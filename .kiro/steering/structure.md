@@ -54,7 +54,7 @@ src/
 
 ## File Naming Conventions
 - Components: PascalCase for Astro components (e.g., `ThemeToggle.astro`)
-- Pages: kebab-case for routes (e.g., `prompt-generator.astro`)
+- Pages: kebab-case for routes (e.g., `diy-prompt-library.astro`)
 - Content: kebab-case for markdown files (e.g., `generate-react-component.mdx`)
 - Utilities: camelCase for JavaScript files (e.g., `all.js`)
 

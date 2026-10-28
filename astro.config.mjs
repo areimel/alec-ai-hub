@@ -11,11 +11,5 @@ export default defineConfig({
   integrations: [tailwind(), mdx(), sitemap(), icon()],
   image: {
     service: passthroughImageService()
-  },
-  vite: {
-    define: {
-      // Ensure environment variables are available in client-side code
-      'import.meta.env.PUBLIC_GOOGLE_GEMINI_API_KEY': JSON.stringify(process.env.PUBLIC_GOOGLE_GEMINI_API_KEY)
-    }
   }
 });
