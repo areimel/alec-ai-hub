@@ -10,7 +10,7 @@
       },
       "secondary": {
         "text": "Live Demo",
-        "href": "/prompt-generator",
+        "href": "/prompts",
         "icon": "bx:bx-rocket"
       }
     },
@@ -55,17 +55,12 @@
     "items": [
       {
         "title": "Complete Source Code",
-        "description": "Full access to all code, including the AI integration, user interface, and prompt management system. Built with modern technologies like Astro, TypeScript, and Tailwind CSS.",
+        "description": "Full access to all code, including the user interface and prompt management system. Built with modern technologies like Astro, TypeScript, and Tailwind CSS.",
         "icon": "bx:bx-code-alt"
       },
       {
-        "title": "AI Integration Ready",
-        "description": "Pre-configured integration with Google Gemini AI through the Vercel AI SDK. Easy to swap for other AI providers or add multiple AI models.",
-        "icon": "bx:bxs-brain"
-      },
-      {
         "title": "Modern Tech Stack",
-        "description": "Built with Astro for fast static sites, TypeScript for type safety, Tailwind CSS for styling, and comprehensive testing with Vitest.",
+        "description": "Built with Astro for fast static sites, TypeScript for type safety, and Tailwind CSS for styling.",
         "icon": "bx:bx-rocket"
       },
       {
@@ -105,14 +100,9 @@
         "answer": "While some technical knowledge helps, the project includes detailed setup instructions. If you can follow a recipe, you can likely get this running. For major customizations, you might want to work with a developer."
       },
       {
-        "id": "faq-2",
-        "question": "What AI services does it work with?",
-        "answer": "Currently configured for Google Gemini, but the Vercel AI SDK supports OpenAI, Anthropic, Cohere, and many others. Switching providers typically requires changing just a few lines of code."
-      },
-      {
         "id": "faq-3",
         "question": "How much does it cost to run?",
-        "answer": "The hosting can be free (Netlify, Vercel, GitHub Pages). You'll only pay for AI API calls based on your usage. Google Gemini has generous free tiers to get you started."
+        "answer": "It can be completely free. It's a static site, so it runs on free hosting tiers like Netlify, Vercel, or GitHub Pages, with no API keys or usage costs."
       },
       {
         "id": "faq-4",

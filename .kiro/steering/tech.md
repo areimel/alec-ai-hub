@@ -13,7 +13,6 @@
 - **SEO**: astro-seo for meta tags and sitemap generation
 - **Navigation**: astro-navbar for responsive navigation
 - **Image Processing**: Sharp for optimization, passthrough service for build
-- **AI Integration**: @google/genai for Gemini API integration
 
 ## Build System & Commands
 - **Package Manager**: pnpm (preferred)

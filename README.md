@@ -31,10 +31,8 @@ Built with modern web technologies for performance and ease of customization, th
 *   **Framework**: [Astro 5.7+](https://astro.build/) - Fast, modern static site generator
 *   **Styling**: [TailwindCSS 3.4+](https://tailwindcss.com/) - Utility-first CSS framework
 *   **Content Management**: [Astro Content Collections](https://docs.astro.build/en/guides/content-collections/) with TypeScript schemas
-*   **AI Integration**: Google Gemini API integration for dynamic features
 *   **Icons**: Astro Icon with Iconify icons (Boxicons, Simple Icons)
 *   **Typography**: Inter Variable & Bricolage Grotesque fonts
-*   **Testing**: Vitest for unit testing
 *   **Deployment**: Netlify-ready with optimized build process
 
 ## Getting Started
@@ -69,9 +67,6 @@ Visit `http://localhost:4321` to view your site.
 *   **`pnpm dev`**: Start development server at `localhost:4321`
 *   **`pnpm build`**: Build production site to `./dist/`
 *   **`pnpm preview`**: Preview production build locally
-*   **`pnpm test`**: Run test suite
-*   **`pnpm test:watch`**: Run tests in watch mode
-*   **`pnpm test:ui`**: Run tests with UI interface
 *   **`pnpm img-compress`**: Optimize images in public folder
 
 ## Project Structure
@@ -98,7 +93,6 @@ Visit `http://localhost:4321` to view your site.
 │   │   ├── homeContent.json  # Homepage content
 │   │   └── announcements.json # Site announcements
 │   ├── layouts/              # Page layouts
-│   ├── lib/                  # Utilities and services
 │   ├── pages/                # Site routes
 │   │   ├── index.astro       # Homepage
 │   │   ├── prompts/          # Prompt directory pages
@@ -108,8 +102,7 @@ Visit `http://localhost:4321` to view your site.
 │   └── utils/                # Helper functions
 ├── astro.config.mjs          # Astro configuration
 ├── tailwind.config.cjs       # TailwindCSS configuration
-├── tsconfig.json             # TypeScript configuration
-└── vitest.config.ts          # Testing configuration
+└── tsconfig.json             # TypeScript configuration
 ```
 
 ## Content Management
