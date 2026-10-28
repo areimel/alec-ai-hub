@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: http://company-ai-prompts.com/sitemap-index.xml

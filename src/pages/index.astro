@@ -1,0 +1,37 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/container.astro";
+import LandingHero from "@components/LandingComponents/LandingHero.astro";
+import LandingFeatures from "@components/LandingComponents/LandingFeatures.astro";
+import LandingCTA from "@components/LandingComponents/LandingCTA.astro";
+import LandingFAQ from "@components/LandingComponents/LandingFAQ.astro";
+import LandingContact from "@components/LandingComponents/LandingContact.astro";
+import homeContent from "@data/homeContent.json";
+---
+
+<Layout title="AI Prompt Directory - Discover, Share & Master AI Prompts">
+  <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <!-- Hero Section -->
+    <Container>
+      <LandingHero content={homeContent.hero} />
+    </Container>
+
+    <!-- Features Section -->
+    <Container>
+      <LandingFeatures content={homeContent.features} />
+    </Container>
+
+    <!-- Call to Action Section -->
+    <Container>
+      <LandingCTA content={homeContent.cta} />
+    </Container>
+
+    <!-- FAQ Section -->
+    <Container>
+      <LandingFAQ content={homeContent.faq} />
+    </Container>
+
+    <!-- Contact Section -->
+    <LandingContact content={homeContent.contact} />
+  </div>
+</Layout>

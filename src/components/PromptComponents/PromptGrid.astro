@@ -1,0 +1,16 @@
+---
+import PromptCard from "./PromptCard.astro";
+
+interface Props {
+  publishedItems: any[];
+  collectionType?: 'prompts' | 'personas';
+}
+
+const { publishedItems, collectionType = 'prompts' } = Astro.props;
+---
+
+<div id="promptsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+  {publishedItems.map((itemEntry) => (
+    <PromptCard itemEntry={itemEntry} collectionType={collectionType} />
+  ))}
+</div> 

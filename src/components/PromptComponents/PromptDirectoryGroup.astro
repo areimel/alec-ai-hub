@@ -1,0 +1,61 @@
+---
+import { getCollection } from "astro:content";
+import SearchFilter from "@components/PromptComponents/SearchFilter.astro";
+import PromptGrid from "@components/PromptComponents/PromptGrid.astro";
+
+interface Props {
+  collectionType?: 'prompts' | 'personas';
+}
+
+const { collectionType = 'prompts' } = Astro.props;
+
+// Filter entries with 'draft: false' & date before current date
+const publishedItems = await getCollection(collectionType, ({ data }) => {
+  return !data.draft && data.publishDate < new Date();
+});
+
+// Sort content entries by publication date
+publishedItems.sort(function (a, b) {
+  return b.data.publishDate.valueOf() - a.data.publishDate.valueOf();
+});
+
+// Get unique categories and count items in each
+const categories = [...new Set(publishedItems.map(item => item.data.category))];
+const categoryCount = categories.reduce((acc, category) => {
+  acc[category] = publishedItems.filter(item => item.data.category === category).length;
+  return acc;
+}, {});
+
+// Get unique sub-categories
+const subCategories = [...new Set(publishedItems.map(item => item.data.sub_category))];
+
+// Get all unique tags
+const allTags = [...new Set(publishedItems.flatMap(item => item.data.tags))];
+
+// Render all contents
+const renderedItems = await Promise.all(
+  publishedItems.map(async (item) => {
+    const { Content } = await item.render();
+    return { ...item, Content };
+  })
+);
+---
+
+<div class="flex flex-col lg:flex-row gap-8 py-8">
+    <!-- Sidebar -->
+    <div class="w-full lg:w-64 lg:flex-shrink-0">
+        <SearchFilter
+        publishedItems={publishedItems}
+        categories={categories}
+        categoryCount={categoryCount}
+        subCategories={subCategories}
+        allTags={allTags}
+        collectionType={collectionType}
+        />
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-1">
+        <PromptGrid publishedItems={publishedItems} collectionType={collectionType} />
+    </div>
+</div>
