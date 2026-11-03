@@ -1,0 +1,32 @@
+---
+import { getFormattedDate } from "@utils/all";
+
+interface Props {
+  entries: {
+    href: string;
+    date: Date;
+    category: string;
+    title: string;
+    snippet?: string;
+  }[];
+}
+
+const { entries } = Astro.props;
+---
+
+<ol class="entry-register">
+  {
+    entries.map(({ href, date, category, title, snippet }) => (
+      <li>
+        <a href={href}>
+          <time class="technical-label" datetime={date.toISOString()}>
+            {getFormattedDate(date)}
+          </time>
+          <span class="technical-label">{category}</span>
+          <span class="entry-register__title">{title}</span>
+          {snippet && <span class="entry-register__snippet">{snippet}</span>}
+        </a>
+      </li>
+    ))
+  }
+</ol>

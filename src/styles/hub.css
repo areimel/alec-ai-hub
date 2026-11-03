@@ -1,4 +1,9 @@
 /* Site composition styles for AI Hub; imported from global.css after kojima.css. */
+@import "./hub/home.css";
+@import "./hub/directory.css";
+@import "./hub/dossier.css";
+@import "./hub/forms.css";
+@import "./hub/blog.css";
 
 /* Shell */
 .skip-link {
@@ -67,4 +72,109 @@
   color: var(--muted-foreground);
   font-size: 0.875rem;
   line-height: 1.5;
+}
+
+/* State contract: scripts set these attributes and never toggle colour classes. */
+[data-active="true"] {
+  border-color: var(--primary);
+  background: var(--accent);
+  color: var(--foreground);
+}
+[data-copied="true"][data-slot="button"] {
+  border-color: var(--primary);
+  background: var(--accent);
+  color: var(--foreground);
+}
+[data-status="pending"] {
+  color: var(--muted-foreground);
+}
+[data-status="success"] {
+  color: var(--kojima-accent-ink);
+}
+[data-status="error"] {
+  color: var(--destructive);
+}
+.dark [data-status="error"] {
+  color: #ff8a80;
+}
+
+/* Long-form text: blog posts and legal pages. */
+.prose {
+  --tw-prose-body: var(--foreground);
+  --tw-prose-headings: var(--foreground);
+  --tw-prose-lead: var(--muted-foreground);
+  --tw-prose-links: var(--kojima-accent-ink);
+  --tw-prose-bold: var(--foreground);
+  --tw-prose-counters: var(--muted-foreground);
+  --tw-prose-bullets: var(--muted-foreground);
+  --tw-prose-hr: var(--border);
+  --tw-prose-quotes: var(--foreground);
+  --tw-prose-quote-borders: var(--primary);
+  --tw-prose-captions: var(--muted-foreground);
+  --tw-prose-code: var(--foreground);
+  --tw-prose-pre-code: var(--foreground);
+  --tw-prose-pre-bg: var(--card);
+  --tw-prose-th-borders: var(--border);
+  --tw-prose-td-borders: var(--border);
+  max-width: 70ch;
+}
+
+/* Page header and entry register: shared across index, form and legal pages. */
+.page-header {
+  padding-block: clamp(2rem, 5vw, 4rem);
+  border-bottom: 1px solid var(--border);
+}
+.page-header__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.page-header h1 {
+  margin-top: 1.5rem;
+  font-size: clamp(2.5rem, 5.8vw, 5rem);
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+.page-header__intro {
+  margin-top: 1.25rem;
+  max-width: 60ch;
+  color: var(--muted-foreground);
+  line-height: 1.7;
+}
+.entry-register {
+  list-style: none;
+  padding: 0;
+  border-top: 1px solid var(--border);
+}
+.entry-register a {
+  display: grid;
+  grid-template-columns: 7rem 7rem minmax(0, 1fr);
+  align-items: baseline;
+  gap: 0.5rem 1.5rem;
+  padding-block: 1rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--foreground);
+}
+.entry-register a:hover {
+  border-bottom-color: var(--primary);
+}
+.entry-register__title {
+  font-weight: 600;
+  line-height: 1.35;
+}
+.entry-register__snippet {
+  grid-column: 3;
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+@media (max-width: 640px) {
+  .entry-register a {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+  .entry-register__title,
+  .entry-register__snippet {
+    grid-column: 1 / -1;
+  }
 }
