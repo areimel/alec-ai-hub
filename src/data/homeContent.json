@@ -70,7 +70,7 @@
       {
         "id": "faq-4",
         "question": "Which AI tools do they work with?",
-        "answer": "Each prompt is tagged with the tool it was written for, such as ChatGPT, Claude, Gemini, Cursor or MidJourney. They may behave differently in other tools."
+        "answer": "Each prompt is tagged with the tool it was written for, such as ChatGPT, Claude, Cursor or MidJourney. They may behave differently in other tools."
       },
       {
         "id": "faq-5",

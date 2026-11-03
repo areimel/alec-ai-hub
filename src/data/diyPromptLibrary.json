@@ -33,7 +33,7 @@
       },
       {
         "title": "Change anything",
-        "description": "Name, links and navigation are set in src/data/branding.json. Everything else is code you can edit."
+        "description": "The name, wordmark and navigation are set in src/data/branding.json. Page copy is in src/data, and plate wording is set where each plate is used."
       }
     ]
   },
@@ -42,7 +42,7 @@
     "headline": "What open source means",
     "paragraphs": [
       "Open source software is code that anyone can read, use and change. Think of a recipe that is shared freely: you can follow it exactly or swap ingredients.",
-      "This project uses the MIT license, which lets you use it for personal or commercial work as long as you keep the license notice."
+      "The project uses the MIT license, which lets you use it for personal or commercial work as long as you keep the license notice. The theme code in src/components/kojima adds a Commons Clause: you can use it in your own site, but not resell the template as is."
     ],
     "button": {
       "text": "Download project",
@@ -65,7 +65,7 @@
       {
         "id": "faq-3",
         "question": "Can I remove the branding?",
-        "answer": "Yes. The name and links are in src/data/branding.json, and the license lets you change anything else."
+        "answer": "Yes. The name and links are in src/data/branding.json. Keep the license notices when you change the rest."
       },
       {
         "id": "faq-4",
@@ -75,7 +75,7 @@
       {
         "id": "faq-5",
         "question": "Can I use it for a business?",
-        "answer": "Yes. The MIT license allows commercial use. Keep the license notice with the code."
+        "answer": "Yes. Commercial use is allowed if you keep the license notices. You can't resell the template itself as is, because the theme code has a Commons Clause."
       },
       {
         "id": "faq-6",
