@@ -1,0 +1,65 @@
+---
+// One labelled field: label above, control, optional hint, and an error message
+// that CSS reveals (forms.css) once the form has been validated.
+import { Input } from "@components/ui/input";
+import { Textarea } from "@components/ui/textarea";
+import { Label } from "@components/ui/label";
+
+interface Props {
+  id: string;
+  name: string;
+  label: string;
+  control?: "input" | "textarea" | "select";
+  type?: string;
+  required?: boolean;
+  /** Help text shown under the field. */
+  hint?: string;
+  /** Shown when a required field is empty or invalid. Required fields only. */
+  error?: string;
+  placeholder?: string;
+  autocomplete?: string;
+  rows?: number;
+  /** For control="select"; the first option is the empty prompt. */
+  options?: string[];
+  prompt?: string;
+}
+
+const {
+  id,
+  name,
+  label,
+  control = "input",
+  type = "text",
+  required = false,
+  hint,
+  error,
+  placeholder,
+  autocomplete,
+  rows = 4,
+  options = [],
+  prompt = "Choose one",
+} = Astro.props;
+
+const hintId = hint ? `${id}-hint` : undefined;
+const errorId = required && error ? `${id}-error` : undefined;
+const describedBy = [hintId, errorId].filter(Boolean).join(" ") || undefined;
+const shared = { id, name, required, "aria-describedby": describedBy };
+---
+
+<div class="form-field">
+  <Label htmlFor={id} className="technical-label">
+    {label}{!required && <span class="form-field__optional"> (optional)</span>}
+  </Label>
+  {control === "input" && <Input {...shared} type={type} placeholder={placeholder} autoComplete={autocomplete} />}
+  {control === "textarea" && <Textarea {...shared} rows={rows} placeholder={placeholder} />}
+  {
+    control === "select" && (
+      <select {...shared} data-slot="input" class="form-select">
+        <option value="" disabled selected>{prompt}</option>
+        {options.map((option) => <option value={option}>{option}</option>)}
+      </select>
+    )
+  }
+  {hint && <p id={hintId} class="form-field__hint">{hint}</p>}
+  {errorId && <p id={errorId} class="form-field__error">{error}</p>}
+</div>
