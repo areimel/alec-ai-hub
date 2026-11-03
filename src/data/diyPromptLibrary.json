@@ -5,7 +5,7 @@
     "buttons": {
       "primary": {
         "text": "View on GitHub",
-        "href": "https://github.com/your-username/company-ai-prompts",
+        "href": "https://github.com/areimel/alec-ai-hub",
         "icon": "simple-icons:github"
       },
       "secondary": {
@@ -85,7 +85,7 @@
     "description": "Open source software is code that anyone can view, use, and modify. Think of it like a recipe that's shared freely - you can use it exactly as written, or change ingredients to suit your taste. This project is open source, which means you get complete freedom and control.",
     "button": {
       "text": "Download Project",
-      "href": "https://github.com/your-username/company-ai-prompts/archive/main.zip"
+      "href": "https://github.com/areimel/alec-ai-hub/archive/main.zip"
     }
   },
   "faq": {

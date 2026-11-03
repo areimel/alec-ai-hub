@@ -32,7 +32,7 @@ publishedBlogEntries.sort(function (a, b) {
               <a href={`/blog/${blogPostEntry.slug}`}>
                 <div class="grid md:grid-cols-2 gap-5 md:gap-10 items-center">
                   <Picture
-                    src={blogPostEntry.data.image?.src || '/placeholder.jpg'}
+                    src={blogPostEntry.data.image?.src || '/opengraph.jpg'}
                     alt={blogPostEntry.data.image?.alt || 'Blog post thumbnail'}
                     sizes="(max-width: 800px) 100vw, 800px"
                     width={800}

@@ -46,8 +46,8 @@ Built with modern web technologies for performance and ease of customization, th
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/your-username/company-ai-prompts.git
-    cd company-ai-prompts
+    git clone https://github.com/areimel/alec-ai-hub.git
+    cd alec-ai-hub
     ```
 
 2.  **Install dependencies:**
