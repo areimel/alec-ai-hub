@@ -1,0 +1,24 @@
+---
+import Container from "@components/container.astro";
+
+interface Props {
+  /** Short micro-label above the heading, using real information. */
+  label: string;
+  title: string;
+  intro?: string;
+}
+
+const { label, title, intro } = Astro.props;
+---
+
+<header class="page-header">
+  <Container>
+    <div class="page-header__top">
+      <p class="kicker">{label}</p>
+      <span class="registration-mark" aria-hidden="true"></span>
+    </div>
+    <h1>{title}</h1>
+    {intro && <p class="page-header__intro">{intro}</p>}
+    <slot />
+  </Container>
+</header>

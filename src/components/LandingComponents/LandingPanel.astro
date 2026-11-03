@@ -1,0 +1,45 @@
+---
+import SectionHead from "@components/SectionHead.astro";
+import Container from "@components/container.astro";
+import ActionButton from "@components/ui/ActionButton.astro";
+import { InstrumentGraphic } from "@/components/kojima/instrument-graphic";
+import type { InstrumentGraphicProps } from "@/components/kojima/instrument-graphic";
+
+export interface Props {
+  content: {
+    label: string;
+    headline: string;
+    paragraphs: string[];
+    button?: { text: string; href: string };
+  };
+  /** Optional plate shown beside the text. */
+  plate?: InstrumentGraphicProps;
+}
+
+const { content, plate } = Astro.props;
+---
+
+<section class="home-section">
+  <Container>
+    <div class:list={["home-panel", plate && "home-panel--plate"]}>
+      {
+        plate && (
+          <div class="home-panel__plate">
+            <InstrumentGraphic {...plate} decorative />
+          </div>
+        )
+      }
+      <div class="home-panel__text">
+        <SectionHead label={content.label} title={content.headline} />
+        {content.paragraphs.map((text) => <p>{text}</p>)}
+        {
+          content.button && (
+            <ActionButton href={content.button.href} size="lg">
+              {content.button.text}
+            </ActionButton>
+          )
+        }
+      </div>
+    </div>
+  </Container>
+</section>

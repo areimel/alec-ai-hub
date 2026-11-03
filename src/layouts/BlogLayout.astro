@@ -1,49 +1,58 @@
 ---
+import type { CollectionEntry } from "astro:content";
+import { Picture } from "astro:assets";
 import Container from "@components/container.astro";
 import { getFormattedDate } from "@utils/all";
 import Layout from "./Layout.astro";
+
+interface Props {
+  frontmatter: CollectionEntry<"blog">["data"];
+}
 
 const { frontmatter } = Astro.props;
 ---
 
 <Layout title={frontmatter.title}>
-  <Container>
-    <div class="mx-auto max-w-[735px] mt-14">
-      <span class="text-blue-400 uppercase tracking-wider text-sm font-medium">
-        {frontmatter.category}
-      </span>
-      <h1
-        class="text-4xl lg:text-5xl font-bold lg:tracking-tight mt-1 lg:leading-tight">
-        {frontmatter.title}
-      </h1>
-      <div class="flex gap-2 mt-3 items-center flex-wrap md:flex-nowrap">
-        <span class="text-gray-400">
-          {frontmatter.author}
-        </span>
-        <span class="text-gray-400">•</span>
-        <time class="text-gray-400" datetime={frontmatter.publishDate}>
+  <Container class="blog-post">
+    <header class="post-header">
+      <a class="post-back" href="/blog">← All posts</a>
+      <p class="kicker">{frontmatter.category}</p>
+      <h1>{frontmatter.title}</h1>
+      <p class="technical-label post-meta">
+        <span>{frontmatter.author}</span>
+        <time datetime={frontmatter.publishDate.toISOString()}>
           {getFormattedDate(frontmatter.publishDate)}
         </time>
-        <span class="text-gray-400 hidden md:block">•</span>
-        <div class="w-full md:w-auto flex flex-wrap gap-3">
-          {
-            frontmatter.tags.map((tag) => (
-              <span class="text-sm text-gray-500">#{tag}</span>
-            ))
-          }
-        </div>
-      </div>
-    </div>
+      </p>
+      {
+        frontmatter.tags.length > 0 && (
+          <ul class="post-tags">
+            {frontmatter.tags.map((tag) => (
+              <li class="technical-label">#{tag}</li>
+            ))}
+          </ul>
+        )
+      }
+    </header>
 
-    <div class="mx-auto prose prose-lg mt-6">
+    {
+      frontmatter.image && (
+        <figure class="post-figure">
+          <Picture
+            src={frontmatter.image.src}
+            alt={frontmatter.image.alt}
+            sizes="(max-width: 768px) 100vw, 70ch"
+            width={800}
+            height={600}
+            loading="eager"
+            decoding="async"
+          />
+        </figure>
+      )
+    }
+
+    <div class="prose post-body">
       <slot />
-    </div>
-    <div class="text-center mt-8">
-      <a
-        href="/blog"
-        class="bg-gray-100 px-5 py-3 rounded-md hover:bg-gray-200 transition"
-        >← Back to Blog</a
-      >
     </div>
   </Container>
 </Layout>

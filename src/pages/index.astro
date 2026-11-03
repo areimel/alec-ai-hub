@@ -1,37 +1,127 @@
 ---
+import SectionHead from "@components/SectionHead.astro";
 import Layout from "@layouts/Layout.astro";
 import Container from "@components/container.astro";
+import EntryRegister from "@components/EntryRegister.astro";
+import PlateLink from "@/components/kojima/PlateLink.astro";
 import LandingHero from "@components/LandingComponents/LandingHero.astro";
 import LandingFeatures from "@components/LandingComponents/LandingFeatures.astro";
-import LandingCTA from "@components/LandingComponents/LandingCTA.astro";
-import LandingFAQ from "@components/LandingComponents/LandingFAQ.astro";
+import LandingPanel from "@components/LandingComponents/LandingPanel.astro";
 import LandingContact from "@components/LandingComponents/LandingContact.astro";
+import { getCounts, getPublished } from "@/lib/content";
 import homeContent from "@data/homeContent.json";
+
+const [counts, prompts, personas, posts] = await Promise.all([
+  getCounts(),
+  getPublished("prompts"),
+  getPublished("personas"),
+  getPublished("blog"),
+]);
+
+const latest = [
+  ...prompts.map((e) => ({ ...e, base: "prompts" })),
+  ...personas.map((e) => ({ ...e, base: "ai-personas" })),
+  ...posts.map((e) => ({ ...e, base: "blog" })),
+]
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+  .slice(0, 6)
+  .map((e) => ({
+    href: `/${e.base}/${e.slug}`,
+    date: e.data.publishDate,
+    category: e.data.category,
+    title: e.data.title,
+  }));
+
+const stats = [
+  { label: "Prompts", value: counts.prompts },
+  { label: "AI personas", value: counts.personas },
+  { label: "News & tips", value: counts.blog },
+];
+const { plates } = homeContent;
 ---
 
-<Layout title="AI Prompt Directory - Discover, Share & Master AI Prompts">
-  <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
-    <!-- Hero Section -->
-    <Container>
-      <LandingHero content={homeContent.hero} />
-    </Container>
+<Layout>
+  <LandingHero
+    content={homeContent.hero}
+    stats={stats}
+    plate={{
+      variant: "radar",
+      palette: "orange",
+      seed: 25,
+      code: `PROMPTS—${counts.prompts}`,
+      plate: "AI HUB",
+      footerLines: [`${counts.prompts} PROMPTS PUBLISHED`, "ALEC REIMEL"],
+    }}
+  />
 
-    <!-- Features Section -->
+  <section class="home-section">
     <Container>
-      <LandingFeatures content={homeContent.features} />
+      <div class="plate-row">
+        <PlateLink
+          href="/prompts"
+          title={plates.prompts.title}
+          description={plates.prompts.description}
+          meta={`${counts.prompts} prompts`}
+          variant="radar"
+          palette="paper"
+          seed={7}
+          wordmark="PROMPTS"
+          code={`PROMPTS—${counts.prompts}`}
+          plate="PROMPTS"
+          footerLines={[`${counts.prompts} PUBLISHED`, "ALEC REIMEL"]}
+        />
+        <PlateLink
+          href="/ai-personas"
+          title={plates.personas.title}
+          description={plates.personas.description}
+          meta={`${counts.personas} personas`}
+          variant="grid"
+          palette="dark"
+          seed={11}
+          wordmark="PERSONAS"
+          code={`PERSONAS—${counts.personas}`}
+          plate="PERSONAS"
+          footerLines={[`${counts.personas} PUBLISHED`, "ALEC REIMEL"]}
+        />
+        <PlateLink
+          href="/blog"
+          title={plates.blog.title}
+          description={plates.blog.description}
+          meta={`${counts.blog} posts`}
+          variant="wave"
+          palette="orange"
+          seed={13}
+          wordmark="NOTES"
+          code={`NOTES—${counts.blog}`}
+          plate="NEWS & TIPS"
+          footerLines={[`${counts.blog} PUBLISHED`, "ALEC REIMEL"]}
+        />
+      </div>
     </Container>
+  </section>
 
-    <!-- Call to Action Section -->
+  <section class="home-section">
     <Container>
-      <LandingCTA content={homeContent.cta} />
+      <SectionHead label={homeContent.latest.label} title={homeContent.latest.title} />
+      <EntryRegister entries={latest} />
     </Container>
+  </section>
 
-    <!-- FAQ Section -->
-    <Container>
-      <LandingFAQ content={homeContent.faq} />
-    </Container>
+  <LandingFeatures content={homeContent.features} />
 
-    <!-- Contact Section -->
-    <LandingContact content={homeContent.contact} />
-  </div>
+  <LandingPanel
+    content={homeContent.about}
+    plate={{
+      variant: "wave",
+      palette: "paper",
+      seed: 3,
+      wordmark: "ALEC",
+      code: "ABOUT",
+      plate: "ABOUT",
+      footerLines: ["ALEC REIMEL", "AI HUB"],
+      idSuffix: "about",
+    }}
+  />
+
+  <LandingContact faq={homeContent.faq} contact={homeContent.contact} />
 </Layout>

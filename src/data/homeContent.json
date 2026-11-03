@@ -1,155 +1,99 @@
 {
   "hero": {
-    "headline": "Master AI Prompt Engineering",
-    "description": "Discover, share, and master powerful AI prompts that unlock your team's potential. From beginner templates to advanced techniques, find the perfect prompts for every AI application.",
-    "buttons": {
-      "primary": {
-        "text": "Browse Prompts",
-        "href": "/prompts",
-        "icon": "bx:bxs-collection"
-      },
-      "secondary": {
-        "text": "Explore AI Personas",
-        "href": "/ai-personas",
-        "icon": "bx:bx-user-circle"
-      }
+    "kicker": "Alec Reimel / AI working files",
+    "headline": "Working prompts.",
+    "headlineMuted": "Yours to copy.",
+    "intro": "A small collection of AI prompts and personas, kept in one place. Copy what is useful, fill in the blanks on the templates, and paste it into your AI tool.",
+    "primary": { "text": "Browse prompts", "href": "/prompts" },
+    "secondary": { "text": "See personas", "href": "/ai-personas" }
+  },
+  "plates": {
+    "prompts": {
+      "title": "Prompts",
+      "description": "Prompts for coding, writing, analysis and more. Filter by category or AI tool."
     },
-    "benefits": [
-      "Curated prompt library",
-      "Team collaboration",
-      "Proven techniques"
-    ],
-    "trustIndicators": {
-      "title": "Trusted by teams worldwide",
-      "stats": [
-        {
-          "text": "500+ Prompts",
-          "icon": "bx:bx-trending-up"
-        },
-        {
-          "text": "Growing Community",
-          "icon": "bx:bx-group"
-        },
-        {
-          "text": "Always Updated",
-          "icon": "bx:bx-time-five"
-        }
-      ]
+    "personas": {
+      "title": "AI Personas",
+      "description": "Role and tone setups you can give an AI before you start a chat."
     },
-    "icons": {
-      "brain": "bx:bxs-brain",
-      "floating": [
-        "bx:bx-code-alt",
-        "bx:bx-edit-alt",
-        "bx:bx-rocket",
-        "bx:bx-bulb"
-      ],
-      "check": "bx:bx-check"
+    "blog": {
+      "title": "News & Tips",
+      "description": "Short posts about the site and how to use prompts."
     }
   },
+  "latest": { "label": "Latest", "title": "Recently added" },
   "features": {
-    "header": {
-      "title": "Everything you need for AI prompting",
-      "description": "Our directory comes with powerful features to help you find, share, and improve your AI prompts."
-    },
+    "header": { "label": "How it works", "title": "Find it, fill it in, copy it." },
+    "numbered": true,
     "items": [
       {
-        "title": "Discover Effective Prompts",
-        "description": "Find proven prompts for various AI tasks, tested and refined by the community for maximum effectiveness.",
-        "icon": "bx:bxs-search"
+        "title": "Find",
+        "description": "Browse prompts by category or AI tool, or search by keyword."
       },
       {
-        "title": "Share Your Expertise",
-        "description": "Contribute and share your successful prompts with the community to help others achieve better AI results.",
-        "icon": "bx:bxs-share"
+        "title": "Fill in",
+        "description": "Some prompts are templates with blanks. Type your details in and the prompt updates as you go."
       },
       {
-        "title": "Organized by Category",
-        "description": "Easy browsing by use case and application. Find exactly what you need with our intuitive categorization system.",
-        "icon": "bx:bxs-category"
-      },
-      {
-        "title": "Copy & Use Instantly",
-        "description": "Ready-to-use prompts for immediate implementation. No complex setup required - just copy and paste.",
-        "icon": "bx:bxs-copy"
-      },
-      {
-        "title": "Community Driven",
-        "description": "Built by and for AI prompt engineers. Join a growing community of practitioners sharing knowledge.",
-        "icon": "bx:bxs-group"
-      },
-      {
-        "title": "Always Updated",
-        "description": "Fresh prompts added regularly. Stay current with the latest techniques and best practices in AI prompting.",
-        "icon": "bx:bx-refresh"
+        "title": "Copy",
+        "description": "Press copy and paste the prompt into ChatGPT, Claude, Gemini or whichever tool you use."
       }
     ]
   },
-  "cta": {
-    "headline": "Start Building Better AI Prompts Today",
-    "description": "Discover our curated collection of proven AI prompts and transform the way you interact with artificial intelligence. From creative writing to business automation, find the perfect prompt for your needs.",
-    "button": {
-      "text": "Explore Prompts",
-      "href": "/prompts"
-    }
+  "about": {
+    "label": "About",
+    "headline": "Hi, I'm Alec.",
+    "paragraphs": [
+      "I made AI Hub to keep my prompts and personas in one place and to share them. It is a personal project, so the collection is small and changes when I add to it.",
+      "If you have a prompt that works well, you can send it in."
+    ],
+    "button": { "text": "Submit a prompt", "href": "/submit-prompt" }
   },
   "faq": {
-    "header": {
-      "title": "Frequently Asked Questions",
-      "description": "Everything you need to know about our AI prompt directory and how to make the most of it."
-    },
+    "header": { "label": "FAQ", "title": "Questions" },
     "items": [
       {
         "id": "faq-1",
-        "question": "What is an AI prompt directory?",
-        "answer": "An AI prompt directory is a curated collection of effective prompts designed to help you get better results from AI models. Our directory contains tested prompts for various use cases including writing, coding, analysis, creative tasks, and business applications. Each prompt is optimized to produce high-quality, consistent outputs from AI systems."
+        "question": "What is this?",
+        "answer": "A collection of AI prompts and personas, plus a few posts about using them. Everything is on this site and there is no account to make."
       },
       {
         "id": "faq-2",
-        "question": "How do I use these prompts?",
-        "answer": "Simply copy any prompt from our directory and paste it into your preferred AI tool (ChatGPT, Claude, Gemini, etc.). You can customize the prompts by replacing placeholder text with your specific requirements. For best results, read the prompt description and any usage notes provided with each template."
+        "question": "How do I use a prompt?",
+        "answer": "Open a prompt, press copy, and paste it into your AI tool. On templates, fill in the fields first and the prompt text updates to match."
       },
       {
         "id": "faq-3",
-        "question": "Can I contribute my own prompts?",
-        "answer": "Yes! We welcome contributions from the community. You can submit your own tested prompts through our contribution form. All submissions are reviewed for quality and effectiveness before being added to the directory. We particularly value prompts that solve unique problems or improve upon existing solutions."
+        "question": "Are the prompts free to use?",
+        "answer": "Yes. You can use, change and share them for personal or commercial work. Credit is appreciated but not required."
       },
       {
         "id": "faq-4",
-        "question": "Are the prompts free to use?",
-        "answer": "Absolutely! All prompts in our directory are free to use for personal and commercial purposes. We believe in making AI more accessible to everyone. You can use, modify, and share these prompts without any restrictions. Attribution is appreciated but not required."
+        "question": "Which AI tools do they work with?",
+        "answer": "Each prompt is tagged with the tool it was written for, such as ChatGPT, Claude, Cursor or MidJourney. They may behave differently in other tools."
       },
       {
         "id": "faq-5",
-        "question": "What AI models work with these prompts?",
-        "answer": "Our prompts are designed to work with most modern AI language models including OpenAI's GPT series, Anthropic's Claude, Google's Gemini, and other compatible models. While some prompts may work better with specific models, most are crafted to be model-agnostic and deliver good results across different platforms."
+        "question": "Can I contribute a prompt?",
+        "answer": "Yes. Use the submit a prompt page. I decide what gets added."
       },
       {
         "id": "faq-6",
-        "question": "How often are new prompts added?",
-        "answer": "We add new prompts regularly, typically several times per week. Our team continuously tests and curates new prompts based on community submissions, emerging AI capabilities, and popular use cases. Follow our blog or subscribe to our newsletter to stay updated on the latest additions."
+        "question": "Can I ask for a prompt?",
+        "answer": "Yes, send a request with the contact form. I can't promise when or whether I will write it."
       },
       {
         "id": "faq-7",
-        "question": "Can I request specific types of prompts?",
-        "answer": "Yes! We encourage prompt requests from our community. You can submit requests through our contact form or suggest new categories and use cases. While we can't guarantee every request will be fulfilled, we prioritize prompts that would benefit many users and align with our quality standards."
+        "question": "Can I run my own copy of this site?",
+        "answer": "Yes. The site is open source. The DIY Prompt Library page has the details."
       }
-    ],
-    "chevronIcon": "bx:bx-chevron-down"
+    ]
   },
   "contact": {
     "header": {
-      "title": "Get In Touch",
-      "description": "Have questions about our AI prompts? Need help with implementation? We'd love to hear from you and help you succeed with AI."
-    },
-    "content": {
-      "subtitle": "Let's Start a Conversation",
-      "description": "Whether you're looking for specific AI prompts, have feedback on our collection, or want to collaborate, we're here to help. Send us a message and we'll get back to you within 24 hours.",
-      "features": [
-        "Quick response within 24 hours",
-        "Detailed and helpful responses",
-        "Your information stays private"
-      ]
+      "label": "Contact",
+      "title": "Get in touch",
+      "description": "A question, feedback or a prompt request. I will reply when I can."
     }
   }
 }

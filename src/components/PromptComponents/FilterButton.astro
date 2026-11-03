@@ -1,0 +1,24 @@
+---
+// One filter option in the directory rail. The script reads the class and data attribute.
+interface Props {
+  kind: "category" | "subcategory" | "tag";
+  value: string;
+  label?: string;
+  count?: number;
+  active?: boolean;
+}
+
+const { kind, value, label = value, count, active = false } = Astro.props;
+const dataAttr = { [`data-${kind}`]: value };
+---
+
+<button
+  type="button"
+  class={`filter-option ${kind}-filter`}
+  aria-pressed={active ? "true" : "false"}
+  data-active={active ? "true" : undefined}
+  {...dataAttr}
+>
+  <span>{label}</span>
+  {count !== undefined && <span class="filter-option__count">{count}</span>}
+</button>

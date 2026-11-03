@@ -3,14 +3,23 @@ import PromptCard from "./PromptCard.astro";
 
 interface Props {
   publishedItems: any[];
-  collectionType?: 'prompts' | 'personas';
+  collectionType?: "prompts" | "personas";
 }
 
-const { publishedItems, collectionType = 'prompts' } = Astro.props;
+const { publishedItems, collectionType = "prompts" } = Astro.props;
+const noun = collectionType === "personas" ? "personas" : "prompts";
 ---
 
-<div id="promptsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-  {publishedItems.map((itemEntry) => (
-    <PromptCard itemEntry={itemEntry} collectionType={collectionType} />
-  ))}
-</div> 
+<div>
+  <p id="resultCount" class="technical-label directory-count" aria-live="polite" data-noun={noun}>
+    Showing {publishedItems.length} of {publishedItems.length} {noun}
+  </p>
+  <p id="emptyState" class="directory-empty" hidden>
+    No {noun} match these filters. Reset filters to see all.
+  </p>
+  <div id="promptsGrid" class="directory-grid">
+    {publishedItems.map((itemEntry) => (
+      <PromptCard itemEntry={itemEntry} collectionType={collectionType} />
+    ))}
+  </div>
+</div>

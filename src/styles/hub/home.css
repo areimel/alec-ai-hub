@@ -1,0 +1,209 @@
+/* Styles for the home and DIY pages; imported from hub.css.
+   Ported from Kojima's kojima-home.css (hero, capability grid, briefing),
+   with its 7-9px labels replaced by the theme's 12px floor. */
+
+.home-hero {
+  padding-block: clamp(1.5rem, 4vw, 3rem) 0;
+}
+.home-hero__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.home-hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2.5rem;
+  align-items: center;
+  padding-block: clamp(2rem, 5vw, 4rem);
+}
+.home-hero h1 {
+  font-size: clamp(2.5rem, 6.4vw, 6rem);
+  line-height: 0.95;
+  letter-spacing: -0.055em;
+}
+.home-hero__muted {
+  display: block;
+  color: var(--muted-foreground);
+}
+.home-hero__intro {
+  margin-top: 1.5rem;
+  max-width: 52ch;
+  color: var(--muted-foreground);
+  line-height: 1.7;
+}
+.home-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+.home-hero__plate svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+@media (min-width: 900px) {
+  .home-hero__grid {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(2rem, 4vw, 4rem);
+  }
+}
+
+.stat-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  border-block: 1px solid var(--border);
+}
+.stat-strip > div {
+  padding: 1rem 1.25rem 1.25rem 0;
+}
+.stat-strip > div + div {
+  padding-left: 1.25rem;
+  border-left: 1px solid var(--border);
+}
+.stat-strip dd {
+  margin-top: 0.25rem;
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+}
+@media (max-width: 520px) {
+  .stat-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .stat-strip > div:nth-child(odd) {
+    padding-left: 0;
+    border-left: 0;
+  }
+  .stat-strip > div:nth-child(n + 3) {
+    border-top: 1px solid var(--border);
+  }
+}
+
+.home-section {
+  padding-block: clamp(2.5rem, 6vw, 5rem) 0;
+}
+.home-section__title {
+  margin-top: 1rem;
+  margin-bottom: 1.75rem;
+  font-size: clamp(1.75rem, 3.6vw, 3rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+.plate-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 2rem);
+}
+@media (max-width: 800px) {
+  .plate-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Ruled three-column grid (Kojima's capability grid). */
+.rule-grid {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+}
+.rule-grid li {
+  min-width: 0;
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.rule-grid__step {
+  display: block;
+  margin-bottom: 2.5rem;
+}
+.rule-grid h3 {
+  font-size: 1.5rem;
+  line-height: 1.15;
+}
+.rule-grid p {
+  margin-top: 0.75rem;
+  max-width: 44ch;
+  color: var(--muted-foreground);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+}
+
+/* About / open-source panel (Kojima's briefing). */
+.home-panel {
+  border: 1px solid var(--border);
+}
+.home-panel--plate {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+.home-panel__plate svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.home-panel__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: clamp(1.5rem, 4vw, 3.5rem);
+}
+.home-panel__text p:not(.kicker) {
+  max-width: 56ch;
+  margin-bottom: 1.25rem;
+  color: var(--muted-foreground);
+  line-height: 1.7;
+}
+@media (min-width: 900px) {
+  .home-panel--plate {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  }
+  .home-panel__plate {
+    border-right: 1px solid var(--border);
+  }
+}
+
+/* FAQ beside the contact form. */
+.faq-contact {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2.5rem;
+  padding-bottom: clamp(2.5rem, 6vw, 5rem);
+}
+@media (min-width: 900px) {
+  .faq-contact {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(2rem, 4vw, 4rem);
+    align-items: start;
+  }
+}
+.faq-contact__intro {
+  max-width: 52ch;
+  margin-bottom: 1.5rem;
+  color: var(--muted-foreground);
+  line-height: 1.7;
+}
+.faq-list {
+  border-top: 1px solid var(--border);
+}
+.faq-list [data-slot="accordion-item"] {
+  border-bottom: 1px solid var(--border);
+}
+.faq-list [data-slot="accordion-trigger"] {
+  border-radius: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+.faq-list__answer {
+  max-width: 60ch;
+  color: var(--muted-foreground);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+}

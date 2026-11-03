@@ -1,0 +1,115 @@
+---
+// Shared detail sheet for prompts and personas. Differences live in `collectionType`.
+import type { CollectionEntry } from "astro:content";
+import Container from "@components/container.astro";
+import ActionButton from "@components/ui/ActionButton.astro";
+import SlugBarcode from "@components/kojima/SlugBarcode.astro";
+import TemplateMenu from "@components/PromptComponents/TemplateMenu.astro";
+
+interface Props {
+  entry: CollectionEntry<"prompts"> | CollectionEntry<"personas">;
+  collectionType: "prompts" | "personas";
+}
+
+const { entry, collectionType } = Astro.props;
+const { data } = entry;
+const isTemplate = "template" in data && data.template === true;
+
+const labels = {
+  prompts: { back: "All prompts", href: "/prompts", tool: "AI tool", text: "Prompt text", copy: "Copy prompt" },
+  personas: { back: "All personas", href: "/ai-personas", tool: "Persona type", text: "Persona system prompt", copy: "Copy persona" },
+}[collectionType];
+
+const day = (d: Date) => d.toISOString().slice(0, 10);
+const rows = [
+  { label: "Category", value: data.category },
+  { label: labels.tool, value: data.sub_category },
+  { label: "Version", value: `v${data.version}` },
+  { label: "Author", value: data.author },
+];
+---
+
+<Container class="dossier">
+  <nav class="dossier__crumb technical-label" aria-label="Breadcrumb">
+    <a href={labels.href}>{labels.back}</a>
+  </nav>
+
+  <article class="dossier__sheet">
+    <header class="dossier__head">
+      <p class="kicker technical-label">{data.category} / {data.sub_category}</p>
+      <h1>{data.title}</h1>
+      <span class="registration-mark" aria-hidden="true"></span>
+    </header>
+
+    <aside class="dossier__rail technical-panel" aria-label="Entry details">
+      <dl class="dossier__meta">
+        {rows.map((r) => (
+          <div>
+            <dt class="technical-label">{r.label}</dt>
+            <dd>{r.value}</dd>
+          </div>
+        ))}
+        <div>
+          <dt class="technical-label">Published</dt>
+          <dd><time datetime={data.publishDate.toISOString()}>{day(data.publishDate)}</time></dd>
+        </div>
+        {data.lastUpdated && (
+          <div>
+            <dt class="technical-label">Updated</dt>
+            <dd><time datetime={data.lastUpdated.toISOString()}>{day(data.lastUpdated)}</time></dd>
+          </div>
+        )}
+        {data.tags.length > 0 && (
+          <div>
+            <dt class="technical-label">Tags</dt>
+            <dd>
+              <ul class="dossier__tags">
+                {data.tags.map((tag) => <li class="technical-label">{tag}</li>)}
+              </ul>
+            </dd>
+          </div>
+        )}
+      </dl>
+      <SlugBarcode slug={entry.slug} class="dossier__barcode" />
+    </aside>
+
+    <div class="dossier__main">
+      <section class="dossier__prose" aria-labelledby="entry-description">
+        <h2 id="entry-description">Description</h2>
+        <p>{data.description}</p>
+      </section>
+
+      {data.usage_instructions && (
+        <section class="dossier__prose" aria-labelledby="entry-usage">
+          <h2 id="entry-usage">Usage instructions</h2>
+          <p class="dossier__usage">{data.usage_instructions}</p>
+        </section>
+      )}
+
+      {isTemplate && <TemplateMenu />}
+
+      <section class="dossier__prompt" aria-labelledby="entry-text">
+        <div class="dossier__bar">
+          <h2 id="entry-text">{labels.text}</h2>
+          <div class="dossier__actions">
+            <ActionButton id="copyLink" variant="outline" size="sm">Copy link</ActionButton>
+            <ActionButton id="copyPrompt" size="sm">{labels.copy}</ActionButton>
+          </div>
+        </div>
+        <pre id="promptContent" class="dossier__pre">{entry.body}</pre>
+      </section>
+    </div>
+  </article>
+</Container>
+
+<script>
+  import { copyWithConfirm } from "../../scripts/copy";
+
+  const promptEl = document.getElementById("promptContent");
+  document.getElementById("copyPrompt")?.addEventListener("click", (e) => {
+    copyWithConfirm(e.currentTarget as HTMLElement, promptEl?.textContent ?? "", "Copied");
+  });
+  document.getElementById("copyLink")?.addEventListener("click", (e) => {
+    copyWithConfirm(e.currentTarget as HTMLElement, window.location.href, "Link copied");
+  });
+</script>
