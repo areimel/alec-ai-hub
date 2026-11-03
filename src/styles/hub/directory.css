@@ -55,9 +55,16 @@
   gap: 2rem;
   margin-top: 1rem;
 }
+/* Unlayered display:flex above beats Tailwind's layered .hidden, so restate it. */
+.directory-filters__body.hidden {
+  display: none;
+}
 @media (min-width: 1024px) {
   .directory-filters__body {
     margin-top: 0;
+  }
+  .directory-filters__body.hidden {
+    display: flex;
   }
 }
 .directory-filters__group {

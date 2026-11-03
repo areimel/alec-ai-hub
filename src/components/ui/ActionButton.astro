@@ -13,7 +13,7 @@ type Props = (
   class?: string;
 };
 
-const { href, variant, size, class: className, ...attrs } = Astro.props as any;
+const { href, variant, size, type = "button", class: className, ...attrs } = Astro.props as any;
 const classes = buttonVariants({ variant, size, className });
 ---
 
@@ -23,7 +23,7 @@ const classes = buttonVariants({ variant, size, className });
       <slot />
     </a>
   ) : (
-    <button type="button" data-slot="button" class={classes} {...attrs}>
+    <button type={type} data-slot="button" class={classes} {...attrs}>
       <slot />
     </button>
   )
