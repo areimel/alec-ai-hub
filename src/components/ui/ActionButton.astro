@@ -1,0 +1,30 @@
+---
+// The single Astro way to render a Kojima button (Radix asChild can't take Astro slots).
+// Renders <a> when href is given, otherwise <button type="button">. No client JS.
+import { buttonVariants } from "./button";
+import type { VariantProps } from "class-variance-authority";
+
+type Props = (
+  | ({ href: string } & astroHTML.JSX.AnchorHTMLAttributes)
+  | ({ href?: undefined } & astroHTML.JSX.ButtonHTMLAttributes)
+) & {
+  variant?: VariantProps<typeof buttonVariants>["variant"];
+  size?: VariantProps<typeof buttonVariants>["size"];
+  class?: string;
+};
+
+const { href, variant, size, class: className, ...attrs } = Astro.props as any;
+const classes = buttonVariants({ variant, size, className });
+---
+
+{
+  href ? (
+    <a href={href} data-slot="button" class={classes} {...attrs}>
+      <slot />
+    </a>
+  ) : (
+    <button type="button" data-slot="button" class={classes} {...attrs}>
+      <slot />
+    </button>
+  )
+}
