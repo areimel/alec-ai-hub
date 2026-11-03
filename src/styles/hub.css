@@ -1,1 +1,37 @@
 /* Site composition styles for AI Hub; imported from global.css after kojima.css. */
+
+/* Plates */
+.plate-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  color: var(--foreground);
+  text-decoration: none;
+}
+
+.plate-link__frame {
+  display: block;
+  border: 1px solid var(--border);
+  background: var(--card);
+}
+
+.plate-link:is(:hover, :focus-visible) .plate-link__frame {
+  border-color: var(--primary);
+}
+
+.plate-link__caption {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.plate-link__title {
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.plate-link__desc {
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}

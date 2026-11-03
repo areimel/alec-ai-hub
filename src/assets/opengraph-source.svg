@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#eee9db" stroke-width="0.6" opacity="0.16"/></pattern>
+    <clipPath id="c"><rect x="740" y="108" width="412" height="474"/></clipPath>
+  </defs>
+  <rect width="1200" height="630" fill="#191a17"/>
+  <g fill="none" stroke="#eee9db"><rect x="24" y="24" width="1152" height="582" stroke-width="1.4"/><path d="M24 84H1176M716 84V606"/></g>
+  <g fill="#eee9db" font-family="'DejaVu Sans Mono','Courier New',monospace" font-size="16" letter-spacing="2">
+    <text x="48" y="61">AI HUB / PROMPT RESEARCH BUREAU</text>
+    <text x="1152" y="61" text-anchor="end">PLATE 025</text>
+  </g>
+  <text x="44" y="390" fill="#ff4d00" font-family="'DejaVu Sans','Arial Black',Arial,sans-serif" font-weight="900" font-size="165">AI HUB</text>
+  <text x="48" y="478" fill="#eee9db" font-family="'DejaVu Sans',Arial,sans-serif" font-size="31" font-weight="700">Alec Reimel's working AI prompts</text>
+  <g fill="#eee9db" font-family="'DejaVu Sans Mono','Courier New',monospace" font-size="16" letter-spacing="2">
+    <text x="48" y="570">WORKING INSTRUMENTS / PROMPT + PERSONA</text>
+  </g>
+  <g clip-path="url(#c)"><g transform="translate(0 30)">
+    <rect x="740" y="108" width="412" height="474" fill="url(#g)"/>
+    <path d="M946 315L860 187A150 150 0 0 1 1088 238Z" fill="#ff4d00"/>
+    <g fill="none" stroke="#eee9db">
+      <circle cx="946" cy="315" r="168" stroke-width="2.5"/>
+      <circle cx="946" cy="315" r="126"/><circle cx="946" cy="315" r="84"/><circle cx="946" cy="315" r="42"/>
+      <path d="M770 315H1122M946 140V490" stroke-width="1"/>
+      <path d="M946 315L1060 228" stroke-width="3"/>
+    </g>
+    <circle cx="946" cy="315" r="7" fill="#191a17" stroke="#eee9db" stroke-width="2"/>
+  </g></g>
+  <rect x="740" y="108" width="412" height="474" fill="none" stroke="#eee9db"/>
+</svg>
