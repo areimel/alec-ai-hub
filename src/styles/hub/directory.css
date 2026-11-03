@@ -1,1 +1,228 @@
 /* Styles for the directory pages; imported from hub.css. */
+
+.directory {
+  display: grid;
+  gap: 2rem;
+  padding-block: 2rem 4rem;
+  grid-template-columns: minmax(0, 1fr);
+}
+@media (min-width: 1024px) {
+  .directory {
+    grid-template-columns: 16rem minmax(0, 1fr);
+    gap: 3rem;
+  }
+  .directory__rail {
+    position: sticky;
+    top: 1rem;
+    align-self: start;
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+  }
+}
+.directory__main {
+  min-width: 0;
+}
+
+/* Filter rail */
+.directory-filters__toggle {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--foreground);
+}
+.directory-filters__chevron {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: rotate(45deg);
+}
+.directory-filters__toggle[aria-expanded="true"] .directory-filters__chevron {
+  transform: rotate(225deg);
+}
+@media (min-width: 1024px) {
+  .directory-filters__toggle {
+    display: none;
+  }
+}
+.directory-filters__body {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+@media (min-width: 1024px) {
+  .directory-filters__body {
+    margin-top: 0;
+  }
+}
+.directory-filters__group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.directory-filters__group :where(h2, label) {
+  color: var(--muted-foreground);
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.directory-filters__list {
+  display: flex;
+  flex-direction: column;
+}
+.directory-filters__scroll {
+  max-height: 24rem;
+  overflow-y: auto;
+}
+.directory-filters__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.directory-filters__reset {
+  align-self: flex-start;
+  padding: 0.25rem 0;
+  color: var(--muted-foreground);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.directory-filters__reset:hover {
+  color: var(--foreground);
+}
+
+.filter-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid transparent;
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+  line-height: 1.3;
+  text-align: left;
+}
+.filter-option:hover {
+  border-color: var(--border);
+  color: var(--foreground);
+}
+.filter-option__count {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+.tag-filter {
+  border-color: var(--border);
+  padding: 0.25rem 0.625rem;
+  font-size: 0.75rem;
+}
+
+/* Themed scrollbars for the scrollable regions */
+.directory-filters__scroll,
+.prompt-card__preview {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+/* Results */
+.directory-count {
+  padding-bottom: 0.75rem;
+  color: var(--muted-foreground);
+}
+.directory-empty {
+  padding-block: 2rem;
+  font-size: 1rem;
+}
+.directory-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+}
+@media (min-width: 1280px) {
+  .directory-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* File card */
+.prompt-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.prompt-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  color: var(--muted-foreground);
+}
+.prompt-card__featured {
+  color: var(--kojima-accent-ink);
+}
+.prompt-card__barcode {
+  margin-left: auto;
+  height: 1rem;
+  width: 6rem;
+  color: var(--foreground);
+}
+.prompt-card__title {
+  font-size: 1.25rem;
+  line-height: 1.2;
+}
+.prompt-card__desc {
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+.prompt-card__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.5rem;
+}
+.prompt-card__facts div {
+  display: flex;
+  gap: 0.5rem;
+}
+.prompt-card__facts dt {
+  color: var(--muted-foreground);
+}
+.prompt-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.75rem;
+  padding: 0;
+  list-style: none;
+  color: var(--muted-foreground);
+}
+.prompt-card__tags li::before {
+  content: "#";
+}
+.prompt-card__preview {
+  height: 14rem;
+  overflow: auto;
+  border: 1px solid var(--border);
+  background: var(--card);
+}
+.prompt-card__preview pre {
+  padding: 0.75rem;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+.prompt-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: auto;
+}
