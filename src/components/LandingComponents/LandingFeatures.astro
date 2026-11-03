@@ -1,44 +1,36 @@
 ---
-import { Icon } from "astro-icon/components";
-import Sectionhead from "../sectionhead.astro";
+import Container from "@components/container.astro";
 
 export interface Props {
   content: {
-    header: {
-      title: string;
-      description: string;
-    };
-    items: {
-      title: string;
-      description: string;
-      icon: string;
-    }[];
+    header: { label: string; title: string };
+    numbered?: boolean;
+    items: { title: string; description: string }[];
   };
 }
 
 const { content } = Astro.props;
-const { header, items } = content;
+const { header, items, numbered = false } = content;
 ---
 
-<div class="my-24">
-  <Sectionhead>
-    <Fragment slot="title">{header.title}</Fragment>
-    <Fragment slot="desc">{header.description}</Fragment>
-  </Sectionhead>
-
-  <div class="grid sm:grid-cols-2 md:grid-cols-3 mt-16 gap-16">
-    {
-      items.map((item) => (
-        <div class="flex gap-4 items-start">
-          <div class="mt-1 bg-black rounded-full p-2 w-8 h-8 shrink-0">
-            <Icon class="text-white" name={item.icon} />
-          </div>
-          <div>
-            <h3 class="font-semibold text-lg">{item.title}</h3>
-            <p class="text-slate-500 mt-2 leading-relaxed">{item.description}</p>
-          </div>
-        </div>
-      ))
-    }
-  </div>
-</div>
+<section class="home-section">
+  <Container>
+    <p class="kicker">{header.label}</p>
+    <h2 class="home-section__title">{header.title}</h2>
+    <ol class="rule-grid">
+      {
+        items.map((item, index) => (
+          <li>
+            {numbered && (
+              <span class="technical-label rule-grid__step">
+                Step {String(index + 1).padStart(2, "0")}
+              </span>
+            )}
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </Container>
+</section>
