@@ -11,11 +11,10 @@ export function Footer() {
       <div className="mx-auto max-w-[1600px] px-5 pt-10 md:px-10">
         <div className="flex flex-col justify-between gap-8 md:flex-row">
           <div>
-            <p className="kicker">Alec Reimel / Working files</p>
-            <p className="mt-4 max-w-sm text-lg">
-              A personal collection of AI prompts and personas. Copy what is
-              useful.
+            <p className="kicker">
+              {branding.site.owner} / {branding.site.label}
             </p>
+            <p className="mt-4 max-w-sm text-lg">{branding.site.tagline}</p>
           </div>
           <nav
             aria-label="Footer"
@@ -48,16 +47,17 @@ export function Footer() {
         </nav>
         <a
           href="/"
-          aria-label="AI Hub home"
+          aria-label={`${branding.site.name} home`}
           className="focus-visible:outline-ring mt-10 block w-fit text-[clamp(4rem,18.5vw,19rem)] leading-[1.05] font-bold tracking-[-0.075em] focus-visible:outline-2"
         >
-          AI HUB<span className="text-primary">.</span>
+          {branding.site.wordmark}
+          <span className="text-primary">.</span>
         </a>
         <div className="text-muted-foreground border-border mt-6 flex flex-wrap justify-between gap-4 border-t py-6 font-mono text-[11px] tracking-wider uppercase">
           <span>
             &copy; {new Date().getFullYear()} {branding.company.legalName}
           </span>
-          <span>Prompts and personas, free to copy</span>
+          <span>{branding.site.footerNote}</span>
         </div>
       </div>
     </footer>

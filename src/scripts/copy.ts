@@ -1,4 +1,5 @@
 const RESET_MS = 2000;
+const timers = new WeakMap<HTMLElement, number>();
 
 /**
  * Copies text and confirms on the button. Sets data-copied (styled in hub.css)
@@ -11,6 +12,7 @@ export async function copyWithConfirm(
 ) {
   const label = button.dataset.label ?? button.textContent?.trim() ?? "";
   button.dataset.label = label;
+  window.clearTimeout(timers.get(button));
   try {
     await navigator.clipboard.writeText(text);
     button.textContent = confirmation;
@@ -19,8 +21,11 @@ export async function copyWithConfirm(
     button.textContent = "Copy failed";
     delete button.dataset.copied;
   }
-  window.setTimeout(() => {
-    button.textContent = label;
-    delete button.dataset.copied;
-  }, RESET_MS);
+  timers.set(
+    button,
+    window.setTimeout(() => {
+      button.textContent = label;
+      delete button.dataset.copied;
+    }, RESET_MS),
+  );
 }

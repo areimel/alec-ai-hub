@@ -1,4 +1,5 @@
 ---
+import SectionHead from "@components/SectionHead.astro";
 import Layout from "@layouts/Layout.astro";
 import Container from "@components/container.astro";
 import EntryRegister from "@components/EntryRegister.astro";
@@ -35,7 +36,6 @@ const stats = [
   { label: "Prompts", value: counts.prompts },
   { label: "AI personas", value: counts.personas },
   { label: "News & tips", value: counts.blog },
-  { label: "Price", value: "Free" },
 ];
 const { plates } = homeContent;
 ---
@@ -102,8 +102,7 @@ const { plates } = homeContent;
 
   <section class="home-section">
     <Container>
-      <p class="kicker">{homeContent.latest.label}</p>
-      <h2 class="home-section__title">{homeContent.latest.title}</h2>
+      <SectionHead label={homeContent.latest.label} title={homeContent.latest.title} />
       <EntryRegister entries={latest} />
     </Container>
   </section>

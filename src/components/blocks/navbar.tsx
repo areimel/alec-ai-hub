@@ -52,16 +52,17 @@ export function Navbar({ pathname = "/" }: { pathname?: string }) {
       <div className="mx-auto flex min-h-20 max-w-[1600px] items-center justify-between gap-4 px-5 md:px-10">
         <a
           href="/"
-          aria-label="AI Hub home"
+          aria-label={`${branding.site.name} home`}
           className={`flex shrink-0 items-center gap-3 ${focus}`}
         >
           <span className="text-2xl font-bold tracking-[-0.06em]">
-            AI HUB<span className="text-primary">.</span>
+            {branding.site.wordmark}
+            <span className="text-primary">.</span>
           </span>
-          <span className="text-muted-foreground border-border hidden border-l pl-3 font-mono text-[10px] leading-tight tracking-[0.12em] sm:block">
-            ALEC REIMEL
+          <span className="text-muted-foreground border-border hidden border-l pl-3 font-mono text-[11px] leading-tight tracking-[0.12em] sm:block">
+            {branding.site.owner.toUpperCase()}
             <br />
-            WORKING FILES
+            {branding.site.label.toUpperCase()}
           </span>
         </a>
         <nav aria-label="Primary" className="hidden lg:block">

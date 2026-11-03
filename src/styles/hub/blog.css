@@ -20,7 +20,7 @@
   text-decoration: none;
 }
 .post-back:is(:hover, :focus-visible) {
-  color: var(--primary);
+  color: var(--kojima-accent-ink);
 }
 .post-header {
   max-width: 70ch;

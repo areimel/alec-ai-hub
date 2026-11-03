@@ -6,6 +6,11 @@
   },
   "site": {
     "name": "AI Hub",
+    "wordmark": "AI HUB",
+    "owner": "Alec Reimel",
+    "label": "Working files",
+    "tagline": "A personal collection of AI prompts and personas. Copy what is useful.",
+    "footerNote": "Prompts and personas, free to copy",
     "description": "Alec Reimel's working collection of AI prompts and personas, free to copy."
   },
   "seo": {

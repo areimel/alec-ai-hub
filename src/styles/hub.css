@@ -91,11 +91,14 @@
 [data-status="success"] {
   color: var(--kojima-accent-ink);
 }
-[data-status="error"] {
-  color: var(--destructive);
+html[data-theme="kojima"] {
+  --status-error: var(--destructive);
 }
-.dark [data-status="error"] {
-  color: #ff8a80;
+html[data-theme="kojima"].dark {
+  --status-error: #ff8a80;
+}
+[data-status="error"] {
+  color: var(--status-error);
 }
 
 /* Long-form text: blog posts and legal pages. */
@@ -149,7 +152,7 @@
 }
 .entry-register a {
   display: grid;
-  grid-template-columns: 7rem 7rem minmax(0, 1fr);
+  grid-template-columns: 7rem 10rem minmax(0, 1fr);
   align-items: baseline;
   gap: 0.5rem 1.5rem;
   padding-block: 1rem;

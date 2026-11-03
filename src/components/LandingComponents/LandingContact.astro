@@ -1,4 +1,5 @@
 ---
+import SectionHead from "@components/SectionHead.astro";
 import Container from "@components/container.astro";
 import ContactForm from "@components/FormComponents/contactform.astro";
 import { FaqAccordion } from "./FaqAccordion";
@@ -20,13 +21,11 @@ const { faq, contact } = Astro.props;
   <Container>
     <div class="faq-contact">
       <div>
-        <p class="kicker">{faq.header.label}</p>
-        <h2 class="home-section__title">{faq.header.title}</h2>
+        <SectionHead label={faq.header.label} title={faq.header.title} />
         <FaqAccordion items={faq.items} client:visible />
       </div>
       <div class="technical-panel faq-contact__form">
-        <p class="kicker">{contact.header.label}</p>
-        <h2 class="home-section__title">{contact.header.title}</h2>
+        <SectionHead label={contact.header.label} title={contact.header.title} />
         <p class="faq-contact__intro">{contact.header.description}</p>
         <ContactForm />
       </div>
