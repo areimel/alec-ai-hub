@@ -5,73 +5,32 @@
     "website": "https://alecreimel.com/"
   },
   "site": {
-    "name": "AI Prompt Library",
-    "description": "A library for storing and sharing AI prompts across your company, organization, or team. Get your own AI Prompt Library today and empower your team to use AI to its fullest potential.",
-    "logo": {
-      "light": {
-        "path": "/Placeholder-Logo-Black.png",
-        "alt": "Whitelabel Logo - Light Mode",
-        "width": "60",
-        "height": "auto"
-      },
-      "dark": {
-        "path": "/Placeholder-Logo-White.png",
-        "alt": "Whitelabel Logo - Dark Mode",
-        "width": "60",
-        "height": "auto"
-      }
-    }
-  },
-  "footer": {
-    "newsletter": {
-      "title": "We're building cool things every day.",
-      "subtitle": "Sign up to receive the latest news."
-    },
-    "social": {
-      "enabled": ["twitter", "facebook", "instagram", "pinterest"],
-      "icons": {
-        "twitter": "simple-icons:twitter",
-        "facebook": "simple-icons:facebook",
-        "instagram": "simple-icons:instagram",
-        "pinterest": "simple-icons:pinterest"
-      }
-    }
-  },
-  "social": {
-    "twitter": {
-      "handle": "@alecreimel",
-      "url": "#"
-    },
-    "facebook": {
-      "handle": "alecreimel",
-      "url": "#"
-    },
-    "instagram": {
-      "handle": "@alecreimel",
-      "url": "#"
-    },
-    "pinterest": {
-      "handle": "alecreimel",
-      "url": "#"
-    }
+    "name": "AI Hub",
+    "description": "Alec Reimel's working collection of AI prompts and personas, free to copy."
   },
   "seo": {
-    "title": "AI Prompt Library | Alec Reimel",
-    "description": "A library for storing and sharing AI prompts across your company, organization, or team. Get your own AI Prompt Library today and empower your team to use AI to its fullest potential.",
+    "title": "AI Hub | Alec Reimel",
+    "description": "Alec Reimel's working collection of AI prompts and personas, free to copy.",
     "openGraph": {
-      "title": "AI Prompt Library | Alec Reimel",
+      "title": "AI Hub | Alec Reimel",
       "image": {
-        "alt": "AI Prompt Library Homepage Screenshot"
+        "alt": "Orange and charcoal instrument plate with a radar graphic and the wordmark AI HUB."
       }
     }
   },
   "navigation": {
-    "primaryLinks": [
-      {
-        "title": "Company Website",
-        "url": "https://alecreimel.com/",
-        "isExternal": true
-      }
+    "main": [
+      { "title": "Prompts", "url": "/prompts" },
+      { "title": "AI Personas", "url": "/ai-personas" },
+      { "title": "News & Tips", "url": "/blog" },
+      { "title": "DIY Prompt Library", "url": "/diy-prompt-library" }
+    ],
+    "footer": [
+      { "title": "Submit a prompt", "url": "/submit-prompt" },
+      { "title": "Alec's website", "url": "https://alecreimel.com/", "isExternal": true },
+      { "title": "Privacy", "url": "/privacy" },
+      { "title": "Terms", "url": "/terms" },
+      { "title": "CCPA", "url": "/ccpa" }
     ]
   }
-} 
+}

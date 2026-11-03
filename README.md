@@ -160,6 +160,10 @@ This project is available for free personal and commercial use. See the LICENSE 
 *   **Community**: Join our growing community of AI prompt engineers
 *   **Documentation**: Comprehensive guides available in the `/blog` section
 
+## Credits
+
+The visual design is based on the Kojima theme ([areimel/kojima-astro-template](https://github.com/areimel/kojima-astro-template)), built on blocks from shadcnblocks.com by Rob Austin. The copied theme code is used under its MIT + Commons Clause license, see `src/components/kojima/LICENSE`.
+
 ---
 
 Built with ❤️ by [Alec Reimel](https://alecreimel.com) | Empowering teams to master AI prompt engineering

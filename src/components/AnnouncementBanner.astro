@@ -61,30 +61,17 @@ if (shouldDisplay && endDate) {
 ---
 
 {shouldDisplay && (
-  <>
+  <div class="announcement bg-background text-foreground border-border w-full border-b">
     {link ? (
-      <a 
-        href={link} 
-        class="block w-full bg-blue-500 dark:bg-blue-700 text-white py-2 px-4 transition-colors duration-300 hover:bg-blue-600 dark:hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
-      >
-        <div class="max-w-screen-lg mx-auto flex items-center justify-center text-center">
-          <div class="text-sm" set:html={text} />
-        </div>
+      <a href={link} class="announcement-row hover:bg-accent focus-visible:outline-ring focus-visible:outline-2 focus-visible:-outline-offset-2">
+        <span class="kicker">Notice</span>
+        <span class="text-sm" set:html={text} />
       </a>
     ) : (
-      <div class="w-full bg-blue-500 dark:bg-blue-700 text-white py-2 px-4 transition-colors duration-300">
-        <div class="max-w-screen-lg mx-auto flex items-center justify-center text-center">
-          <div class="text-sm" set:html={text} />
-        </div>
+      <div class="announcement-row">
+        <span class="kicker">Notice</span>
+        <span class="text-sm" set:html={text} />
       </div>
     )}
-  </>
+  </div>
 )}
-
-<style>
-  /* Add any component-specific styles here */
-  a:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px color-mix(in oklab, white 50%, transparent);
-  }
-</style> 
