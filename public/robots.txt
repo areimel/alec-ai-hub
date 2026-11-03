@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: http://company-ai-prompts.com/sitemap-index.xml
+Sitemap: https://ai-hub.alecreimel.com/sitemap-index.xml

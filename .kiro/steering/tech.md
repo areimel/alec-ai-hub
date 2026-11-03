@@ -23,9 +23,9 @@
 - **Astro CLI**: `pnpm astro` - access Astro CLI commands
 
 ## Deployment
-- **Platform**: Netlify with @astrojs/netlify adapter
+- **Platform**: GitHub Pages, deployed by GitHub Actions (.github/workflows/deploy.yml)
 - **Output**: Static site generation
-- **Site URL**: https://company-ai-prompts.netlify.app
+- **Site URL**: https://ai-hub.alecreimel.com
 
 ## Development Environment
 - **Node.js**: ES modules (type: "module" in package.json)

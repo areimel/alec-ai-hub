@@ -6,7 +6,7 @@ import icon from "astro-icon";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://ai-hub.homelab.alecreimel.com",
+  site: "https://ai-hub.alecreimel.com",
   output: "static",
   integrations: [tailwind(), mdx(), sitemap(), icon()],
   image: {

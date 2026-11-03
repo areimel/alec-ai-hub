@@ -140,7 +140,7 @@ Visit `http://localhost:4321` to view your site.
 
 ## Deployment
 
-The site is optimized for Netlify deployment with the `@astrojs/netlify` adapter. Other deployment options include Vercel, GitHub Pages, or any static hosting service.
+The site is a static Astro build deployed to GitHub Pages at https://ai-hub.alecreimel.com. Every push to `main` runs `.github/workflows/deploy.yml`, which builds and publishes the site. The custom domain is set in the repository's Pages settings, so there is no `public/CNAME` file.
 
 ## Contributing
 
