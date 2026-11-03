@@ -3,8 +3,7 @@ import { SEO } from "astro-seo";
 import Footer from "@components/footer.astro";
 import Navbar from "@components/navbar/navbar.astro";
 import AnnouncementBanner from "@components/AnnouncementBanner.astro";
-import "@fontsource-variable/inter/index.css";
-import '@fontsource-variable/bricolage-grotesque';
+import "../styles/global.css";
 import branding from "@data/branding.json";
 
 export interface Props {
@@ -26,7 +25,7 @@ const makeTitle = title
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="kojima">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />

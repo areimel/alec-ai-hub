@@ -1,5 +1,6 @@
 import { defineConfig, passthroughImageService } from "astro/config";
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from "@tailwindcss/vite";
+import react from "@astrojs/react";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import icon from "astro-icon";
@@ -8,7 +9,10 @@ import icon from "astro-icon";
 export default defineConfig({
   site: "https://ai-hub.alecreimel.com",
   output: "static",
-  integrations: [tailwind(), mdx(), sitemap(), icon()],
+  integrations: [react(), mdx(), sitemap(), icon()],
+  vite: {
+    plugins: [tailwindcss()],
+  },
   image: {
     service: passthroughImageService()
   }
