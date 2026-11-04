@@ -4,7 +4,7 @@ import Layout from "@layouts/Layout.astro";
 import EntryDossier from "@components/PromptComponents/EntryDossier.astro";
 
 export async function getStaticPaths() {
-  const entries = await getCollection("personas");
+  const entries = await getCollection("agents");
   return entries.map((entry) => ({
     params: { slug: entry.slug },
     props: { entry },
@@ -15,5 +15,5 @@ const { entry } = Astro.props;
 ---
 
 <Layout title={entry.data.title}>
-  <EntryDossier entry={entry} collectionType="personas" />
+  <EntryDossier entry={entry} collectionType="agents" />
 </Layout>

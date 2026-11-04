@@ -5,16 +5,16 @@ import PageHeader from "@components/PageHeader.astro";
 import PromptDirectoryGroup from "@components/PromptComponents/PromptDirectoryGroup.astro";
 import { getPublished } from "@lib/content";
 
-const count = (await getPublished("personas")).length;
+const count = (await getPublished("agents")).length;
 ---
 
-<Layout title="Personas">
+<Layout title="Custom Agents">
   <PageHeader
-    label="Directory / Personas"
-    title="Personas"
-    intro={`${count} personas that set up an AI for a role. Filter by category or type, then copy one or open it to read the full text.`}
+    label="Directory / Custom Agents"
+    title="Custom Agents"
+    intro={`${count} agent files you can save into your own project. Filter by category or access, then copy one or open it to read the full file.`}
   />
   <Container>
-    <PromptDirectoryGroup collectionType="personas" />
+    <PromptDirectoryGroup collectionType="agents" />
   </Container>
 </Layout>

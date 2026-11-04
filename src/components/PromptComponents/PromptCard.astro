@@ -1,6 +1,7 @@
 ---
 import ActionButton from "@components/ui/ActionButton.astro";
 import SlugBarcode from "@components/kojima/SlugBarcode.astro";
+import { directoryCollections, type DirectoryCollection } from "@lib/collections";
 
 interface Props {
   itemEntry: {
@@ -16,17 +17,15 @@ interface Props {
     body: string;
     slug: string;
   };
-  collectionType?: "prompts" | "personas";
+  collectionType?: DirectoryCollection;
 }
 
 const { itemEntry, collectionType = "prompts" } = Astro.props;
 const { data } = itemEntry;
 
-const isPersonas = collectionType === "personas";
-const linkUrl = `/${isPersonas ? "ai-personas" : "prompts"}/${itemEntry.slug}`;
-const viewText = isPersonas ? "View persona" : "View prompt";
-const copyText = isPersonas ? "Copy persona" : "Copy prompt";
-const subCategoryLabel = isPersonas ? "Persona type" : "AI tool";
+const config = directoryCollections[collectionType];
+const linkUrl = `/${config.base}/${itemEntry.slug}`;
+const { viewLabel: viewText, copyLabel: copyText, subCategoryLabel } = config;
 ---
 
 <article

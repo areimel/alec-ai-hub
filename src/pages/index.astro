@@ -14,13 +14,13 @@ import homeContent from "@data/homeContent.json";
 const [counts, prompts, personas, posts] = await Promise.all([
   getCounts(),
   getPublished("prompts"),
-  getPublished("personas"),
+  getPublished("agents"),
   getPublished("blog"),
 ]);
 
 const latest = [
   ...prompts.map((e) => ({ ...e, base: "prompts" })),
-  ...personas.map((e) => ({ ...e, base: "ai-personas" })),
+  ...personas.map((e) => ({ ...e, base: "custom-agents" })),
   ...posts.map((e) => ({ ...e, base: "blog" })),
 ]
   .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
@@ -34,7 +34,7 @@ const latest = [
 
 const stats = [
   { label: "Prompts", value: counts.prompts },
-  { label: "AI personas", value: counts.personas },
+  { label: "AI personas", value: counts.agents },
   { label: "News & tips", value: counts.blog },
 ];
 const { plates } = homeContent;
@@ -71,17 +71,17 @@ const { plates } = homeContent;
           footerLines={[`${counts.prompts} PUBLISHED`, "ALEC REIMEL"]}
         />
         <PlateLink
-          href="/ai-personas"
+          href="/custom-agents"
           title={plates.personas.title}
           description={plates.personas.description}
-          meta={`${counts.personas} personas`}
+          meta={`${counts.agents} personas`}
           variant="grid"
           palette="dark"
           seed={11}
           wordmark="PERSONAS"
-          code={`PERSONAS—${counts.personas}`}
+          code={`PERSONAS—${counts.agents}`}
           plate="PERSONAS"
-          footerLines={[`${counts.personas} PUBLISHED`, "ALEC REIMEL"]}
+          footerLines={[`${counts.agents} PUBLISHED`, "ALEC REIMEL"]}
         />
         <PlateLink
           href="/blog"

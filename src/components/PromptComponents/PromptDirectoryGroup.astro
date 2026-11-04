@@ -2,9 +2,10 @@
 import { getPublished } from "@lib/content";
 import SearchFilter from "@components/PromptComponents/SearchFilter.astro";
 import PromptGrid from "@components/PromptComponents/PromptGrid.astro";
+import { directoryCollections, type DirectoryCollection } from "@lib/collections";
 
 interface Props {
-  collectionType?: "prompts" | "personas";
+  collectionType?: DirectoryCollection;
 }
 
 const { collectionType = "prompts" } = Astro.props;
@@ -31,7 +32,7 @@ const allTags = [...new Set(publishedItems.flatMap((item) => item.data.tags))];
       collectionType={collectionType}
     />
   </aside>
-  <section class="directory__main" aria-label={collectionType === "personas" ? "Persona list" : "Prompt list"}>
+  <section class="directory__main" aria-label={directoryCollections[collectionType].listLabel}>
     <PromptGrid publishedItems={publishedItems} collectionType={collectionType} />
   </section>
 </div>

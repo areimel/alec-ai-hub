@@ -1,6 +1,7 @@
 ---
 import { Input } from "@/components/ui/input";
 import FilterButton from "./FilterButton.astro";
+import { directoryCollections, type DirectoryCollection } from "@lib/collections";
 
 interface Props {
   publishedItems: any[];
@@ -8,14 +9,12 @@ interface Props {
   categoryCount: Record<string, number>;
   subCategories: string[];
   allTags: string[];
-  collectionType?: "prompts" | "personas";
+  collectionType?: DirectoryCollection;
 }
 
 const { publishedItems, categories, categoryCount, subCategories, allTags, collectionType = "prompts" } = Astro.props;
 
-const isPersonas = collectionType === "personas";
-const searchPlaceholder = isPersonas ? "Search personas" : "Search prompts";
-const subCategoryLabel = isPersonas ? "Persona types" : "AI tools";
+const { searchPlaceholder, subCategoryHeading, allSubCategoriesLabel } = directoryCollections[collectionType];
 ---
 
 <div class="directory-filters">
@@ -50,9 +49,9 @@ const subCategoryLabel = isPersonas ? "Persona types" : "AI tools";
     </div>
 
     <div class="directory-filters__group">
-      <h2 class="technical-label">{subCategoryLabel}</h2>
+      <h2 class="technical-label">{subCategoryHeading}</h2>
       <div class="directory-filters__list">
-        <FilterButton kind="subcategory" value="all" label={isPersonas ? "All types" : "All tools"} active />
+        <FilterButton kind="subcategory" value="all" label={allSubCategoriesLabel} active />
         {subCategories.map((subCategory) => (
           <FilterButton kind="subcategory" value={subCategory} />
         ))}

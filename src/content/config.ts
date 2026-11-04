@@ -51,29 +51,14 @@ const promptsCollection = defineCollection({
   }),
 });
 
-const personasCollection = defineCollection({
+const agentsCollection = defineCollection({
   schema: z.object({
     draft: z.boolean(),
     title: z.string(),
     description: z.string(),
     usage_instructions: z.string(),
-    category: z.enum([
-      'Assistant',
-      'Creative',
-      'Technical',
-      'Business',
-      'Educational',
-      'Specialized'
-    ]),
-    sub_category: z.enum([
-      'General',
-      'Customer Service',
-      'Content Creation',
-      'Code Review',
-      'Teaching',
-      'Research',
-      'Other'
-    ]),
+    category: z.enum(['Code', 'Research', 'Writing', 'Operations']),
+    sub_category: z.enum(['Read-only', 'Can edit']),
     tags: z.array(z.string()),
     version: z.string().default('1.0'),
     author: z.string().default('Anonymous'),
@@ -88,5 +73,5 @@ const personasCollection = defineCollection({
 export const collections = {
   'blog': blogCollection,
   'prompts': promptsCollection,
-  'personas': personasCollection,
+  'agents': agentsCollection,
 };
