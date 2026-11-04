@@ -1,29 +1,27 @@
 ---
-// Shared detail sheet for prompts and personas. Differences live in `collectionType`.
+// Shared detail sheet for prompts, agents and skills. Differences live in `collectionType`.
 import type { CollectionEntry } from "astro:content";
 import Container from "@components/container.astro";
 import ActionButton from "@components/ui/ActionButton.astro";
 import SlugBarcode from "@components/kojima/SlugBarcode.astro";
 import TemplateMenu from "@components/PromptComponents/TemplateMenu.astro";
+import { directoryCollections, type DirectoryCollection } from "@lib/collections";
 
 interface Props {
-  entry: CollectionEntry<"prompts"> | CollectionEntry<"personas">;
-  collectionType: "prompts" | "personas";
+  entry: CollectionEntry<DirectoryCollection>;
+  collectionType: DirectoryCollection;
 }
 
 const { entry, collectionType } = Astro.props;
 const { data } = entry;
 const isTemplate = "template" in data && data.template === true;
 
-const labels = {
-  prompts: { back: "All prompts", href: "/prompts", tool: "AI tool", text: "Prompt text", copy: "Copy prompt" },
-  personas: { back: "All personas", href: "/ai-personas", tool: "Persona type", text: "Persona system prompt", copy: "Copy persona" },
-}[collectionType];
+const labels = directoryCollections[collectionType];
 
 const day = (d: Date) => d.toISOString().slice(0, 10);
 const rows = [
   { label: "Category", value: data.category },
-  { label: labels.tool, value: data.sub_category },
+  { label: labels.subCategoryLabel, value: data.sub_category },
   { label: "Version", value: `v${data.version}` },
   { label: "Author", value: data.author },
 ];
@@ -31,7 +29,7 @@ const rows = [
 
 <Container class="dossier">
   <nav class="dossier__crumb technical-label" aria-label="Breadcrumb">
-    <a href={labels.href}>{labels.back}</a>
+    <a href={labels.backHref}>{labels.backLabel}</a>
   </nav>
 
   <article class="dossier__sheet">
@@ -90,10 +88,10 @@ const rows = [
 
       <section class="dossier__prompt" aria-labelledby="entry-text">
         <div class="dossier__bar">
-          <h2 id="entry-text">{labels.text}</h2>
+          <h2 id="entry-text">{labels.textHeading}</h2>
           <div class="dossier__actions">
             <ActionButton id="copyLink" variant="outline" size="sm">Copy link</ActionButton>
-            <ActionButton id="copyPrompt" size="sm">{labels.copy}</ActionButton>
+            <ActionButton id="copyPrompt" size="sm">{labels.copyLabel}</ActionButton>
           </div>
         </div>
         <pre id="promptContent" class="dossier__pre">{entry.body}</pre>

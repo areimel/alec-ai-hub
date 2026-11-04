@@ -243,10 +243,10 @@ test.describe("real data", () => {
 test.describe("without JavaScript", () => {
   test.use({ javaScriptEnabled: false });
 
-  test("home, directory and a post show content and nav links", async ({ page, request }) => {
+  test("home, directory and an agent page show content and nav links", async ({ page, request }) => {
     await blockThirdParty(page);
     const html = await (await request.get("/")).text();
-    for (const href of ["/prompts", "/ai-personas", "/blog"]) {
+    for (const href of ["/prompts", "/custom-agents", "/skills-plugins"]) {
       expect(html, `server HTML nav link ${href}`).toMatch(new RegExp(`<nav[\\s\\S]*href="${href}"`));
     }
 
@@ -259,9 +259,9 @@ test.describe("without JavaScript", () => {
     await expect(page.locator(".prompt-card").first().locator("pre")).toBeAttached();
     await expect(page.locator("#searchInput")).toBeVisible(); // desktop width
 
-    await page.goto("/blog/template-prompts-feature");
+    await page.goto("/custom-agents/code-reviewer");
     await expect(page.locator("h1")).toBeVisible();
-    await expect(page.locator(".post-body")).toContainText(/\w{10}/);
+    await expect(page.locator("#promptContent")).toContainText(/\w{10}/);
   });
 
   test("mobile directory filters reachability without JS (informational)", async ({ page }) => {
@@ -283,4 +283,123 @@ test.describe("legal pages", () => {
       await expect(page.locator("#contact #form")).toBeInViewport();
     });
   }
+});
+
+const PORTFOLIO = "https://alecreimel.com/";
+const REPO = "https://github.com/areimel/alec-ai-hub";
+
+test.describe("header and footer links", () => {
+  test("desktop header has Portfolio and GitHub repo links that open in a new tab", async ({ page }) => {
+    await page.setViewportSize({ width: 1024, height: 800 });
+    await open(page, "/");
+    for (const [name, href] of [["Portfolio", PORTFOLIO], ["GitHub repo", REPO]]) {
+      const link = page.locator("header > div").getByRole("link", { name });
+      await expect(link).toBeVisible();
+      await expect(link).toHaveAttribute("href", href);
+      await expect(link).toHaveAttribute("target", "_blank");
+      await expect(link).toHaveAttribute("rel", /noopener/);
+    }
+  });
+
+  for (const width of [390, 768]) {
+    test(`at ${width}px the CTAs are hidden in the bar and appear in the mobile menu`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 844 });
+      await open(page, "/");
+      for (const href of [PORTFOLIO, REPO]) {
+        await expect(page.locator(`header > div a[href="${href}"]`)).toBeHidden();
+        await expect(page.locator(`#mobile-navigation a[href="${href}"]`)).toBeHidden();
+      }
+      await page.locator("button[aria-controls=mobile-navigation]").click();
+      await expect(page.locator("#mobile-navigation")).toBeVisible();
+      for (const href of [PORTFOLIO, REPO]) {
+        const link = page.locator(`#mobile-navigation a[href="${href}"]`);
+        await expect(link).toBeVisible();
+        await expect(link).toHaveAttribute("target", "_blank");
+        await expect(link).toHaveAttribute("rel", /noopener/);
+        await expect(page.locator(`header > div a[href="${href}"]`)).toBeHidden();
+      }
+    });
+  }
+
+  test("footer links to the DIY library and the repo; the header does not link to the DIY library", async ({ page }) => {
+    await open(page, "/");
+    await expect(page.locator('footer a[href="/diy-prompt-library"]')).toHaveCount(1);
+    await expect(page.locator('header a[href="/diy-prompt-library"]')).toHaveCount(0);
+    const repo = page.locator(`footer a[href="${REPO}"]`);
+    await expect(repo).toHaveCount(1);
+    await expect(repo).toHaveAttribute("target", "_blank");
+    await expect(repo).toHaveAttribute("rel", /noopener/);
+  });
+
+  test("header nav has exactly Prompts, Custom Agents and Skills & Plugins", async ({ page }) => {
+    await open(page, "/");
+    const expected = ["Prompts", "Custom Agents", "Skills & Plugins"];
+    expect(await page.locator('header nav[aria-label="Primary"] a').allTextContents()).toEqual(expected);
+    expect(
+      (await page.locator("#mobile-navigation li a").allTextContents()).map((t) => t.trim()),
+    ).toEqual(expected);
+  });
+});
+
+test.describe("old URL redirects", () => {
+  for (const [from, to] of [
+    ["/ai-personas", "/custom-agents"],
+    ["/ai-personas/technical-mentor", "/custom-agents"],
+    ["/blog", "/"],
+    ["/blog/template-prompts-feature", "/"],
+  ]) {
+    test(`${from} redirects to ${to}`, async ({ page }) => {
+      await blockThirdParty(page);
+      await page.goto(from);
+      await expect.poll(() => new URL(page.url()).pathname).toBe(to);
+    });
+  }
+});
+
+test.describe("agents and skills", () => {
+  test.beforeEach(async ({ context }) => {
+    await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+  });
+  const clip = (page: import("@playwright/test").Page) => page.evaluate(() => navigator.clipboard.readText());
+
+  for (const path of ["/custom-agents/code-reviewer", "/skills-plugins/commit-message-writer"]) {
+    test(`${path} detail page copies a file starting with front matter`, async ({ page }) => {
+      await open(page, path);
+      const copy = page.locator("#copyPrompt");
+      await copy.click();
+      await expect(copy).toHaveAttribute("data-copied", "true");
+      const text = await clip(page);
+      expect(text.startsWith("---\nname: ")).toBe(true);
+      expect(text).toBe(await page.locator("#promptContent").evaluate((el) => el.textContent ?? ""));
+    });
+  }
+
+  test("a card copy button on /custom-agents copies a file starting with front matter", async ({ page }) => {
+    await open(page, "/custom-agents");
+    const card = page.locator(".prompt-card").first();
+    const expected = await card.locator("pre").evaluate((el) => el.textContent ?? "");
+    const button = card.locator(".copy-button");
+    await button.click();
+    await expect(button).toHaveAttribute("data-copied", "true");
+    const text = await clip(page);
+    expect(text.startsWith("---\nname: ")).toBe(true);
+    expect(text).toBe(expected);
+  });
+
+  test("directories show 5 agents and 4 skills; the Plugin filter shows 1", async ({ page }) => {
+    await open(page, "/custom-agents");
+    await expect(page.locator(".prompt-card")).toHaveCount(5);
+    await open(page, "/skills-plugins");
+    await expect(page.locator(".prompt-card")).toHaveCount(4);
+    await page.locator('.subcategory-filter[data-subcategory="Plugin"]').click();
+    await expect(cards(page)).toHaveCount(1);
+  });
+
+  test("the home hero's secondary button goes to /custom-agents", async ({ page }) => {
+    await open(page, "/");
+    const secondary = page.locator(".home-hero__actions a").nth(1);
+    await expect(secondary).toHaveAttribute("href", "/custom-agents");
+    await secondary.click();
+    await expect(page).toHaveURL(/\/custom-agents$/);
+  });
 });

@@ -1,16 +1,17 @@
 import AxeBuilder from "@axe-core/playwright";
-import { blogSlugs, expect, open, setTheme, test } from "./helpers";
+import { expect, open, setTheme, test } from "./helpers";
 
 const routes = [
   "/",
   "/prompts",
-  "/ai-personas",
+  "/custom-agents",
+  "/skills-plugins",
   "/prompts/code-review-template",
   "/prompts/ai-prompt-template",
   "/prompts/web-developer",
-  "/ai-personas/curious-teacher",
-  "/blog",
-  ...blogSlugs.map((s) => `/blog/${s}`),
+  "/custom-agents/code-reviewer",
+  "/skills-plugins/commit-message-writer",
+  "/skills-plugins/git-writing-kit",
   "/diy-prompt-library",
   "/submit-prompt",
   "/privacy",

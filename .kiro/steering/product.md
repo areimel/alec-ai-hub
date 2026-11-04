@@ -3,7 +3,7 @@
 Company AI Prompt Directory is a lightweight, customizable AI prompt library designed for sharing AI prompts across companies or with friends. 
 
 ## Key Features
-- Directory-style landing page with prompt browsing
+- Directory-style landing page with prompt, custom agent and skill browsing
 - Search and filtering capabilities 
 - Individual prompt pages with detailed information
 - Built for performance with modern web technologies
@@ -25,3 +25,5 @@ The platform supports various prompt categories:
 - Marketing (campaigns, website optimization)
 
 Prompts are designed for multiple AI platforms including Cursor, ChatGPT, Claude, Gemini, and MidJourney.
+
+Custom agents (subagent files) and skills and plugins are written for Claude Code and its file formats.

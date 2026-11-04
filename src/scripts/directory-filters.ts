@@ -1,4 +1,4 @@
-// Search, filter and card-copy behaviour for the prompt and persona directories.
+// Search, filter and card-copy behaviour for the prompt, custom agent and skills and plugins directories (safe on an empty directory).
 import { copyWithConfirm } from "./copy";
 
 const DESKTOP = window.matchMedia("(min-width: 1024px)");

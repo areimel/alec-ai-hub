@@ -9,8 +9,7 @@
 ├── .kiro/               # Kiro AI assistant configuration
 ├── dist/                # Production build output
 ├── node_modules/        # Dependencies
-├── astro.config.mjs     # Astro configuration
-├── tailwind.config.cjs  # TailwindCSS configuration
+├── astro.config.mjs     # Astro configuration (includes redirects for retired URLs)
 ├── tsconfig.json        # TypeScript configuration
 └── package.json         # Project dependencies and scripts
 ```
@@ -18,24 +17,28 @@
 ## Source Directory (`src/`)
 ```
 src/
-├── components/          # Reusable UI components (.astro files)
-│   ├── ContentComponents/    # Content-specific components
-│   ├── navbar/              # Navigation components
-│   ├── PromptComponents/    # Prompt-related components
+├── components/          # Reusable UI components (.astro and .tsx files)
+│   ├── blocks/              # Navbar and footer
+│   ├── FormComponents/      # Contact and prompt submission forms
+│   ├── kojima/              # Instrument plates, plate links, slug barcode
+│   ├── LandingComponents/   # Homepage and DIY page sections
+│   ├── PromptComponents/    # Directory and detail pages for prompts, agents and skills
 │   └── ui/                  # Generic UI components
 ├── content/             # Content collections (Markdown/MDX)
-│   ├── blog/           # Blog posts
-│   ├── prompts/        # AI prompt library
+│   ├── prompts/        # AI prompt library (.mdx or .md)
+│   ├── agents/         # Claude Code custom agents (.md)
+│   ├── skills/         # Claude Code skills and plugins (.md)
 │   └── config.ts       # Content schema definitions
-├── data/               # Static JSON data files
+├── data/               # Static JSON data files (branding, homepage and DIY page copy)
 ├── layouts/            # Page layout templates
-├── pages/              # Site pages and API routes
-│   ├── api/           # API endpoints
-│   ├── blog/          # Blog-related pages
-│   ├── prompts/       # Prompt pages and routes
-│   └── index.astro    # Homepage
+├── lib/                # Content helpers (getPublished, getCounts) and collection config
+├── pages/              # Site pages
+│   ├── prompts/        # Prompt directory and detail pages
+│   ├── custom-agents/  # Custom agents directory and detail pages
+│   ├── skills-plugins/ # Skills and plugins directory and detail pages
+│   └── index.astro     # Homepage
 ├── utils/              # Utility functions
-└── assets/             # Images and other assets
+└── assets/             # Images and other assets, including the OG image source SVG
 ```
 
 ## Path Aliases (TypeScript)
@@ -48,9 +51,9 @@ src/
 - `@data/*` → `src/data/*`
 
 ## Content Collections Schema
-- **Prompts**: Title, description, usage instructions, category, sub_category, tags, version, author, dates, featured flag
-- **Blog**: Title, snippet, image, publish date, category, author, tags
-- **Team**: Name, title, avatar, publish date
+- **Prompts**: Title, description, usage instructions, category, sub_category, template flag, tags, version, author, dates, featured flag
+- **Agents**: Title, description, usage instructions, category (Code, Research, Writing, Operations), sub_category (Read-only, Runs commands, Can edit), tags, version, author, dates, featured flag
+- **Skills**: Title, description, usage instructions, category (Code, Writing, Docs, Workflow), sub_category (Skill, Plugin), tags, version, author, dates, featured flag
 
 ## File Naming Conventions
 - Components: PascalCase for Astro components (e.g., `ThemeToggle.astro`)

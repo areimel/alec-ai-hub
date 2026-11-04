@@ -1,16 +1,8 @@
-import fs from "node:fs";
-import path from "node:path";
 import { expect, test as base, type Page } from "@playwright/test";
 
 export { expect };
 
 export const WEB3FORMS = "https://api.web3forms.com/**";
-
-/** Slugs of every post in src/content/blog, so new posts are covered automatically. */
-export const blogSlugs = fs
-  .readdirSync(path.join(process.cwd(), "src/content/blog"))
-  .filter((f) => /\.mdx?$/.test(f))
-  .map((f) => f.replace(/\.mdx?$/, ""));
 
 type Fixtures = {
   /** Page errors and console errors seen so far. */

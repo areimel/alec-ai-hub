@@ -1,13 +1,14 @@
 ---
 import PromptCard from "./PromptCard.astro";
+import { directoryCollections, type DirectoryCollection } from "@lib/collections";
 
 interface Props {
   publishedItems: any[];
-  collectionType?: "prompts" | "personas";
+  collectionType?: DirectoryCollection;
 }
 
 const { publishedItems, collectionType = "prompts" } = Astro.props;
-const noun = collectionType === "personas" ? "personas" : "prompts";
+const { noun } = directoryCollections[collectionType];
 ---
 
 <div>

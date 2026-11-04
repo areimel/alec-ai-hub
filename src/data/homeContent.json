@@ -1,24 +1,24 @@
 {
   "hero": {
     "kicker": "Alec Reimel / AI working files",
-    "headline": "Working prompts.",
+    "headline": "Working tools.",
     "headlineMuted": "Yours to copy.",
-    "intro": "A small collection of AI prompts and personas, kept in one place. Copy what is useful, fill in the blanks on the templates, and paste it into your AI tool.",
+    "intro": "A small collection of AI prompts, custom agents and skills, kept in one place. Copy what is useful: fill in the blanks on prompt templates and paste them into your AI tool, or save agent and skill files into a Claude Code project.",
     "primary": { "text": "Browse prompts", "href": "/prompts" },
-    "secondary": { "text": "See personas", "href": "/ai-personas" }
+    "secondary": { "text": "See custom agents", "href": "/custom-agents" }
   },
   "plates": {
     "prompts": {
       "title": "Prompts",
       "description": "Prompts for coding, writing, analysis and more. Filter by category or AI tool."
     },
-    "personas": {
-      "title": "AI Personas",
-      "description": "Role and tone setups you can give an AI before you start a chat."
+    "agents": {
+      "title": "Custom Agents",
+      "description": "Subagent files for Claude Code. Save one into your project's .claude/agents folder and ask for it by name."
     },
-    "blog": {
-      "title": "News & Tips",
-      "description": "Short posts about the site and how to use prompts."
+    "skills": {
+      "title": "Skills & Plugins",
+      "description": "Skills and plugins for Claude Code. Save a skill into .claude/skills, or assemble a plugin folder by hand."
     }
   },
   "latest": { "label": "Latest", "title": "Recently added" },
@@ -28,15 +28,15 @@
     "items": [
       {
         "title": "Find",
-        "description": "Browse prompts by category or AI tool, or search by keyword."
+        "description": "Browse by category or search by keyword. Prompts can also be filtered by AI tool."
       },
       {
         "title": "Fill in",
-        "description": "Some prompts are templates with blanks. Type your details in and the prompt updates as you go."
+        "description": "Some prompts are templates with blanks. Type your details in and the prompt updates as you go. Agents and skills have no blanks, but you can edit their files."
       },
       {
         "title": "Copy",
-        "description": "Press copy and paste the prompt into ChatGPT, Claude, Gemini or whichever tool you use."
+        "description": "Press copy. Paste a prompt into ChatGPT, Claude, Gemini or whichever tool you use, or paste an agent or skill into the file its page names."
       }
     ]
   },
@@ -44,7 +44,7 @@
     "label": "About",
     "headline": "Hi, I'm Alec.",
     "paragraphs": [
-      "I made AI Hub to keep my prompts and personas in one place and to share them. It is a personal project, so the collection is small and changes when I add to it.",
+      "I made AI Hub to keep my prompts, custom agents and skills in one place and to share them. It is a personal project, so the collection is small and changes when I add to it.",
       "If you have a prompt that works well, you can send it in."
     ],
     "button": { "text": "Submit a prompt", "href": "/submit-prompt" }
@@ -55,7 +55,7 @@
       {
         "id": "faq-1",
         "question": "What is this?",
-        "answer": "A collection of AI prompts and personas, plus a few posts about using them. Everything is on this site and there is no account to make."
+        "answer": "A collection of AI prompts, plus custom agents and skills for Claude Code. Everything is on this site and there is no account to make."
       },
       {
         "id": "faq-2",
@@ -69,21 +69,26 @@
       },
       {
         "id": "faq-4",
-        "question": "Which AI tools do they work with?",
+        "question": "Which AI tools do the prompts work with?",
         "answer": "Each prompt is tagged with the tool it was written for, such as ChatGPT, Claude, Cursor or MidJourney. They may behave differently in other tools."
       },
       {
         "id": "faq-5",
+        "question": "What do agents and skills work with?",
+        "answer": "They are written for Claude Code and use its file formats: subagent files for .claude/agents, and SKILL.md files for .claude/skills. They are not written for other AI tools."
+      },
+      {
+        "id": "faq-6",
         "question": "Can I contribute a prompt?",
         "answer": "Yes. Use the submit a prompt page. I decide what gets added."
       },
       {
-        "id": "faq-6",
+        "id": "faq-7",
         "question": "Can I ask for a prompt?",
         "answer": "Yes, send a request with the contact form. I can't promise when or whether I will write it."
       },
       {
-        "id": "faq-7",
+        "id": "faq-8",
         "question": "Can I run my own copy of this site?",
         "answer": "Yes. The site is open source. The DIY Prompt Library page has the details."
       }

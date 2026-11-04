@@ -8,6 +8,20 @@ import sitemap from "@astrojs/sitemap";
 export default defineConfig({
   site: "https://ai-hub.alecreimel.com",
   output: "static",
+  // Old URLs that now point somewhere else. Add new entries here.
+  redirects: {
+    "/ai-personas": "/custom-agents",
+    "/ai-personas/creative-collaborator": "/custom-agents",
+    "/ai-personas/curious-teacher": "/custom-agents",
+    "/ai-personas/empathetic-counselor": "/custom-agents",
+    "/ai-personas/professional-assistant": "/custom-agents",
+    "/ai-personas/strategic-business-advisor": "/custom-agents",
+    "/ai-personas/technical-mentor": "/custom-agents",
+    "/blog": "/",
+    "/blog/ai-persona-prompts": "/",
+    "/blog/get-your-own-ai-prompt-directory": "/",
+    "/blog/template-prompts-feature": "/",
+  },
   integrations: [react(), mdx(), sitemap()],
   vite: {
     plugins: [tailwindcss()],

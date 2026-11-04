@@ -12,7 +12,7 @@
   <text x="44" y="390" fill="#ff4d00" font-family="'DejaVu Sans','Arial Black',Arial,sans-serif" font-weight="900" font-size="165">AI HUB</text>
   <text x="48" y="478" fill="#eee9db" font-family="'DejaVu Sans',Arial,sans-serif" font-size="31" font-weight="700">Alec Reimel's working AI prompts</text>
   <g fill="#eee9db" font-family="'DejaVu Sans Mono','Courier New',monospace" font-size="16" letter-spacing="2">
-    <text x="48" y="570">WORKING INSTRUMENTS / PROMPT + PERSONA</text>
+    <text x="48" y="570">WORKING INSTRUMENTS / PROMPT + AGENT + SKILL</text>
   </g>
   <g clip-path="url(#c)"><g transform="translate(0 30)">
     <rect x="740" y="108" width="412" height="474" fill="url(#g)"/>

@@ -1,6 +1,6 @@
 import { getCollection } from "astro:content";
 
-type PublishedCollection = "prompts" | "personas" | "blog";
+type PublishedCollection = "prompts" | "agents" | "skills";
 
 /** Published entries (not draft, publishDate in the past), newest first. */
 export async function getPublished<C extends PublishedCollection>(collection: C) {
@@ -15,10 +15,10 @@ export async function getPublished<C extends PublishedCollection>(collection: C)
 
 /** Published entry counts per collection. */
 export async function getCounts() {
-  const [prompts, personas, blog] = await Promise.all([
+  const [prompts, agents, skills] = await Promise.all([
     getPublished("prompts"),
-    getPublished("personas"),
-    getPublished("blog"),
+    getPublished("agents"),
+    getPublished("skills"),
   ]);
-  return { prompts: prompts.length, personas: personas.length, blog: blog.length };
+  return { prompts: prompts.length, agents: agents.length, skills: skills.length };
 }
