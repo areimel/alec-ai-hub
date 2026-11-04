@@ -108,7 +108,7 @@ Custom agents and skills are Claude Code files. The body of each entry is the fi
 
 1. Create a new `.md` file in `src/content/agents/` for a subagent file, or in `src/content/skills/` for a skill or plugin entry
 2. Copy the frontmatter from an existing entry in the same folder and follow its schema:
-   *   Agents: `category` is Code, Research, Writing or Operations, and `sub_category` is Read-only or Can edit
+   *   Agents: `category` is Code, Research, Writing or Operations, and `sub_category` is Read-only, Runs commands or Can edit
    *   Skills: `category` is Code, Writing, Docs or Workflow, and `sub_category` is Skill or Plugin
 3. Use `.md`, not `.mdx`, when the body contains `<` or `{`. MDX reads those characters as JSX, which can break the build
 

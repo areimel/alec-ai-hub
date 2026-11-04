@@ -41,7 +41,7 @@ Keep the existing filter, card and dossier markup and `src/scripts/directory-fil
 Entry defaults for all 9 new entries: `publishDate` and `lastUpdated` of `2026-11-03 12:00` (`getPublished` drops anything not yet published), `author: "Alec Reimel"`, `version: "1.0"`, `featured: false`, no `template` field (my calls).
 
 ### 2. Custom Agents
-- `src/content/config.ts`: replace `personas` with `agents`, using the same field shape as prompts. `category`: `Code | Research | Writing | Operations`. `sub_category`: `Read-only | Can edit`, labelled "Access".
+- `src/content/config.ts`: replace `personas` with `agents`, using the same field shape as prompts. `category`: `Code | Research | Writing | Operations`. `sub_category`: `Read-only | Runs commands | Can edit`, labelled "Access".
 - Delete `src/content/personas/` and `src/pages/ai-personas/`.
 - Add `src/pages/custom-agents/index.astro` and `[slug].astro`, following the old persona pages.
 - Add 5 entries in `src/content/agents/*.md`: Code Reviewer, Bug Investigator, Codebase Explorer, Test Writer, Docs Writer. Use `.md`, not `.mdx`, because bodies are shown raw and contain `<`, `{` and frontmatter. Each body is a complete, ready-to-save agent file. `usage_instructions` says where to save it.

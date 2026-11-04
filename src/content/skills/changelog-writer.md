@@ -15,7 +15,7 @@ featured: false
 ---
 name: changelog-writer
 description: "Drafts a changelog entry from git history since the last tag, grouped by user-visible impact. Use when the user asks for a changelog, release notes, or what changed since the last release."
-allowed-tools: Bash(git log:*) Bash(git describe:*) Bash(git tag:*) Bash(git diff:*)
+allowed-tools: Bash(git log:*) Bash(git describe:*) Bash(git show:*) Bash(git diff:*)
 ---
 
 # Changelog Writer

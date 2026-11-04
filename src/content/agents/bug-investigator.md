@@ -1,10 +1,10 @@
 ---
 draft: false
 title: "Bug Investigator"
-description: "A read-only subagent that reproduces a bug, gathers evidence, and reports the root cause without changing any code."
-usage_instructions: "Save this as `.claude/agents/bug-investigator.md` in a project, or `~/.claude/agents/bug-investigator.md` to use it in every project. Ask for it when you have a failing test, an error message, or unexpected behavior and want the cause identified before anyone changes code."
+description: "A subagent that reproduces a bug, gathers evidence, and reports the root cause without changing any code."
+usage_instructions: "Save this as `.claude/agents/bug-investigator.md` in a project, or `~/.claude/agents/bug-investigator.md` to use it in every project. Ask for it when you have a failing test, an error message, or unexpected behavior and want the cause identified before anyone changes code. It has Bash so it can run commands. Staying out of your files is an instruction, not an enforced limit, so read what it wants to run before approving."
 category: "Code"
-sub_category: "Read-only"
+sub_category: "Runs commands"
 tags: ["debugging", "root-cause", "investigation", "errors"]
 version: "1.0"
 author: "Alec Reimel"

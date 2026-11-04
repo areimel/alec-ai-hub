@@ -15,7 +15,7 @@ featured: false
 ---
 name: pr-description-writer
 description: "Writes a pull request title and description from the branch's real commits and diff. Use when the user asks for a PR description, PR summary, or is about to open a pull request."
-allowed-tools: Bash(git log:*) Bash(git diff:*) Bash(git status:*) Bash(git merge-base:*) Bash(git branch:*)
+allowed-tools: Bash(git log:*) Bash(git diff:*) Bash(git status:*) Bash(git merge-base:*) Bash(git branch -a)
 ---
 
 # PR Description Writer

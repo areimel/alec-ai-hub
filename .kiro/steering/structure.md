@@ -52,7 +52,7 @@ src/
 
 ## Content Collections Schema
 - **Prompts**: Title, description, usage instructions, category, sub_category, template flag, tags, version, author, dates, featured flag
-- **Agents**: Title, description, usage instructions, category (Code, Research, Writing, Operations), sub_category (Read-only, Can edit), tags, version, author, dates, featured flag
+- **Agents**: Title, description, usage instructions, category (Code, Research, Writing, Operations), sub_category (Read-only, Runs commands, Can edit), tags, version, author, dates, featured flag
 - **Skills**: Title, description, usage instructions, category (Code, Writing, Docs, Workflow), sub_category (Skill, Plugin), tags, version, author, dates, featured flag
 
 ## File Naming Conventions

@@ -42,7 +42,7 @@ const agentsCollection = defineCollection({
     description: z.string(),
     usage_instructions: z.string(),
     category: z.enum(['Code', 'Research', 'Writing', 'Operations']),
-    sub_category: z.enum(['Read-only', 'Can edit']),
+    sub_category: z.enum(['Read-only', 'Runs commands', 'Can edit']),
     tags: z.array(z.string()),
     version: z.string().default('1.0'),
     author: z.string().default('Anonymous'),
