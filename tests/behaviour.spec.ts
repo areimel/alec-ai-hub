@@ -273,3 +273,14 @@ test.describe("without JavaScript", () => {
     console.log(`NO-JS 390px filters visible: ${reachable}`);
   });
 });
+
+test.describe("legal pages", () => {
+  for (const path of ["/privacy", "/ccpa"]) {
+    test(`${path} links privacy requests to the contact form`, async ({ page }) => {
+      await open(page, path);
+      await page.locator('.prose a[href="/#contact"]').first().click();
+      await expect(page).toHaveURL(/\/#contact$/);
+      await expect(page.locator("#contact #form")).toBeInViewport();
+    });
+  }
+});
