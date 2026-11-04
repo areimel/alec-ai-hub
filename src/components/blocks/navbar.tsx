@@ -9,6 +9,33 @@ const focus =
   "focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring";
 
 const NAV = branding.navigation.main;
+const CTA = branding.navigation.cta;
+
+const ctaStyle = {
+  primary: "bg-primary text-primary-foreground hover:opacity-80",
+  outline: "border-border border bg-transparent hover:border-primary",
+} as const;
+
+function CtaLinks({
+  className,
+  onNavigate,
+}: {
+  className: string;
+  onNavigate?: () => void;
+}) {
+  return CTA.map(({ title, url, variant }) => (
+    <a
+      key={url + title}
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      onClick={onNavigate}
+      className={`${ctaStyle[variant as keyof typeof ctaStyle]} font-mono text-xs transition-opacity ${className} ${focus}`}
+    >
+      {title} <ArrowUpRight aria-hidden="true" className="size-4" />
+    </a>
+  ));
+}
 
 export function Navbar({ pathname = "/" }: { pathname?: string }) {
   const [open, setOpen] = useState(false);
@@ -82,13 +109,7 @@ export function Navbar({ pathname = "/" }: { pathname?: string }) {
         </nav>
         <div className="flex items-center gap-3">
           <ThemeToggle />
-          <a
-            href="/prompts"
-            className={`bg-primary text-primary-foreground hidden min-h-11 items-center gap-5 px-4 font-mono text-xs transition-opacity hover:opacity-80 sm:inline-flex ${focus}`}
-          >
-            Browse prompts{" "}
-            <ArrowUpRight aria-hidden="true" className="size-4" />
-          </a>
+          <CtaLinks className="hidden min-h-11 items-center gap-5 px-4 lg:inline-flex" />
           <button
             ref={trigger}
             type="button"
@@ -127,13 +148,12 @@ export function Navbar({ pathname = "/" }: { pathname?: string }) {
             </li>
           ))}
         </ul>
-        <a
-          href="/prompts"
-          onClick={() => setOpen(false)}
-          className={`bg-primary text-primary-foreground mt-4 flex min-h-12 items-center justify-between px-4 font-mono text-xs ${focus}`}
-        >
-          Browse prompts <ArrowUpRight aria-hidden="true" className="size-4" />
-        </a>
+        <div className="mt-4 flex flex-col gap-3">
+          <CtaLinks
+            className="flex min-h-12 items-center justify-between px-4"
+            onNavigate={() => setOpen(false)}
+          />
+        </div>
       </nav>
     </header>
   );
