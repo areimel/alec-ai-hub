@@ -9,13 +9,13 @@
     "wordmark": "AI HUB",
     "owner": "Alec Reimel",
     "label": "Working files",
-    "tagline": "A personal collection of AI prompts and personas. Copy what is useful.",
-    "footerNote": "Prompts and personas, free to copy",
-    "description": "Alec Reimel's working collection of AI prompts and personas, free to copy."
+    "tagline": "A personal collection of AI prompts, custom agents and skills. Copy what is useful.",
+    "footerNote": "Prompts, agents and skills, free to copy",
+    "description": "Alec Reimel's working collection of AI prompts, custom agents and skills, free to copy."
   },
   "seo": {
     "title": "AI Hub | Alec Reimel",
-    "description": "Alec Reimel's working collection of AI prompts and personas, free to copy.",
+    "description": "Alec Reimel's working collection of AI prompts, custom agents and skills, free to copy.",
     "openGraph": {
       "title": "AI Hub | Alec Reimel",
       "image": {

@@ -21,7 +21,7 @@
       },
       {
         "title": "Content in files",
-        "description": "Prompts, personas and posts are plain Markdown files in the repository. Add a file to add an entry."
+        "description": "Prompts, custom agents and skills are plain files in src/content, one folder for each type. Add a file to add an entry."
       },
       {
         "title": "Light and dark mode",

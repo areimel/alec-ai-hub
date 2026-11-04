@@ -34,7 +34,7 @@ const latest = [
 
 const stats = [
   { label: "Prompts", value: counts.prompts },
-  { label: "AI personas", value: counts.agents },
+  { label: "Custom agents", value: counts.agents },
   { label: "Skills & plugins", value: counts.skills },
 ];
 const { plates } = homeContent;
@@ -72,21 +72,21 @@ const { plates } = homeContent;
         />
         <PlateLink
           href="/custom-agents"
-          title={plates.personas.title}
-          description={plates.personas.description}
-          meta={`${counts.agents} personas`}
+          title={plates.agents.title}
+          description={plates.agents.description}
+          meta={`${counts.agents} agents`}
           variant="grid"
           palette="dark"
           seed={11}
-          wordmark="PERSONAS"
-          code={`PERSONAS—${counts.agents}`}
-          plate="PERSONAS"
+          wordmark="AGENTS"
+          code={`AGENTS—${counts.agents}`}
+          plate="CUSTOM AGENTS"
           footerLines={[`${counts.agents} PUBLISHED`, "ALEC REIMEL"]}
         />
         <PlateLink
           href="/skills-plugins"
-          title="Skills & Plugins"
-          description="Skill files and plugins you can add to your own setup."
+          title={plates.skills.title}
+          description={plates.skills.description}
           meta={`${counts.skills} entries`}
           variant="wave"
           palette="orange"

@@ -1,13 +1,13 @@
 # AI Hub
 
-Alec Reimel's public collection of AI prompts and personas, free to copy, at https://ai-hub.alecreimel.com. It's a static Astro site styled with the Kojima theme: charcoal and ivory, safety orange, instrument plates and monospaced labels.
+Alec Reimel's public collection of AI prompts, custom agents and skills, free to copy, at https://ai-hub.alecreimel.com. It's a static Astro site styled with the Kojima theme: charcoal and ivory, safety orange, instrument plates and monospaced labels.
 
 ## Features
 
 *   **Prompt directory**: search and filter by category, AI tool and tag, and copy a prompt from its card or page
 *   **Fill-in templates**: prompts with `@name` blanks generate fields, and the prompt text updates as you type
-*   **AI personas**: the same directory and detail pages, for persona prompts
-*   **News & Tips**: a blog written in Markdown and MDX
+*   **Custom agents**: Claude Code subagent files, with the same directory and detail pages as prompts
+*   **Skills & plugins**: Claude Code skill files and a plugin, with the same directory and detail pages
 *   **Contact and prompt submission forms**: sent through Web3Forms
 *   **Dark and light themes**: dark by default, with the visitor's choice saved
 
@@ -67,13 +67,13 @@ Visit `http://localhost:4321` to view your site.
 │   │   ├── FormComponents/   # Forms and the shared form field
 │   │   ├── kojima/           # Instrument plates, plate links, slug barcode
 │   │   ├── LandingComponents/ # Homepage and DIY page sections
-│   │   ├── PromptComponents/ # Directory and detail page
+│   │   ├── PromptComponents/ # Directory and detail pages for prompts, agents and skills
 │   │   └── ui/               # Shared UI parts
-│   ├── content/              # Blog posts, prompts, personas and their schemas
+│   ├── content/              # Content collections: prompts/, agents/, skills/ and config.ts (schemas)
 │   ├── data/                 # Branding, page copy and announcements (JSON)
 │   ├── layouts/
 │   ├── lib/                  # Content helpers and utilities
-│   ├── pages/                # Site routes
+│   ├── pages/                # Site routes: /, /prompts, /custom-agents, /skills-plugins, /diy-prompt-library
 │   ├── scripts/              # Browser scripts: filters, copy, templates, forms
 │   └── styles/               # Theme, plus site styles in hub.css and hub/
 ├── tests/                    # Playwright tests
@@ -84,7 +84,7 @@ Visit `http://localhost:4321` to view your site.
 
 ### Adding New Prompts
 
-1. Create a new `.mdx` file in `src/content/prompts/`
+1. Create a new `.mdx` or `.md` file in `src/content/prompts/`
 2. Use the defined schema with required frontmatter:
    ```yaml
    ---
@@ -102,10 +102,15 @@ Visit `http://localhost:4321` to view your site.
    ---
    ```
 
-### Adding AI Personas
+### Adding Custom Agents and Skills
 
-1. Create a new `.mdx` file in `src/content/personas/`
-2. Follow the personas schema with appropriate categories
+Custom agents and skills are Claude Code files. The body of each entry is the file a visitor saves into their project, so write it in Claude Code's format.
+
+1. Create a new `.md` file in `src/content/agents/` for a subagent file, or in `src/content/skills/` for a skill or plugin entry
+2. Copy the frontmatter from an existing entry in the same folder and follow its schema:
+   *   Agents: `category` is Code, Research, Writing or Operations, and `sub_category` is Read-only or Can edit
+   *   Skills: `category` is Code, Writing, Docs or Workflow, and `sub_category` is Skill or Plugin
+3. Use `.md`, not `.mdx`, when the body contains `<` or `{`. MDX reads those characters as JSX, which can break the build
 
 ### Configuration
 

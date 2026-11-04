@@ -55,7 +55,7 @@ export function InstrumentGraphic({
   plate = "PLATE 025",
   bureau = "AI HUB / PROMPT RESEARCH BUREAU",
   figure,
-  footerLines = ["WORKING INSTRUMENTS", "NO. 025 / PROMPT + PERSONA"],
+  footerLines = ["WORKING INSTRUMENTS", "NO. 025 / PROMPT + AGENT + SKILL"],
   idSuffix = "",
 }: InstrumentGraphicProps) {
   const colors = palettes[palette];
