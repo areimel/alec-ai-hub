@@ -1,20 +1,20 @@
 ---
-import { getCollection } from "astro:content";
 import Layout from "@layouts/Layout.astro";
 import Container from "@components/container.astro";
-import HomeHeaderSection from "@components/ContentComponents/HomeHeaderSection.astro";
-import SearchFilter from "@components/PromptComponents/SearchFilter.astro";
-import PromptGrid from "@components/PromptComponents/PromptGrid.astro";
+import PageHeader from "@components/PageHeader.astro";
 import PromptDirectoryGroup from "@components/PromptComponents/PromptDirectoryGroup.astro";
+import { getPublished } from "@lib/content";
 
+const count = (await getPublished("personas")).length;
 ---
 
-<Layout title="AI Personas Directory">
-  <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-    <HomeHeaderSection />
-
-    <Container>
-      <PromptDirectoryGroup collectionType="personas" />
-    </Container>
-  </div>
+<Layout title="Personas">
+  <PageHeader
+    label="Directory / Personas"
+    title="Personas"
+    intro={`${count} personas that set up an AI for a role. Filter by category or type, then copy one or open it to read the full text.`}
+  />
+  <Container>
+    <PromptDirectoryGroup collectionType="personas" />
+  </Container>
 </Layout>

@@ -1,0 +1,29 @@
+---
+import { sample, seedFromSlug } from "./seed";
+
+interface Props {
+  slug: string;
+  class?: string;
+}
+
+const { slug, class: className } = Astro.props;
+const seed = seedFromSlug(slug);
+const count = 28;
+const bars = Array.from({ length: count }, (_, i) => {
+  const r = sample(seed, i);
+  return { x: (i * 96) / count, w: r > 0.66 ? 2.4 : r > 0.33 ? 1.6 : 0.8 };
+});
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 96 16"
+  width="96"
+  height="16"
+  class={className}
+  fill="currentColor"
+  aria-hidden="true"
+  focusable="false"
+>
+  {bars.map((b) => <rect x={b.x.toFixed(2)} y="0" width={b.w} height="16" />)}
+</svg>

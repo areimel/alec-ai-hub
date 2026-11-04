@@ -1,150 +1,99 @@
 {
   "hero": {
-    "headline": "Get Your Own Prompt Library",
-    "description": "This entire project is open-source and available for you to download, modify, and use for your own prompt library. Perfect for individuals, teams, or businesses who want complete control over their AI prompt collection.",
-    "buttons": {
-      "primary": {
-        "text": "View on GitHub",
-        "href": "https://github.com/areimel/alec-ai-hub",
-        "icon": "simple-icons:github"
-      },
-      "secondary": {
-        "text": "Live Demo",
-        "href": "/prompts",
-        "icon": "bx:bx-rocket"
-      }
-    },
-    "benefits": [
-      "Complete source code",
-      "Modern tech stack",
-      "Easy to customize"
-    ],
-    "trustIndicators": {
-      "title": "Free & Open Source Software",
-      "stats": [
-        {
-          "text": "MIT Licensed",
-          "icon": "bx:bx-check-shield"
-        },
-        {
-          "text": "100% Free",
-          "icon": "bx:bx-dollar"
-        },
-        {
-          "text": "No Vendor Lock-in",
-          "icon": "bx:bx-lock-open"
-        }
-      ]
-    },
-    "icons": {
-      "brain": "bx:bxs-brain",
-      "floating": [
-        "bx:bx-code-alt",
-        "simple-icons:github",
-        "bx:bx-download",
-        "bx:bx-customize"
-      ],
-      "check": "bx:bx-check"
-    }
+    "kicker": "Open source / MIT license",
+    "headline": "Get your own",
+    "headlineMuted": "prompt library.",
+    "intro": "This whole site is open source. Download it, change it, and fill it with your own prompts. It works for one person or a team.",
+    "primary": { "text": "View on GitHub", "href": "https://github.com/areimel/alec-ai-hub" },
+    "secondary": { "text": "See the live site", "href": "/prompts" }
   },
+  "stats": [
+    { "label": "License", "value": "MIT" },
+    { "label": "Cost", "value": "Free" },
+    { "label": "Hosting", "value": "Static site" }
+  ],
   "features": {
-    "header": {
-      "title": "What You Get",
-      "description": "Everything you need to build and manage your own AI prompt library, completely free and customizable."
-    },
+    "header": { "label": "What you get", "title": "The full source." },
     "items": [
       {
-        "title": "Complete Source Code",
-        "description": "Full access to all code, including the user interface and prompt management system. Built with modern technologies like Astro, TypeScript, and Tailwind CSS.",
-        "icon": "bx:bx-code-alt"
+        "title": "Complete source code",
+        "description": "All of the code, including the interface and the way prompts are stored. Built with Astro, React and Tailwind CSS."
       },
       {
-        "title": "Modern Tech Stack",
-        "description": "Built with Astro for fast static sites, TypeScript for type safety, and Tailwind CSS for styling.",
-        "icon": "bx:bx-rocket"
+        "title": "Content in files",
+        "description": "Prompts, personas and posts are plain Markdown files in the repository. Add a file to add an entry."
       },
       {
-        "title": "Responsive Design",
-        "description": "Mobile-first design that works perfectly on all devices. Dark mode support and accessibility features built-in from the start.",
-        "icon": "bx:bx-mobile-alt"
+        "title": "Light and dark mode",
+        "description": "Both themes are included, and the layout works on phones and desktops."
       },
       {
-        "title": "Easy Deployment",
-        "description": "Deploy anywhere - Netlify, Vercel, GitHub Pages, or your own server. Static site generation means fast loading and low hosting costs.",
-        "icon": "bx:bx-cloud-upload"
+        "title": "Any static host",
+        "description": "The site builds to static files, so it runs on GitHub Pages, Netlify, Vercel or your own server."
       },
       {
-        "title": "Fully Customizable",
-        "description": "Modify the design, add new features, integrate with your existing systems. The code is clean, well-documented, and easy to understand.",
-        "icon": "bx:bx-customize"
+        "title": "Change anything",
+        "description": "The name, wordmark and navigation are set in src/data/branding.json. Page copy is in src/data, and plate wording is set where each plate is used."
       }
     ]
   },
-  "cta": {
-    "headline": "Understanding Open Source",
-    "description": "Open source software is code that anyone can view, use, and modify. Think of it like a recipe that's shared freely - you can use it exactly as written, or change ingredients to suit your taste. This project is open source, which means you get complete freedom and control.",
+  "about": {
+    "label": "Open source",
+    "headline": "What open source means",
+    "paragraphs": [
+      "Open source software is code that anyone can read, use and change. Think of a recipe that is shared freely: you can follow it exactly or swap ingredients.",
+      "The project uses the MIT license, which lets you use it for personal or commercial work as long as you keep the license notice. The theme code in src/components/kojima adds a Commons Clause: you can use it in your own site, but not resell the template as is."
+    ],
     "button": {
-      "text": "Download Project",
+      "text": "Download project",
       "href": "https://github.com/areimel/alec-ai-hub/archive/main.zip"
     }
   },
   "faq": {
-    "header": {
-      "title": "Frequently Asked Questions",
-      "description": "Everything you need to know about using this open-source project for your own prompt library."
-    },
+    "header": { "label": "FAQ", "title": "Questions" },
     "items": [
       {
         "id": "faq-1",
-        "question": "Do I need to be a developer to use this?",
-        "answer": "While some technical knowledge helps, the project includes detailed setup instructions. If you can follow a recipe, you can likely get this running. For major customizations, you might want to work with a developer."
+        "question": "Do I need to be a developer?",
+        "answer": "Some comfort with the command line helps. The README covers installing and building the site. Larger changes are easier with a developer."
+      },
+      {
+        "id": "faq-2",
+        "question": "How much does it cost to run?",
+        "answer": "It can be free. The site is static, so it runs on free static hosting such as GitHub Pages. The forms use Web3Forms, which has a free tier."
       },
       {
         "id": "faq-3",
-        "question": "How much does it cost to run?",
-        "answer": "It can be completely free. It's a static site, so it runs on free hosting tiers like Netlify, Vercel, or GitHub Pages, with no API keys or usage costs."
+        "question": "Can I remove the branding?",
+        "answer": "Yes. The name and links are in src/data/branding.json. Keep the license notices when you change the rest."
       },
       {
         "id": "faq-4",
-        "question": "Can I remove the branding and make it my own?",
-        "answer": "Absolutely! You can customize everything - colors, logos, text, layout. Make it completely your own brand. The open-source license gives you full freedom to modify and rebrand."
+        "question": "Is open source the same as free?",
+        "answer": "Not quite. Open source means you can see and change the code. Free means no cost. This project is both."
       },
       {
         "id": "faq-5",
-        "question": "What's the difference between open source and free software?",
-        "answer": "Open source means you can see and modify the code. 'Free' usually means no cost, but you might not get the code. This project is both - free to use AND you get all the source code to modify as needed."
+        "question": "Can I use it for a business?",
+        "answer": "Yes. Commercial use is allowed if you keep the license notices. You can't resell the template itself as is, because the theme code has a Commons Clause."
       },
       {
         "id": "faq-6",
-        "question": "Can I use this for my business?",
-        "answer": "Yes! You can use this for personal projects, client work, or your own business. The only restriction is that you can't resell the original code itself - but you can absolutely build commercial services with it."
+        "question": "Is there support?",
+        "answer": "No ongoing support. This is a personal project. You can report bugs or ask for features on GitHub, and I will look when I can."
       },
       {
         "id": "faq-7",
-        "question": "Is there ongoing support?",
-        "answer": "This is a community project. While we can't provide individual support, you can report bugs and request features on GitHub where the community can help."
-      },
-      {
-        "id": "faq-8",
-        "question": "Can I contribute improvements back?",
-        "answer": "Yes! Open source thrives on community contributions. If you add features or fix bugs, you're welcome to submit them back to help others."
+        "question": "Can I contribute changes?",
+        "answer": "Yes. If you fix a bug or add a feature, you are welcome to send it back on GitHub."
       }
-    ],
-    "chevronIcon": "bx:bx-chevron-down"
+    ]
   },
   "contact": {
     "header": {
-      "title": "Need Help Getting Started?",
-      "description": "Have questions about setting up your own prompt library? Check out the documentation or connect with the community."
-    },
-    "content": {
-      "subtitle": "Resources & Community",
-      "description": "Getting started with open source can feel overwhelming, but you're not alone. We've prepared comprehensive documentation and there's a helpful community ready to assist.",
-      "features": [
-        "Step-by-step setup guides",
-        "Active GitHub community",
-        "Detailed code documentation"
-      ]
+      "label": "Contact",
+      "title": "Need help getting started?",
+      "description": "Read the README on GitHub first. For anything else, send me a message."
     }
   }
 }

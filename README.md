@@ -1,46 +1,31 @@
-# AI Prompt Directory
+# AI Hub
 
-A comprehensive AI prompt library designed for teams, organizations, and individuals. Discover, share, and master powerful AI prompts that unlock your potential across various use cases including writing, coding, analysis, creative tasks, and business applications.
+Alec Reimel's public collection of AI prompts and personas, free to copy, at https://ai-hub.alecreimel.com. It's a static Astro site styled with the Kojima theme: charcoal and ivory, safety orange, instrument plates and monospaced labels.
 
-Built with modern web technologies for performance and ease of customization, this directory features curated prompts, AI personas, and a growing community of practitioners sharing knowledge.
+## Features
 
-## Key Features
-
-*   **Comprehensive Prompt Library**: Browse 500+ curated AI prompts across multiple categories (Coding, Writing, Analysis, Creative, Business, Marketing)
-*   **AI Personas Collection**: Ready-to-use AI personas including Creative Collaborator, Technical Mentor, Strategic Business Advisor, and more
-*   **Search & Filtering**: Find exactly what you need with intuitive categorization and filtering system
-*   **Individual Prompt Pages**: Detailed pages with usage instructions, examples, and copy-to-clipboard functionality
-*   **Blog & Resources**: Educational content about AI prompt engineering and best practices
-*   **Mobile-Responsive Design**: Optimized experience across all devices
-*   **Template System**: Create your own prompt templates for team consistency
-*   **Free & Open Source**: Available for personal and commercial use
-
-## Live Features
-
-*   **Landing Page**: Modern hero section with feature highlights and FAQ
-*   **Prompt Directory**: Organized browsing by category with detailed individual pages
-*   **AI Personas**: Specialized AI character profiles for different use cases
-*   **Blog**: Educational articles about AI prompting techniques
-*   **Contact Forms**: Community engagement and contribution system
-*   **Newsletter Integration**: Stay updated with latest prompts and techniques
-*   **Social Media Integration**: Connect across platforms
-*   **Legal Pages**: Privacy policy, terms, and CCPA compliance
+*   **Prompt directory**: search and filter by category, AI tool and tag, and copy a prompt from its card or page
+*   **Fill-in templates**: prompts with `@name` blanks generate fields, and the prompt text updates as you type
+*   **AI personas**: the same directory and detail pages, for persona prompts
+*   **News & Tips**: a blog written in Markdown and MDX
+*   **Contact and prompt submission forms**: sent through Web3Forms
+*   **Dark and light themes**: dark by default, with the visitor's choice saved
 
 ## Technical Stack
 
-*   **Framework**: [Astro 5.7+](https://astro.build/) - Fast, modern static site generator
-*   **Styling**: [TailwindCSS 3.4+](https://tailwindcss.com/) - Utility-first CSS framework
-*   **Content Management**: [Astro Content Collections](https://docs.astro.build/en/guides/content-collections/) with TypeScript schemas
-*   **Icons**: Astro Icon with Iconify icons (Boxicons, Simple Icons)
-*   **Typography**: Inter Variable & Bricolage Grotesque fonts
-*   **Deployment**: Netlify-ready with optimized build process
+*   **Framework**: [Astro 5](https://astro.build/), static output
+*   **Styling**: [Tailwind CSS 4](https://tailwindcss.com/) through the Vite plugin, with the Kojima theme in `src/styles/kojima.css`
+*   **Components**: Astro, plus React and shadcn/ui parts. Only the navbar and FAQ run React in the browser
+*   **Content**: [Astro Content Collections](https://docs.astro.build/en/guides/content-collections/) with schemas in `src/content/config.ts`
+*   **Icons and type**: `lucide-react`, self-hosted DM Sans
+*   **Tests**: Playwright and axe
 
 ## Getting Started
 
 ### Prerequisites
 
-*   Node.js 18+ or 20+
-*   pnpm (recommended) or npm
+*   Node.js 20+
+*   pnpm
 
 ### Installation
 
@@ -67,42 +52,32 @@ Visit `http://localhost:4321` to view your site.
 *   **`pnpm dev`**: Start development server at `localhost:4321`
 *   **`pnpm build`**: Build production site to `./dist/`
 *   **`pnpm preview`**: Preview production build locally
+*   **`pnpm test:e2e`**: Build the site and run the browser tests (first run `pnpm exec playwright install chromium`)
 *   **`pnpm img-compress`**: Optimize images in public folder
 
 ## Project Structure
 
 ```
 /
-├── public/                    # Static assets
-│   ├── *.png, *.jpg          # Images and logos
-│   ├── favicon.svg           # Site favicon
-│   └── robots.txt            # SEO robots file
+├── public/                   # Static assets, fonts, favicon, robots.txt
+├── scripts/                  # render-og.mjs regenerates the social image
 ├── src/
-│   ├── components/           # Reusable UI components
-│   │   ├── LandingComponents/ # Landing page specific components
-│   │   ├── PromptComponents/  # Prompt directory components
-│   │   ├── navbar/           # Navigation components
-│   │   └── ui/               # Generic UI components
-│   ├── content/              # Content collections
-│   │   ├── blog/             # Blog posts (MDX)
-│   │   ├── prompts/          # AI prompts (MDX)
-│   │   ├── personas/         # AI personas (MDX)
-│   │   └── config.ts         # Content collection schemas
-│   ├── data/                 # JSON configuration files
-│   │   ├── branding.json     # Site branding & SEO
-│   │   ├── homeContent.json  # Homepage content
-│   │   └── announcements.json # Site announcements
-│   ├── layouts/              # Page layouts
+│   ├── components/
+│   │   ├── blocks/           # Navbar and footer
+│   │   ├── FormComponents/   # Forms and the shared form field
+│   │   ├── kojima/           # Instrument plates, plate links, slug barcode
+│   │   ├── LandingComponents/ # Homepage and DIY page sections
+│   │   ├── PromptComponents/ # Directory and detail page
+│   │   └── ui/               # Shared UI parts
+│   ├── content/              # Blog posts, prompts, personas and their schemas
+│   ├── data/                 # Branding, page copy and announcements (JSON)
+│   ├── layouts/
+│   ├── lib/                  # Content helpers and utilities
 │   ├── pages/                # Site routes
-│   │   ├── index.astro       # Homepage
-│   │   ├── prompts/          # Prompt directory pages
-│   │   ├── ai-personas/      # AI personas pages
-│   │   ├── blog/             # Blog pages
-│   │   └── *.astro           # Legal & other pages
-│   └── utils/                # Helper functions
-├── astro.config.mjs          # Astro configuration
-├── tailwind.config.cjs       # TailwindCSS configuration
-└── tsconfig.json             # TypeScript configuration
+│   ├── scripts/              # Browser scripts: filters, copy, templates, forms
+│   └── styles/               # Theme, plus site styles in hub.css and hub/
+├── tests/                    # Playwright tests
+└── astro.config.mjs
 ```
 
 ## Content Management
@@ -134,7 +109,7 @@ Visit `http://localhost:4321` to view your site.
 
 ### Configuration
 
-*   **Branding**: Edit `src/data/branding.json` for site identity, logos, and social links
+*   **Branding**: Edit `src/data/branding.json` for the site name, wordmark, SEO text and navigation
 *   **Homepage**: Modify `src/data/homeContent.json` for landing page content
 *   **Announcements**: Update `src/data/announcements.json` for site-wide notifications
 
@@ -152,14 +127,16 @@ The site is a static Astro build deployed to GitHub Pages at https://ai-hub.alec
 
 ## License
 
-This project is available for free personal and commercial use. See the LICENSE file for details.
+The project is under the MIT license, see `LICENSE`. The Kojima theme code is under MIT + Commons Clause, see `src/components/kojima/LICENSE`: you can use it in your own site, but not resell the template as is.
 
 ## Support
 
-*   **Issues**: Report bugs or request features via GitHub Issues
-*   **Community**: Join our growing community of AI prompt engineers
-*   **Documentation**: Comprehensive guides available in the `/blog` section
+Report bugs or request features through [GitHub Issues](https://github.com/areimel/alec-ai-hub/issues).
+
+## Credits
+
+The visual design is based on the Kojima theme ([areimel/kojima-astro-template](https://github.com/areimel/kojima-astro-template)), built on blocks from shadcnblocks.com by Rob Austin. The copied theme code is used under its MIT + Commons Clause license, see `src/components/kojima/LICENSE`.
 
 ---
 
-Built with ❤️ by [Alec Reimel](https://alecreimel.com) | Empowering teams to master AI prompt engineering
+Built by [Alec Reimel](https://alecreimel.com)

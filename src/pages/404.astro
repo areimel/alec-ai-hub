@@ -1,18 +1,45 @@
 ---
-import Container from "@components/container.astro";
+import { Background } from "@/components/background";
+import ActionButton from "@components/ui/ActionButton.astro";
 import Layout from "@layouts/Layout.astro";
 ---
 
-<Layout title="404 Not Found | The Grovery">
-  <Container>
-    <div class="min-h-[calc(100vh-16rem)] flex items-center justify-center">
-      <div class="mt-16 text-center">
-        <h1 class="text-4xl lg:text-5xl font-bold lg:tracking-tight">404: Page Not Found</h1>
-        <p class="text-lg mt-4 text-slate-600">Sorry, we couldn't find the AI prompt or page you're looking for.</p>
-        <div class="mt-8">
-          <a href="/" class="text-blue-600 hover:text-blue-800">← Back to Home</a>
+<Layout title="404: Signal not found">
+  <Background>
+    <section class="mx-auto max-w-5xl px-5 py-12 md:px-10 lg:py-16">
+      <div class="grid border border-border bg-background md:grid-cols-[1fr_2fr]">
+        <div
+          aria-hidden="true"
+          class="flex min-h-48 flex-col justify-between border-b border-border bg-muted/30 p-8 md:border-r md:border-b-0"
+        >
+          <span class="technical-label">Route / Unresolved</span>
+          <span class="font-mono text-8xl tracking-tighter">404</span>
+          <div class="mt-6 grid grid-cols-8 gap-2">
+            {
+              Array.from({ length: 8 }, (_, index) => (
+                <span
+                  class:list={[
+                    "h-2 border border-border",
+                    index < 3 ? "bg-foreground/30" : "bg-background",
+                  ]}
+                />
+              ))
+            }
+          </div>
+        </div>
+        <div class="p-8 md:p-12">
+          <p class="kicker mb-6">AI Hub / Page not found</p>
+          <h1 class="text-4xl tracking-tight md:text-5xl">Signal not found.</h1>
+          <p class="text-muted-foreground mt-6 max-w-lg leading-relaxed">
+            This address does not lead to a page. Check the URL, head back to
+            the home page, or browse the prompts.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <ActionButton href="/" size="lg">Return home</ActionButton>
+            <ActionButton href="/prompts" variant="outline" size="lg">Browse prompts</ActionButton>
+          </div>
         </div>
       </div>
-    </div>
-  </Container>
+    </section>
+  </Background>
 </Layout>

@@ -3,8 +3,11 @@
   "compilerOptions": {
     "baseUrl": "src",
     "strictNullChecks": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
     "types": ["astro/client"],
     "paths": {
+      "@/*": ["*"],
       "@lib/*": ["lib/*"],
       "@utils/*": ["utils/*"],
       "@components/*": ["components/*"],
