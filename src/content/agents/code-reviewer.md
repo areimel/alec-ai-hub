@@ -2,7 +2,7 @@
 draft: false
 title: "Code Reviewer"
 description: "A subagent that reviews a diff or set of files and reports only the problems it has verified in the code."
-usage_instructions: "Save this as `.claude/agents/code-reviewer.md` in a project, or `~/.claude/agents/code-reviewer.md` to use it in every project. Ask for it after you finish a change and before you commit or open a pull request, for example: use the code-reviewer agent on my current diff. It has Bash so it can run commands. Staying out of your files is an instruction, not an enforced limit, so read what it wants to run before approving."
+usage_instructions: "Save this as .claude/agents/code-reviewer.md in a project, or ~/.claude/agents/code-reviewer.md to use it in every project. Ask for it after you finish a change and before you commit or open a pull request, for example: use the code-reviewer agent on my current diff. It has Bash so it can run commands. Staying out of your files is an instruction, not an enforced limit, so read what it wants to run before approving."
 category: "Code"
 sub_category: "Runs commands"
 tags: ["review", "quality", "bugs", "diff"]

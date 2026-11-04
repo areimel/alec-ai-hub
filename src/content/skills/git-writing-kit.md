@@ -2,7 +2,7 @@
 draft: false
 title: "Git Writing Kit"
 description: "A local Claude Code plugin that bundles the commit message, PR description, and changelog writing skills."
-usage_instructions: "This plugin is not on a marketplace. Assemble the folder by hand from the structure below, validate it with `claude plugin validate ./git-writing-kit`, then load it with `claude --plugin-dir ./git-writing-kit`."
+usage_instructions: "This plugin is not on a marketplace. Assemble the folder by hand from the structure below, validate it with claude plugin validate ./git-writing-kit, then load it with claude --plugin-dir ./git-writing-kit."
 category: "Workflow"
 sub_category: "Plugin"
 tags: ["git", "plugin", "commits", "pull-requests", "changelog"]

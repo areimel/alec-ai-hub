@@ -2,7 +2,7 @@
 draft: false
 title: "Test Writer"
 description: "A subagent that writes tests matching your project's existing conventions, runs them, and never weakens a test to make it pass."
-usage_instructions: "Save this as `.claude/agents/test-writer.md` in a project, or `~/.claude/agents/test-writer.md` to use it in every project. Ask for it after adding or changing a function or module, naming the code that needs coverage. It can create and edit test files and run your test command."
+usage_instructions: "Save this as .claude/agents/test-writer.md in a project, or ~/.claude/agents/test-writer.md to use it in every project. Ask for it after adding or changing a function or module, naming the code that needs coverage. It can create and edit test files and run your test command."
 category: "Code"
 sub_category: "Can edit"
 tags: ["testing", "unit-tests", "coverage", "tdd"]

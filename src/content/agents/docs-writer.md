@@ -2,7 +2,7 @@
 draft: false
 title: "Docs Writer"
 description: "A subagent that writes or updates documentation and checks every claim against the actual code before saving it."
-usage_instructions: "Save this as `.claude/agents/docs-writer.md` in a project, or `~/.claude/agents/docs-writer.md` to use it in every project. Ask for it when a README, API reference, or how-to needs writing or updating after a code change. It can edit and create documentation files."
+usage_instructions: "Save this as .claude/agents/docs-writer.md in a project, or ~/.claude/agents/docs-writer.md to use it in every project. Ask for it when a README, API reference, or how-to needs writing or updating after a code change. It can edit and create documentation files."
 category: "Writing"
 sub_category: "Can edit"
 tags: ["documentation", "readme", "technical-writing", "api-docs"]
