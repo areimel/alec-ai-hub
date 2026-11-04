@@ -11,17 +11,17 @@ import LandingContact from "@components/LandingComponents/LandingContact.astro";
 import { getCounts, getPublished } from "@/lib/content";
 import homeContent from "@data/homeContent.json";
 
-const [counts, prompts, personas, posts] = await Promise.all([
+const [counts, prompts, agents, skills] = await Promise.all([
   getCounts(),
   getPublished("prompts"),
   getPublished("agents"),
-  getPublished("blog"),
+  getPublished("skills"),
 ]);
 
 const latest = [
   ...prompts.map((e) => ({ ...e, base: "prompts" })),
-  ...personas.map((e) => ({ ...e, base: "custom-agents" })),
-  ...posts.map((e) => ({ ...e, base: "blog" })),
+  ...agents.map((e) => ({ ...e, base: "custom-agents" })),
+  ...skills.map((e) => ({ ...e, base: "skills-plugins" })),
 ]
   .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
   .slice(0, 6)
@@ -35,7 +35,7 @@ const latest = [
 const stats = [
   { label: "Prompts", value: counts.prompts },
   { label: "AI personas", value: counts.agents },
-  { label: "News & tips", value: counts.blog },
+  { label: "Skills & plugins", value: counts.skills },
 ];
 const { plates } = homeContent;
 ---
@@ -84,17 +84,17 @@ const { plates } = homeContent;
           footerLines={[`${counts.agents} PUBLISHED`, "ALEC REIMEL"]}
         />
         <PlateLink
-          href="/blog"
-          title={plates.blog.title}
-          description={plates.blog.description}
-          meta={`${counts.blog} posts`}
+          href="/skills-plugins"
+          title="Skills & Plugins"
+          description="Skill files and plugins you can add to your own setup."
+          meta={`${counts.skills} entries`}
           variant="wave"
           palette="orange"
           seed={13}
-          wordmark="NOTES"
-          code={`NOTES—${counts.blog}`}
-          plate="NEWS & TIPS"
-          footerLines={[`${counts.blog} PUBLISHED`, "ALEC REIMEL"]}
+          wordmark="SKILLS"
+          code={`SKILLS—${counts.skills}`}
+          plate="SKILLS & PLUGINS"
+          footerLines={[`${counts.skills} PUBLISHED`, "ALEC REIMEL"]}
         />
       </div>
     </Container>

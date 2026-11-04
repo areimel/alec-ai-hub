@@ -3,7 +3,6 @@
 @import "./hub/directory.css";
 @import "./hub/dossier.css";
 @import "./hub/forms.css";
-@import "./hub/blog.css";
 
 /* Shell */
 .skip-link {
@@ -101,7 +100,7 @@ html[data-theme="kojima"].dark {
   color: var(--status-error);
 }
 
-/* Long-form text: blog posts and legal pages. */
+/* Long-form text: legal pages. */
 .prose {
   --tw-prose-body: var(--foreground);
   --tw-prose-headings: var(--foreground);

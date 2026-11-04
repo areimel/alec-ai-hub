@@ -17,6 +17,10 @@ export default defineConfig({
     "/ai-personas/professional-assistant": "/custom-agents",
     "/ai-personas/strategic-business-advisor": "/custom-agents",
     "/ai-personas/technical-mentor": "/custom-agents",
+    "/blog": "/",
+    "/blog/ai-persona-prompts": "/",
+    "/blog/get-your-own-ai-prompt-directory": "/",
+    "/blog/template-prompts-feature": "/",
   },
   integrations: [react(), mdx(), sitemap()],
   vite: {

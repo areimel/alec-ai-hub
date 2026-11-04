@@ -2,22 +2,6 @@
 import { z, defineCollection } from 'astro:content';
 
 // 2. Define your collection(s)
-const blogCollection = defineCollection({
-  schema: z.object({
-    draft: z.boolean().optional(),
-    title: z.string(),
-    snippet: z.string(),
-    image: z.object({
-      src: z.string(),
-      alt: z.string()
-    }).optional(),
-    publishDate: z.string().transform(str => new Date(str)),
-    category: z.string(),
-    author: z.string(),
-    tags: z.array(z.string())
-  }),
-});
-
 const promptsCollection = defineCollection({
   schema: z.object({
     draft: z.boolean(),
@@ -88,7 +72,6 @@ const skillsCollection = defineCollection({
 // 3. Export a single `collections` object to register your collection(s)
 //    This key should match your collection directory name in "src/content"
 export const collections = {
-  'blog': blogCollection,
   'prompts': promptsCollection,
   'agents': agentsCollection,
   'skills': skillsCollection,
