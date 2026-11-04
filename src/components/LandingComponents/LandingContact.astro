@@ -24,7 +24,7 @@ const { faq, contact } = Astro.props;
         <SectionHead label={faq.header.label} title={faq.header.title} />
         <FaqAccordion items={faq.items} client:visible />
       </div>
-      <div class="technical-panel faq-contact__form">
+      <div id="contact" class="technical-panel faq-contact__form scroll-mt-24">
         <SectionHead label={contact.header.label} title={contact.header.title} />
         <p class="faq-contact__intro">{contact.header.description}</p>
         <ContactForm />
