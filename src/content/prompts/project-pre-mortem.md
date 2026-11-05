@@ -9,8 +9,8 @@ template: true
 tags: ["risk", "planning", "project", "executive"]
 version: "1.0"
 author: "Alec Reimel"
-publishDate: "2026-11-05 12:00"
-lastUpdated: "2026-11-05 12:00"
+publishDate: "2026-11-05 09:00"
+lastUpdated: "2026-11-05 09:00"
 featured: false
 ---
 # Project Pre-Mortem

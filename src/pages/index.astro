@@ -8,11 +8,10 @@ import LandingHero from "@components/LandingComponents/LandingHero.astro";
 import LandingFeatures from "@components/LandingComponents/LandingFeatures.astro";
 import LandingPanel from "@components/LandingComponents/LandingPanel.astro";
 import LandingContact from "@components/LandingComponents/LandingContact.astro";
-import { getCounts, getPublished } from "@/lib/content";
+import { getPublished } from "@/lib/content";
 import homeContent from "@data/homeContent.json";
 
-const [counts, prompts, agents, skills] = await Promise.all([
-  getCounts(),
+const [prompts, agents, skills] = await Promise.all([
   getPublished("prompts"),
   getPublished("agents"),
   getPublished("skills"),
@@ -32,25 +31,19 @@ const latest = [
     title: e.data.title,
   }));
 
-const stats = [
-  { label: "Prompts", value: counts.prompts },
-  { label: "Custom agents", value: counts.agents },
-  { label: "Skills & plugins", value: counts.skills },
-];
 const { plates } = homeContent;
 ---
 
 <Layout>
   <LandingHero
     content={homeContent.hero}
-    stats={stats}
     plate={{
       variant: "radar",
       palette: "orange",
       seed: 25,
-      code: `PROMPTS—${counts.prompts}`,
+      code: "INDEX",
       plate: "AI HUB",
-      footerLines: [`${counts.prompts} PROMPTS PUBLISHED`, "ALEC REIMEL"],
+      footerLines: ["PROMPT + AGENT + SKILL", "ALEC REIMEL"],
     }}
   />
 
@@ -61,40 +54,37 @@ const { plates } = homeContent;
           href="/prompts"
           title={plates.prompts.title}
           description={plates.prompts.description}
-          meta={`${counts.prompts} prompts`}
           variant="radar"
           palette="paper"
           seed={7}
           wordmark="PROMPTS"
-          code={`PROMPTS—${counts.prompts}`}
+          code="PROMPTS"
           plate="PROMPTS"
-          footerLines={[`${counts.prompts} PUBLISHED`, "ALEC REIMEL"]}
+          footerLines={["WORKING FILES", "ALEC REIMEL"]}
         />
         <PlateLink
           href="/custom-agents"
           title={plates.agents.title}
           description={plates.agents.description}
-          meta={`${counts.agents} agents`}
           variant="grid"
           palette="dark"
           seed={11}
           wordmark="AGENTS"
-          code={`AGENTS—${counts.agents}`}
+          code="AGENTS"
           plate="CUSTOM AGENTS"
-          footerLines={[`${counts.agents} PUBLISHED`, "ALEC REIMEL"]}
+          footerLines={["WORKING FILES", "ALEC REIMEL"]}
         />
         <PlateLink
           href="/skills-plugins"
           title={plates.skills.title}
           description={plates.skills.description}
-          meta={`${counts.skills} entries`}
           variant="wave"
           palette="orange"
           seed={13}
           wordmark="SKILLS"
-          code={`SKILLS—${counts.skills}`}
+          code="SKILLS"
           plate="SKILLS & PLUGINS"
-          footerLines={[`${counts.skills} PUBLISHED`, "ALEC REIMEL"]}
+          footerLines={["WORKING FILES", "ALEC REIMEL"]}
         />
       </div>
     </Container>

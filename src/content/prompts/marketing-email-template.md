@@ -10,7 +10,7 @@ tags: ["email", "marketing", "template", "copywriting"]
 version: "1.1"
 author: "Alec Reimel"
 publishDate: "2023-06-16"
-lastUpdated: "2026-11-05 12:00"
+lastUpdated: "2026-11-05 09:00"
 featured: false
 ---
 # Marketing Email Generator

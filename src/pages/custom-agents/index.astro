@@ -3,16 +3,14 @@ import Layout from "@layouts/Layout.astro";
 import Container from "@components/container.astro";
 import PageHeader from "@components/PageHeader.astro";
 import PromptDirectoryGroup from "@components/PromptComponents/PromptDirectoryGroup.astro";
-import { getPublished } from "@lib/content";
 
-const count = (await getPublished("agents")).length;
 ---
 
 <Layout title="Custom Agents">
   <PageHeader
     label="Directory / Custom Agents"
     title="Custom Agents"
-    intro={`${count} agent files you can save into your own project. Filter by category or access, then copy one or open it to read the full file.`}
+    intro={"Agent files you can save into your own project. Filter by category or access, then copy one or open it to read the full file."}
   />
   <Container>
     <PromptDirectoryGroup collectionType="agents" />
