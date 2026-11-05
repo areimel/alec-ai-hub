@@ -22,7 +22,7 @@ export const SYNC = {
   lock: 247,
   fields: [
     { field: "productName", text: "Halcyon", n0: 81 },
-    { field: "painPoints", text: "slow reports", n0: 88 },
+    { field: "painPoints", text: "slow ops", n0: 88 },
   ],
   copyPress: 325,                  // bar 7 beat 2: flips to Copied, white flash
   names: [364, 377, 390, 403, 416],// one agent per beat, stacking
