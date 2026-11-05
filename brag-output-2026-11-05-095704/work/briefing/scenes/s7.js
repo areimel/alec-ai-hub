@@ -28,7 +28,7 @@ export async function mount(root) {
   tag = mk({ ...label, left: "110px", top: "150px" }, "Release order / public");
   rule = mk({ left: "110px", top: "206px", width: "700px", height: "3px", background: "#ff4d00" });
   const sub = mk({ left: "110px", top: "250px", fontFamily: '"DM Sans",sans-serif', fontWeight: 700, fontSize: "96px", lineHeight: "1.0", letterSpacing: "-0.04em", color: "#efebe0", whiteSpace: "normal", width: "760px" }, "Free to copy.<br>No account.");
-  by = mk({ ...label, color: "#aaa596", left: "110px", top: "520px", fontSize: "34px" }, "By Alec Reimel");
+  by = mk({ ...label, color: "#aaa596", left: "110px", top: "510px", fontSize: "48px", letterSpacing: ".16em", color: "#efebe0" }, "By Alec Reimel");
   url = mk({ left: "110px", top: "790px", fontFamily: '"DM Sans",sans-serif', fontWeight: 700, fontSize: "168px", lineHeight: "1", letterSpacing: "-0.05em", color: "#efebe0" }, "ai-hub.alecreimel.com");
   const rule2 = mk({ left: "110px", top: "764px", width: "1700px", height: "2px", background: "#3f3b31" });
   [tag, rule, sub, by, rule2, url].forEach((e) => root.appendChild(e));

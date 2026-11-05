@@ -17,7 +17,7 @@ export const SYNC = {
   impactOpen: 0,
   fewCommand: 52,
   drop: 104,
-  numerals: [130, 156, 182],       // 18 / 5 / 4 land
+  numerals: [130, 143, 156],       // 18 / 5 / 4 land
   search: { text: "marketing", n0: 64 },
   lock: 247,
   fields: [
@@ -27,7 +27,7 @@ export const SYNC = {
   copyPress: 325,                  // bar 7 beat 2: flips to Copied, white flash
   names: [364, 377, 390, 403, 416],// one agent per beat, stacking
   free: 468,                       // everything cuts; bar 10
-  noAccount: 494,                  // bar 10 beat 3
+  noAccount: 481,                  // bar 10 beat 2
   finalDrop: 520,
   lastHit: 572,
 };

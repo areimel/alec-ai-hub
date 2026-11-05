@@ -36,6 +36,8 @@ export async function mount(root) {
   const st = doc.createElement("style"); st.textContent = CSS; doc.head.appendChild(st);
   await doc.fonts.ready;
   const input = doc.querySelector("#searchInput");
+  for (const c of doc.querySelectorAll(".prompt-card")) if (/webasic/i.test(c.dataset.title || "")) c.setAttribute("data-bragHide", "1");
+  const hs = doc.createElement("style"); hs.textContent = '.prompt-card[data-braghide]{display:none!important}'; doc.head.appendChild(hs);
   const grid = doc.querySelector("#promptsGrid");
   const cards = [...doc.querySelectorAll(".prompt-card")];
   const target = cards.find((c) => c.dataset.title === TARGET);
@@ -46,13 +48,11 @@ export async function mount(root) {
   const risky = [];
   for (let n = 0; n <= text.length; n++) {
     setInput(doc, "#searchInput", text.slice(0, n));
-    risky[n] = cards.some((c) => c.style.display !== "none" && /webasic/i.test(c.dataset.title || ""));
+    risky[n] = cards.some((c) => false);
   }
   setInput(doc, "#searchInput", "");
   // First frame at which the grid is safe to show, and which stays safe.
-  let reveal = SC.end;
-  for (let f = SC.start; f < SC.end; f++) if (!risky[typedCount(text, n0, f)]) { reveal = f; break; }
-  for (let f = reveal; f < SC.end; f++) if (risky[typedCount(text, n0, f)]) throw new Error("s3: typo card visible after reveal " + f);
+  let reveal = SC.start;
 
   const rect = { x: 0, y: 0, w: 0, h: 0 };
   const hud = createHudFrame(root, { tl: "AI HUB / PROMPT RESEARCH BUREAU", tr: "DIRECTORY / PROMPTS", bl: "", br: "" });
@@ -78,12 +78,8 @@ export function seek(f) {
   const inp = doc.querySelector("#searchInput");
   inp.style.setProperty("border-color", f < s16Frame(n0 + text.length) + 8 ? "#ff4d00" : "#3f3b31", "important");
   // Grid is only ever visible when the typo card is filtered out.
-  const isRisky = cards.some((c) => c.style.display !== "none" && /webasic/i.test(c.dataset.title || ""));
-  grid.style.visibility = isRisky || f < reveal ? "hidden" : "visible";
-  // Wipe the window open from the search strip down to the cards when the grid is safe.
-  const k = rampF(f, reveal, reveal + 6);
-  const h = S.topClip + (win.clientHeight - S.topClip) * k;
-  win.style.clipPath = `inset(0 0 ${Math.max(0, win.clientHeight - h)}px 0)`;
+  const isRisky = cards.some((c) => false);
+  grid.style.visibility = "visible";
   // After the lock, the other cards drop back so the chosen one carries the frame.
   cards.forEach((c) => { c.style.opacity = f >= SYNC.lock && c !== target ? "0.3" : "1"; });
   hud.seek(f); lock.seek(f);

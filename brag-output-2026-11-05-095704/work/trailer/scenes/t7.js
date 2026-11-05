@@ -7,6 +7,7 @@ let page, btn, title, cursor, flash;
 const CSS = `
 body *{visibility:hidden!important}
 #copyPrompt{visibility:visible!important;position:fixed!important;left:10px!important;top:7px!important;width:${BW}px!important;height:${BH}px!important;margin:0!important;z-index:99999!important;justify-content:center!important}
+#copyPrompt[data-copied]{background:#efebe0!important;color:#141310!important;opacity:1!important;border-color:#efebe0!important}
 html,body{background:#141310!important;margin:0!important}
 `;
 

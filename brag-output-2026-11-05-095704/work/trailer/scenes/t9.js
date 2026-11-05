@@ -8,7 +8,7 @@ export async function mount(root) {
   root.style.background = C.charcoal;
   free = bigLines(root, ["FREE."], { maxW: 1740, maxH: 520, centerX: true, y: 60, lh: 0.86 });
   free.el.style.top = "70px";
-  stamp = createStamp(root, { text: "NO ACCOUNT.", x: 960, y: 826, size: 190, rotate: -4, start: SYNC.noAccount, color: "orange" });
+  stamp = createStamp(root, { text: "NO ACCOUNT.", x: 960, y: 826, size: 180, rotate: -4, start: SYNC.noAccount, color: "orange" });
 }
 
 export function seek(f) {

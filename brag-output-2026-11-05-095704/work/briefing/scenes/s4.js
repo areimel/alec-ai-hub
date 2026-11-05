@@ -31,7 +31,7 @@ const RIGHT = `
 body::before{content:"OUTPUT / LIVE PROMPT";display:block;position:fixed;left:16px;top:0;height:${STRIP}px;z-index:100;
   font:500 16px ui-monospace,"Liberation Mono",monospace;line-height:${STRIP}px;letter-spacing:.16em;color:#ff4d00}
 #copyPrompt{position:fixed!important;top:7px!important;right:12px!important;z-index:101!important;height:42px!important;font-size:15px!important;padding:0 18px!important}
-#copyPrompt[data-copied=true]{background:#efebe0!important;color:#141310!important;border-color:#efebe0!important}
+#copyPrompt[data-copied=true]{background:#efebe0!important;color:#141310!important;border-color:#efebe0!important;font-size:25px!important;height:52px!important;top:2px!important;padding:0 30px!important;font-weight:700!important}
 #promptContent{font-size:17px!important;line-height:1.5!important;color:#aaa596!important;background:#141310!important;border:0!important}
 ::highlight(blank){color:#ff4d00}
 ::highlight(resolved){color:#efebe0;text-decoration:underline;text-decoration-color:#ff4d00;text-decoration-thickness:3px}
@@ -45,10 +45,12 @@ function pane(root, x, label) {
   return p;
 }
 function frameBorder(root, x) {
+  S_borders = S_borders || [];
   const b = document.createElement("div");
   Object.assign(b.style, { position: "absolute", left: x + "px", top: PY + "px", width: CW * SCALE - 4 + "px", height: CH * SCALE - 4 + "px", border: "2px solid #3f3b31", pointerEvents: "none", zIndex: 5 });
-  root.appendChild(b);
+  root.appendChild(b); S_borders.push(b);
 }
+let S_borders;
 const inject = (doc, css) => { const s = doc.createElement("style"); s.textContent = css; doc.head.appendChild(s); };
 
 export async function mount(root) {
@@ -66,11 +68,13 @@ export async function mount(root) {
 
   const hud = createHudFrame(root, { tl: "AI HUB / PROMPT RESEARCH BUREAU", tr: "MARKETING / CHATGPT", bl: "", br: "" });
   const cap = createCaption(root, "MISSION 01", "Fill it in. The prompt updates as you type.");
-  Object.assign(cap.style, { paddingTop: "60px", paddingBottom: "64px" });
+  Object.assign(cap.style, { paddingTop: "40px", paddingBottom: "52px" });
+  Object.assign(cap.querySelector(".cap__line").style, { fontSize: "84px", whiteSpace: "nowrap", letterSpacing: "-0.035em" });
+  cap.querySelector(".cap__kicker").style.fontSize = "40px";
   const tag = document.createElement("div");
   tag.textContent = "MISSION READY";
-  Object.assign(tag.style, { position: "absolute", left: "96px", top: "868px", zIndex: 101, background: "#ff4d00", color: "#141310", padding: "4px 20px 2px",
-    font: "700 38px/1.25 ui-monospace,'Liberation Mono',monospace", letterSpacing: ".1em" });
+  Object.assign(tag.style, { position: "absolute", left: "96px", top: "806px", zIndex: 101, background: "#ff4d00", color: "#141310", padding: "6px 28px 4px",
+    font: "700 68px/1.2 ui-monospace,'Liberation Mono',monospace", letterSpacing: ".08em" });
   root.appendChild(tag);
   S = { L, R, pre, copy, copyLabel, original, hud, cap, tag, measured: false, scroll: 0 };
 }
@@ -147,6 +151,8 @@ export function seek(f) {
   // Real Copy prompt button flips to Copied at copyPress (never clicked).
   setCopied(copy, f >= SYNC.copyPress, copyLabel);
   hud.seek(f);
+  const kk = f - SYNC.copyPress, hit = kk >= 0 && kk < 14;
+  S_borders.forEach((b, i) => { b.style.borderColor = hit && i === 1 ? "#ff4d00" : "#3f3b31"; b.style.borderWidth = hit && i === 1 ? "6px" : "2px"; });
   slam(cap.querySelector(".cap__line"), f, SC.start, { from: 1.06, frames: 4 });
   const ready = f >= SYNC.copyPress && f < SC.end - 1;
   tag.style.display = ready ? "block" : "none";

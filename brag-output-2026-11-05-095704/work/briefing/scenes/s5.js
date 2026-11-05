@@ -4,29 +4,29 @@ import { loadPage, createCaption, rampF } from "/engine/lib.js";
 import { createHudFrame, slam } from "/engine/fx.js";
 
 const SC = SCENES.find((s) => s.id === "s5");
-const STEP = 44;   // staggered dossier: each card sits one step lower
+const STEP = 52;   // staggered dossier: each card sits one step lower
 let S;
 
 // Reflow of the real directory page into a stepped row. No card text is edited; only layout and emphasis.
 const CSS = `
 header, .page-header, .skip-link, footer, #mobileMenuToggle, .directory__rail, #resultCount, #emptyState{display:none!important}
 body{background:#141310!important}
-#promptsGrid{position:fixed!important;left:60px;top:136px;width:1800px;display:flex!important;gap:16px;align-items:flex-start;border:0!important}
-.prompt-card{flex:1 1 0;min-width:0;position:relative;display:flex!important;flex-direction:column;gap:14px!important;padding:22px!important;
+#promptsGrid{position:fixed!important;left:60px;top:120px;width:1800px;display:flex!important;gap:16px;align-items:flex-start;border:0!important}
+.prompt-card{flex:1 1 0;min-width:0;position:relative;display:flex!important;flex-direction:column;gap:14px!important;padding:26px!important;
   background:#1c1b17!important;border:2px solid #3f3b31!important;transform-origin:50% 50%}
 .prompt-card:nth-child(1){top:0}.prompt-card:nth-child(2){top:${STEP}px}.prompt-card:nth-child(3){top:${STEP * 2}px}
 .prompt-card:nth-child(4){top:${STEP * 3}px}.prompt-card:nth-child(5){top:${STEP * 4}px}
 .prompt-card__preview,.prompt-card__actions,.prompt-card__tags{display:none!important}
-.prompt-card__meta{order:1;font-size:17px!important}
-.prompt-card__barcode{width:150px!important;height:28px!important}
-.prompt-card__title{order:2;font-size:38px!important;line-height:1.08!important;color:#efebe0!important;min-height:82px}
+.prompt-card__meta{order:1;font-size:20px!important}
+.prompt-card__barcode{width:160px!important;height:32px!important}
+.prompt-card__title{order:2;font-size:48px!important;line-height:1.05!important;color:#efebe0!important;min-height:104px}
 .prompt-card__facts{order:3;display:block!important}
 .prompt-card__facts div:nth-child(n+2){display:none!important}
-.prompt-card__facts div{display:block!important;background:#ff4d00;color:#141310;padding:10px 16px 12px}
-.prompt-card__facts dt{font-size:16px!important;color:#141310!important;letter-spacing:.14em!important;margin:0 0 2px}
+.prompt-card__facts div{display:block!important;background:#ff4d00;color:#141310;padding:12px 16px 14px}
+.prompt-card__facts dt{font-size:20px!important;color:#141310!important;letter-spacing:.14em!important;margin:0 0 2px}
 .prompt-card__facts dt::after{content:":"}
-.prompt-card__facts dd{font:700 30px/1.15 ui-monospace,"Liberation Mono",monospace!important;color:#141310!important;text-transform:uppercase;margin:0;letter-spacing:.02em}
-.prompt-card__desc{order:4;font-size:19px!important;line-height:1.45!important;color:#aaa596!important}
+.prompt-card__facts dd{font:700 32px/1.15 ui-monospace,"Liberation Mono",monospace!important;color:#141310!important;text-transform:uppercase;margin:0;letter-spacing:0}
+.prompt-card__desc{order:4;font-size:22px!important;line-height:1.4!important;color:#aaa596!important}
 `;
 
 export async function mount(root) {
@@ -42,7 +42,8 @@ export async function mount(root) {
   if (access.some((a) => !a)) throw new Error("s5: a card has no Access value");
   const hud = createHudFrame(root, { tl: "AI HUB / CUSTOM AGENTS", tr: "OPERATIVES 00 / 05", bl: "", br: "" });
   const cap = createCaption(root, "", "Then deploy the specialists. Five custom agents for Claude Code.");
-  Object.assign(cap.style, { paddingTop: "70px", paddingBottom: "64px" });
+  Object.assign(cap.style, { paddingTop: "50px", paddingBottom: "48px" });
+  cap.querySelector(".cap__line").style.fontSize = "76px";
   // Same verbatim sentence pair, broken at the sentence boundary.
   const line = cap.querySelector(".cap__line");
   line.textContent = "";
@@ -56,7 +57,7 @@ function makeSlots(root) {
     const r = c.getBoundingClientRect();
     const d = document.createElement("div");
     Object.assign(d.style, { position: "absolute", left: r.left + "px", top: r.top + "px", width: r.width + "px", height: r.height + "px", boxSizing: "border-box",
-      border: "2px dashed #3f3b31", zIndex: 3, color: "#aaa596", padding: "22px", font: "500 22px ui-monospace,'Liberation Mono',monospace", letterSpacing: ".14em" });
+      border: "2px dashed #3f3b31", zIndex: 3, color: "#aaa596", padding: "26px", font: "500 26px ui-monospace,'Liberation Mono',monospace", letterSpacing: ".14em" });
     d.textContent = "OPERATIVE " + String(i + 1).padStart(2, "0");
     root.appendChild(d);
     return d;

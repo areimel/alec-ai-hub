@@ -161,7 +161,7 @@ async function main() {
     if (has("--mux")) {
       const v = path.join(cutDir, "video-noaudio.mp4"), a = path.join(cutDir, "audio.wav"), o = path.join(OUT, CUT.out + ".mp4");
       for (const f of [v, a]) if (!fs.existsSync(f)) throw new Error("missing " + f);
-      sh("ffmpeg", ["-y", "-v", "error", "-i", v, "-i", a, "-map", "0:v:0", "-map", "1:a:0", "-c:v", "copy", "-c:a", "aac", "-b:a", "256k", "-movflags", "+faststart", "-t", "20.8", o]);
+      sh("ffmpeg", ["-y", "-v", "error", "-i", v, "-i", a, "-map", "0:v:0", "-map", "1:a:0", "-c:v", "libx264", "-preset", "slow", "-crf", "23", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "256k", "-movflags", "+faststart", "-t", "20.8", o]);
       console.log("wrote", o);
       console.log(sh("ffprobe", ["-v", "error", "-show_entries", "stream=codec_type,codec_name,width,height,r_frame_rate,start_time,duration:format=duration,size", "-of", "default=nw=1", o]).stdout);
       const c = sh("ffprobe", ["-v", "error", "-count_frames", "-select_streams", "v:0", "-show_entries", "stream=nb_read_frames,start_time", "-of", "default=nw=1", o]).stdout;

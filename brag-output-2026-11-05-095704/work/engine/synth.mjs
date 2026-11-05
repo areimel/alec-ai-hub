@@ -17,7 +17,7 @@ export function parseOpts(argv = process.argv.slice(2)) {
   const g = (n, d) => { const i = argv.indexOf('--' + n); return i >= 0 ? parseFloat(argv[i + 1]) : d; };
   return {
     basscut: g('basscut', 1),            // multiplier on acid base-cutoff automation (1 = as authored)
-    bass: g('bass', 0), drums: g('drums', 0), fx: g('fx', 0),   // stem gains, dB
+    bass: g('bass', 3), drums: g('drums', -1), fx: g('fx', 0),   // stem gains, dB
     rumble: g('rumble', 0), stab: g('stab', 0),
     lufs: g('lufs', -14), tp: g('tp', -1.6), // target integrated LUFS; true-peak ceiling dBTP
     seed: g('seed', 1138),

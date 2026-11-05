@@ -76,7 +76,7 @@ export function createOverlay(stage, { cuts = [], cutId = "briefing" } = {}) {
       const k = f - list[ci];
       if (k < 0 || k >= hits) continue;
       const s = hash(list[ci], k, 99), R = (n, m = 0) => rnd(s, n, m);
-      if (trailer && k === 0) { mk("i", "", gl, { inset: 0, background: PAL.ivory, opacity: 0.94 }); }
+      if (trailer && k === 0) { mk("i", "", gl, { inset: 0, background: PAL.ivory, opacity: 0.55 }); }
       const nb = trailer ? 7 + (s % 6) : 4 + (s % 4);
       for (let i = 0; i < nb; i++) {
         const h = (trailer ? 8 : 4) + Math.floor(R(i, 1) * (trailer ? 150 : 44));

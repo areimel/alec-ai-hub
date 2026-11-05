@@ -141,3 +141,13 @@ work/
 - Poster is a settled frame baked in as frame 0, with duration and sync unchanged.
 - `git diff --stat main...HEAD -- brag-output/` is unchanged by these commits, and `src/` isn't modified.
 - Watch both final videos' stills and report anything that couldn't be verified by eye or ear; final sound judgment is yours.
+
+## As built (differences from the storyboard above)
+
+- Trailer: numerals land at f130/143/156 and NO ACCOUNT at f481, moved earlier for read time. Trailer sample input is "slow ops" so typing finishes inside bar 6.
+- Search scenes hide the one "WeBasic" typo card with injected CSS. During the first letters of "marketing", the real count (for example "6 of 18") can include that hidden card.
+- The detail-page rail and the unfilled @conditionalTestimonials token are hidden the same way; real wording isn't changed.
+- Mix defaults raised the bass 3 dB and lowered drums 1 dB after measurement. Levels were measured, not auditioned.
+- Deliverables are x264 CRF 23 (about 28 MB each); the CRF 16 masters stay local in work/<cut>/.
+- Posters: Briefing f150, Trailer f120, baked in as frame 0.
+- Rebuild from the repo root: `node <folder>/work/<cut>/audio.mjs`, then `node <folder>/work/engine/render.mjs --cut <cut> --full --workers 6 --poster <f> --mux`.

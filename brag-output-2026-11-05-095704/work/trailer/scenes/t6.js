@@ -2,7 +2,7 @@ import { C, SYNC, W, H, scene, fonts, bigLines, pop, div } from "./_shared.js";
 import { loadPage, setInput } from "/engine/lib.js";
 import { typedCount } from "/__comp/timeline.js";
 const sc = scene("t6");
-const SCALE = 3.2, VW = W / SCALE, VH = 204, BAND = Math.round(VH * SCALE);
+const SCALE = 3.2, VW = W / SCALE, VH = 218, BAND = Math.round(VH * SCALE);
 let page, pre, title;
 
 // Isolate the real #promptContent: nothing else on the page is visible, rail and form included.
@@ -10,7 +10,7 @@ const CSS = `
 body *{visibility:hidden!important}
 #promptContent,#promptContent *{visibility:visible!important}
 html,body{background:#1c1b17!important;margin:0!important}
-#promptContent{position:fixed!important;left:0!important;top:0!important;width:${VW}px!important;height:${VH}px!important;margin:0!important;padding:14px 18px!important;box-sizing:border-box!important;overflow:hidden!important;max-height:none!important;border:0!important;background:#1c1b17!important;z-index:99999!important;font-size:13px!important;line-height:19px!important;white-space:pre-wrap!important}
+#promptContent{position:fixed!important;left:0!important;top:28px!important;width:${VW}px!important;height:${VH - 28}px!important;margin:0!important;padding:0 30px!important;box-sizing:border-box!important;overflow:hidden!important;max-height:none!important;border:0!important;background:#1c1b17!important;z-index:99999!important;font-size:13px!important;line-height:19px!important;white-space:pre-wrap!important}
 #promptContent .hl{background:#ff4d00;color:#141310}
 #promptContent .gone{visibility:hidden!important}
 `;
