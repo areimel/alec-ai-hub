@@ -1,0 +1,1 @@
+import{c as e}from"./copy.D34rYj5R.js";const n=document.getElementById("promptContent");document.getElementById("copyPrompt")?.addEventListener("click",t=>{e(t.currentTarget,n?.textContent??"","Copied")});document.getElementById("copyLink")?.addEventListener("click",t=>{e(t.currentTarget,window.location.href,"Link copied")});

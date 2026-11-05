@@ -1,0 +1,1 @@
+import{s as e}from"./web3form.CQfzkLvr.js";e({formId:"form",resultId:"result",pendingMessage:"Sending your message...",successMessage:"Message sent. Alec will get it by email.",errorMessage:"Your message did not send. Check your connection and press Send message again.",clearSuccessAfterMs:8e3});

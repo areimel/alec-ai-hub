@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Launch video</title>
+<meta name="viewport" content="width=1080">
+<style>
+@font-face{font-family:"DM Sans";font-weight:400;src:url(/fonts/dm-sans/DMSans-Regular.ttf) format("truetype")}
+@font-face{font-family:"DM Sans";font-weight:500;src:url(/fonts/dm-sans/DMSans-Medium.ttf) format("truetype")}
+@font-face{font-family:"DM Sans";font-weight:600;src:url(/fonts/dm-sans/DMSans-SemiBold.ttf) format("truetype")}
+@font-face{font-family:"DM Sans";font-weight:700;src:url(/fonts/dm-sans/DMSans-Bold.ttf) format("truetype")}
+html,body{margin:0;padding:0;background:#141310;overflow:hidden}
+#stage{position:relative;width:1080px;height:1080px;overflow:hidden;background:#141310}
+.scene{position:absolute;left:0;top:0;width:1080px;height:1080px;overflow:hidden;background:#141310}
+#dip{position:absolute;inset:0;background:#141310;opacity:0;pointer-events:none;z-index:1000}
+</style>
+<link rel="stylesheet" href="/__comp/comp.css">
+</head>
+<body>
+<div id="stage"><div id="dip"></div></div>
+<script type="module" src="/__comp/comp.js"></script>
+</body>
+</html>

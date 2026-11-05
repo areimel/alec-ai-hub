@@ -12,5 +12,8 @@
       "Bash(npx astro:*)"
     ],
     "deny": []
+  },
+  "enabledPlugins": {
+    "brag@brag": true
   }
 }
