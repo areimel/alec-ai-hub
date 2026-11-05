@@ -1,0 +1,1 @@
+const a=new WeakMap;async function c(e,i,d="Copied"){const t=e.dataset.label??e.textContent?.trim()??"";e.dataset.label=t,window.clearTimeout(a.get(e));try{await navigator.clipboard.writeText(i),e.textContent=d,e.dataset.copied="true"}catch{e.textContent="Copy failed",delete e.dataset.copied}a.set(e,window.setTimeout(()=>{e.textContent=t,delete e.dataset.copied},2e3))}export{c};

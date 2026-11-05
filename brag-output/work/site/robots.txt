@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ai-hub.alecreimel.com/sitemap-index.xml
