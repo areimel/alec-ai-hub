@@ -23,6 +23,6 @@ export function seek(f) {
     r.band.style.background = hit ? C.orange : C.charcoal;
     r.lab.style.color = hit ? C.charcoal : C.ivory;
     r.lab.style.opacity = on ? "1" : "0";
-    pop(r.lab, f, r.land, { from: 1.2, frames: 4, origin: "0% 50%" });
+    pop(r.lab, f, r.land, { from: 1.03, frames: 4, origin: "0% 50%" });
   });
 }

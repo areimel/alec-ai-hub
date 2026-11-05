@@ -1,6 +1,7 @@
 import { C, SYNC, W, H, scene, fonts, div, fetchDoc, widthAt100, MONO, DISPLAY, pop } from "./_shared.js";
 const sc = scene("t8");
 const rows = [];
+let endRule;
 const ROW0 = 164, RH = 170;
 
 export async function mount(root) {
@@ -25,12 +26,14 @@ export async function mount(root) {
     const val = div(acc, { position: "static", font: `500 44px/1 ${MONO}`, letterSpacing: "0.06em", color: C.orange }, a.access);
     rows.push({ row, name, acc, val, land: SYNC.names[i] });
   });
-  div(root, { left: "96px", right: "96px", top: ROW0 + agents.length * RH + "px", height: "3px", background: C.rule });
+  endRule = div(root, { left: "96px", right: "96px", top: ROW0 + agents.length * RH + "px", height: "3px", background: C.rule });
 }
 
 export function seek(f) {
+  endRule.style.visibility = f >= rows[rows.length - 1].land ? "visible" : "hidden";
   rows.forEach((r) => {
     const k = f - r.land, on = k >= 0, hit = on && k < 3;
+    r.row.style.visibility = on ? "visible" : "hidden";
     r.row.style.background = hit ? C.orange : "transparent";
     r.name.style.color = hit ? C.charcoal : C.ivory;
     r.val.style.color = hit ? C.charcoal : C.orange;

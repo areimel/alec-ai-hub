@@ -1,5 +1,5 @@
 // Usage (from repo root): node <path>/engine/render.mjs --cut briefing|trailer [--stills f1,f2] [--contact] [--full] [--workers N]
-//   [--mux] [--poster F] [--determinism F] [--strict] [--check] [--port P]
+//   [--mux] [--poster F] [--determinism F] [--strict] [--check] [--check-all] [--port P]
 import { chromium } from "@playwright/test";
 import { spawnSync } from "node:child_process";
 import crypto from "node:crypto";
@@ -116,6 +116,17 @@ async function main() {
       if (a !== b) process.exitCode = 1;
     }
 
+    if (has("--check-all")) {
+      const { checkExcluded } = await import(pathToFileURL(path.join(WORK, "check-excluded.mjs")).href);
+      const end = SCENES[SCENES.length - 1].end, seen = new Map();
+      for (let f = 0; f < end; f++) {
+        await page.evaluate((x) => window.__seek(x), f);
+        for (const h of (await checkExcluded(page)) || []) { const k = h.needle + "|" + h.text; if (!seen.has(k)) seen.set(k, { f, ...h }); }
+      }
+      console.log(`check-all ${end} frames, distinct hits: ${seen.size}`);
+      for (const h of seen.values()) console.log("  " + JSON.stringify(h));
+      if (seen.size) process.exitCode = 1;
+    }
     if (has("--check")) {
       let checkExcluded;
       try { ({ checkExcluded } = await import(pathToFileURL(path.join(WORK, "check-excluded.mjs")).href)); }

@@ -3,7 +3,7 @@
 const NEEDLES = ['placeholder', 'Anonymous', 'Company AI Team', '2023-06-16', 'WeBasic', '@conditionalTestimonials', 'Kojima', 'localhost'];
 
 // Totals must never appear: the site is early, so the videos don't sell on counts.
-const COUNT_PATTERNS = [/PROMPTS\u2014\d/i, /AGENTS\u2014\d/i, /SKILLS\u2014\d/i, /\b\d+\s+PUBLISHED/i, /Showing\s+\d+\s+of\s+\d+/i, /\b\d+\s+(prompts?|agents?|entries|skills?)\b/i, /\b\d+\s*\/\s*\d+\b(?!\s*%)/];
+const COUNT_PATTERNS = [/PROMPTS\u2014\d/i, /AGENTS\u2014\d/i, /SKILLS\u2014\d/i, /\b\d+\s+PUBLISHED/i, /Showing\s+\d+\s+of\s+\d+/i, /\b\d+\s+(custom|prompts?|agents?|entries|skills?)\b/i, /\b(five|four|eighteen|thirty|nine|eight)\s+(custom|prompts?|agents?|skills?)\b/i, /\b\d+\s*\/\s*\d+\b(?!\s*%)/];
 
 // Runs inside a frame. offset = frame origin in main-viewport coordinates; main = main viewport size.
 function scanFrame({ needles, patterns, offset, main }) {

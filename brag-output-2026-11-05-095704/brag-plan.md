@@ -151,3 +151,14 @@ work/
 - Deliverables are x264 CRF 23 (about 28 MB each); the CRF 16 masters stay local in work/<cut>/.
 - Posters: Briefing f150, Trailer f120, baked in as frame 0.
 - Rebuild from the repo root: `node <folder>/work/<cut>/audio.mjs`, then `node <folder>/work/engine/render.mjs --cut <cut> --full --workers 6 --poster <f> --mux`.
+
+## Update: count-free re-render (2026-11-05)
+
+Supersedes the storyboard above where they differ.
+
+- No total counts anywhere. Briefing s2 shows labels instead of the stat strip; Trailer t4 shows PROMPTS / CUSTOM AGENTS / SKILLS & PLUGINS as big type. Result counts are hidden in search scenes.
+- Find/fill/copy now uses the new Board Update Template: search "board" (3 results), sample inputs "Halcyon" / "supply delay" / "Hire" (Briefing) and "Halcyon" / "Q3 churn" (Trailer). Sample inputs are illustrative.
+- Agents shown are a named lineup (`SYNC.agents`): Meeting Prep Researcher, Competitor Scout, Code Reviewer, Bug Investigator, Security Auditor.
+- Trailer t5 uses the full-width search layout; t8 rows appear only as they land.
+- `render.mjs --check-all` scans every frame for excluded text and count patterns. Plate serials like "0000000025 / 75%" are decorative and allowed.
+- The earlier notes about the WeBasic card and @conditionalTestimonials no longer apply: the site itself is fixed.
