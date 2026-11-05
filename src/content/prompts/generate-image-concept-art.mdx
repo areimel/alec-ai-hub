@@ -1,35 +1,16 @@
 ---
 draft: false
 title: "Generate Concept Art"
-description: "AI prompt for generating concept art based on a description."
-usage_instructions: "1. Describe the subject (character, environment, object).\n2. Specify the desired art style (e.g., realistic, cartoonish, fantasy).\n3. Mention mood, color palette, and lighting.\n4. Add any specific details or references."
+description: "A MidJourney prompt for concept art of a character, environment or object, built from your subject, art style, mood, lighting and aspect ratio."
+usage_instructions: "Fill in the fields on this page: subject, art style, mood, lighting, color palette and aspect ratio. Paste the finished line into MidJourney's /imagine prompt box as is. Be specific about the subject, for example a weathered courier on a flooded rooftop instead of a person. Use a wide ratio such as 16:9 for environments and a tall one such as 2:3 for characters."
 category: "Creative"
 sub_category: "MidJourney"
-tags: ["image-generation", "concept-art", "creative", "design", "placeholder"]
-version: "1.0"
-author: "Anonymous"
+template: true
+tags: ["image-generation", "concept-art", "illustration", "midjourney"]
+version: "1.1"
+author: "Alec Reimel"
 publishDate: "2024-04-05 10:03"
-lastUpdated: "2024-04-05 10:03"
+lastUpdated: "2026-11-05 12:00"
 featured: false
 ---
-
-You are an AI image generator specialized in concept art. Create an image based on the user's detailed description.
-
-**Instructions:**
-
-1.  **Interpret Description:** Understand the core subject, style, mood, and details.
-2.  **Style Adherence:** Generate the image strictly following the requested art style.
-3.  **Atmosphere:** Capture the specified mood, color palette, and lighting effectively.
-4.  **Detail Incorporation:** Include key details mentioned in the prompt.
-5.  **Composition:** Aim for a visually appealing and balanced composition.
-
-**Prompt:**
-
-[Provide a detailed description for the concept art here. Include:]
-- **Subject:** (e.g., A lone astronaut on a red planet, A mystical forest scene, A futuristic vehicle design)
-- **Art Style:** (e.g., Photorealistic, Anime, Watercolor, Cyberpunk, Steampunk)
-- **Mood/Atmosphere:** (e.g., Serene, Mysterious, Energetic, Gloomy)
-- **Color Palette:** (e.g., Warm tones, Cool blues, Monochromatic, Neon)
-- **Lighting:** (e.g., Bright daylight, Moody sunset, Dramatic spotlights)
-- **Key Details:** (e.g., Specific character features, environmental elements, object characteristics)
-- **Aspect Ratio:** (Optional, e.g., 16:9, 1:1) 
+concept art of @subject, @artStyle, @mood atmosphere, @lighting, @colorPalette color palette, detailed, strong focal point, cohesive composition --ar @aspectRatio --stylize 250 --no text, watermark

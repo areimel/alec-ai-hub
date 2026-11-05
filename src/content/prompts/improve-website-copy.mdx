@@ -1,39 +1,49 @@
 ---
 draft: false
 title: "Improve Website Copy"
-description: "AI prompt to revise and improve existing website copy for clarity, engagement, and conversion."
-usage_instructions: "1. Paste the existing website copy.\n2. Specify the target audience.\n3. State the goal of the page/section (e.g., drive signups, explain service, build trust).\n4. Mention desired tone and any keywords."
+description: "Rewrites an existing page or section of website copy for a named audience and goal, and explains each change so you can accept or reject it."
+usage_instructions: "Fill in the fields on this page: paste your current copy, then add the audience, the goal of the page, the tone and any keywords. Copy the finished prompt into ChatGPT. Compare the rewrite with your original and check every factual claim before publishing."
 category: "Writing"
 sub_category: "ChatGPT"
-tags: ["copywriting", "website-content", "conversion-optimization", "marketing", "placeholder"]
-version: "1.0"
-author: "Anonymous"
+template: true
+tags: ["copywriting", "website-content", "editing", "messaging"]
+version: "1.1"
+author: "Alec Reimel"
 publishDate: "2024-04-05 10:08"
-lastUpdated: "2024-04-05 10:08"
+lastUpdated: "2026-11-05 12:00"
 featured: false
 ---
 
-You are an expert conversion copywriter. Revise the provided website copy to make it more clear, engaging, and persuasive.
+You are a senior web copywriter and editor. Your job is to rewrite the copy below so it is clearer and more useful to its audience, without changing what the business actually offers.
 
-**Instructions:**
+## Brief
 
-1.  **Analyze Existing Copy:** Identify weaknesses in the current text (e.g., lack of clarity, weak CTA, jargon).
-2.  **Focus on Audience & Goal:** Rewrite the copy to resonate with the target audience and achieve the specified goal.
-3.  **Clarity & Conciseness:** Ensure the language is clear, direct, and easy to understand. Remove unnecessary jargon.
-4.  **Benefits Over Features:** Emphasize the benefits for the user, not just the product/service features.
-5.  **Strong Headline & CTA:** Craft a compelling headline and a clear, strong call-to-action.
-6.  **Tone Consistency:** Maintain the desired tone throughout the copy.
-7.  **Keywords:** Integrate keywords naturally if provided.
+- Audience: @targetAudience
+- Goal of this page or section: @pageGoal
+- Tone: @tone
+- Keywords to include: @keywords
 
-**Existing Copy:**
+## Existing copy
 
-[Paste the website copy you want to improve here]
+@existingCopy
 
-**Requirements:**
+## Method
 
-[Provide context for the revision here:]
-- **Target Audience:** (e.g., Tech startup founders, Marketing managers, Freelance designers)
-- **Goal of this Page/Section:** (e.g., Get visitors to sign up for a free trial, Explain the core value proposition, Build credibility)
-- **Desired Tone:** (e.g., Authoritative, Friendly, Playful, Empathetic)
-- **Keywords to Include:** (Optional)
-- **Specific Areas to Focus On:** (Optional, e.g., "Make the headline punchier", "Strengthen the call to action") 
+1. Read the existing copy and note what is unclear, vague, repeated, full of jargon, or missing a next step.
+2. Rewrite for the audience and goal above. Lead with what the reader gets, then how it works, then the action to take.
+3. Use short sentences and concrete words. Replace vague phrases with specifics found in the existing copy.
+4. Keep every fact, price, name and claim that appears in the original. Do not add statistics, awards, testimonials, guarantees or features that are not in the original. If the copy would be stronger with one of these, list it as a question for the owner instead.
+5. Write one clear headline and one clear call to action. Use keywords only where they read naturally.
+
+## Output format
+
+1. Revised copy, ready to paste, with the same overall structure as the original unless the structure is the problem.
+2. Change notes: a short bullet list of the main changes and the reason for each.
+3. Questions for the owner: facts you need to confirm or details that would make the copy stronger.
+4. Optional: one alternative headline and one alternative call to action.
+
+## If information is missing
+
+- If the existing copy is blank, stop and ask the user to paste it.
+- If the audience or goal is blank, ask for it in one short question before rewriting. If you must proceed, state the audience and goal you assumed at the top.
+- If the tone is blank, match the tone of the original.

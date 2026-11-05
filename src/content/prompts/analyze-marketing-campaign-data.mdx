@@ -1,37 +1,55 @@
 ---
 draft: false
 title: "Analyze Marketing Campaign Data"
-description: "AI prompt to analyze marketing campaign data and extract key insights."
-usage_instructions: "1. Provide the marketing data (e.g., CSV export, summary table, key metrics).\n2. Specify the campaign goals and KPIs.\n3. State the questions you want answered from the data.\n4. Mention the marketing channels involved."
+description: "Analyze exported campaign results against your goal and KPIs to find what drove performance, what did not, and what to change next."
+usage_instructions: "Fill in the fields on this page: the campaign, its goal and KPIs, the channels, the data, and your questions. Then copy the finished prompt into Claude."
 category: "Analysis"
 sub_category: "Claude"
-tags: ["marketing", "data-analysis", "campaign-performance", "insights", "placeholder"]
-version: "1.0"
-author: "Anonymous"
+template: true
+tags: ["marketing", "data-analysis", "campaign-performance", "insights"]
+version: "1.1"
+author: "Alec Reimel"
 publishDate: "2024-04-05 10:09"
-lastUpdated: "2024-04-05 10:09"
+lastUpdated: "2026-11-05 12:00"
 featured: false
 ---
 
-You are a marketing data analyst. Analyze the provided campaign data to identify key trends, insights, and recommendations.
+You are a marketing analyst. Analyze the campaign data below and report what the numbers support. Separate findings from guesses.
 
-**Instructions:**
+## Campaign
+@campaignDescription
 
-1.  **Understand Goals:** Interpret the data in the context of the campaign goals and KPIs.
-2.  **Identify Trends:** Look for significant patterns, correlations, or anomalies in the data.
-3.  **Extract Insights:** Summarize the key findings and what they mean for campaign performance.
-4.  **Answer Questions:** Directly address the specific questions asked by the user.
-5.  **Actionable Recommendations:** Suggest data-driven recommendations for future campaigns or optimizations.
-6.  **Clarity:** Present the analysis in a clear, structured, and easy-to-understand format (e.g., bullet points, summary).
+## Goal and KPIs
+@campaignGoals
 
-**Marketing Data:**
+## Channels and time period
+@channelsAndDates
 
-[Paste or describe the marketing campaign data here. Include key metrics like impressions, clicks, conversions, cost, CTR, conversion rate, ROAS, etc., segmented by channel/ad set/audience if possible.]
+## Questions to answer
+@keyQuestions
 
-**Context & Goals:**
+## Data
+```
+@campaignData
+```
 
-[Provide context for the analysis here:]
-- **Campaign Goal(s):** (e.g., Increase brand awareness, Generate leads, Drive sales)
-- **Key Performance Indicators (KPIs):** (e.g., Reach, Click-Through Rate (CTR), Cost Per Lead (CPL), Return on Ad Spend (ROAS))
-- **Marketing Channels:** (e.g., Google Ads, Facebook Ads, Email Marketing, SEO)
-- **Specific Questions:** (e.g., "Which channel had the best ROAS?", "What audience segment performed best?", "Why did CTR drop mid-campaign?") 
+## Method
+1. Check the data first. Note missing values, duplicate rows, mismatched date ranges, or columns you are unsure about.
+2. Compute the KPIs named above for the whole campaign and for each channel.
+3. Compare channels and time periods. Look for the biggest differences and for changes over time.
+4. Check whether a result could come from a small sample. If a segment has few impressions, clicks, or conversions, say the result is weak.
+5. Answer each of my questions directly.
+
+## Output format
+1. **Summary:** three to five sentences on how the campaign did against its goal.
+2. **Results table:** KPI by channel.
+3. **Findings:** a numbered list. For each, give the number behind it and how confident you are (high, medium, low).
+4. **Answers:** one short answer per question I listed.
+5. **Recommendations:** up to five actions, each tied to a finding.
+6. **Data issues and gaps:** anything that limits the conclusions.
+
+## If information is missing
+- If a goal or KPI is not given, pick the most common one for the channel, say which you picked, and continue.
+- If the data lacks a metric you need, such as spend or conversions, say which calculation you could not do.
+- Show how you computed any figure that is not in the raw data. Do not fill gaps with benchmarks or industry averages unless I ask.
+- Do not claim a change caused a result unless the data shows it. Say "associated with" when it does not.

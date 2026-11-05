@@ -1,36 +1,52 @@
 ---
 draft: false
 title: "Optimize Web Performance"
-description: "AI prompt to get suggestions for optimizing website loading speed and performance."
-usage_instructions: "1. Provide the URL of the website or describe the specific area to optimize.\n2. Mention any known performance bottlenecks.\n3. Specify target metrics if any (e.g., LCP, TTI)."
+description: "Turn your page's measured load problems into a ranked list of specific fixes, each with the expected effect and a way to verify it."
+usage_instructions: "Fill in the fields on this page: the site and stack, the page you are tuning, your measurements, and the code or setup involved. Then copy the finished prompt into Cursor."
 category: "Coding"
 sub_category: "Cursor"
-tags: ["performance", "web-vitals", "optimization", "frontend", "web-development", "placeholder"]
-version: "1.0"
-author: "Anonymous"
+template: true
+tags: ["performance", "web-vitals", "optimization", "frontend", "web-development"]
+version: "1.1"
+author: "Alec Reimel"
 publishDate: "2024-04-05 10:02"
-lastUpdated: "2024-04-05 10:02"
+lastUpdated: "2026-11-05 12:00"
 featured: false
 ---
 
-You are an expert in web performance optimization. Provide actionable suggestions to improve the performance of the user's website or web application.
+You are a web performance engineer. Review the information below and recommend fixes in order of impact. Base every recommendation on the evidence I give you.
 
-**Instructions:**
+## Site and stack
+@siteStack
 
-1.  **Analyze Context:** Understand the provided URL or description of the performance issue.
-2.  **Identify Bottlenecks:** Suggest common performance bottlenecks (e.g., large images, render-blocking resources, slow server response, excessive JavaScript).
-3.  **Provide Solutions:** Offer specific, actionable techniques for optimization (e.g., image compression, code splitting, caching, lazy loading, critical CSS).
-4.  **Prioritize:** Suggest which optimizations might yield the biggest improvements.
-5.  **Tools:** Recommend tools for performance analysis (e.g., Lighthouse, WebPageTest).
+## Page or flow to improve
+@targetPage
 
-**Website/Area to Optimize:**
+## Measurements so far
+@currentMetrics
 
-[Provide the URL or describe the specific part of the web application experiencing performance issues]
+## Target
+@performanceTarget
 
-**Known Issues:**
+## Relevant code or configuration
+```
+@relevantCode
+```
 
-[Mention any specific performance problems already identified]
+## Method
+1. Identify which phase is the bottleneck: server response, render-blocking resources, large assets, JavaScript execution, layout shifts, or third-party scripts.
+2. Match each problem to the measurement that shows it, such as LCP, INP, CLS, TTFB, or total transfer size.
+3. For each fix, explain the mechanism: why it makes the page faster.
+4. Rank fixes by expected gain divided by effort.
 
-**Goals:**
+## Output format
+Give a table with these columns: Rank, Problem, Evidence, Fix, Effort (low, medium, high), Metric affected.
 
-[Specify any target performance metrics or goals, e.g., "Improve LCP below 2.5s"] 
+Then, for the top three fixes, give the concrete change: a code or config snippet suited to my stack.
+
+Finish with a short verification plan: which tool to run (for example Lighthouse or the browser performance panel), on which page, and which numbers to compare before and after.
+
+## If information is missing
+- If I gave no measurements, say so, tell me which two or three to collect first and how, and then give only fixes that are safe on almost any site, labeled as untested.
+- Do not invent numbers or promise specific improvements. Describe the direction of the effect and let me measure it.
+- If the code I pasted is not enough to judge a fix, say what you would need to see.

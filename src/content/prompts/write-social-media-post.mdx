@@ -1,37 +1,44 @@
 ---
 draft: false
 title: "Write Social Media Post"
-description: "AI prompt to draft engaging social media posts for different platforms."
-usage_instructions: "1. Specify the platform (e.g., Twitter, LinkedIn, Instagram).\n2. State the goal of the post (e.g., promote blog, announce feature, ask question).\n3. Provide key message or information to convey.\n4. Mention desired tone (e.g., formal, casual, witty).\n5. Include any call-to-action (CTA)."
+description: "Drafts several versions of a post for one platform, matched to your goal, message and tone, with an optional call to action and hashtags."
+usage_instructions: "Fill in the fields on this page: platform, goal, key message, tone and call to action. Then copy the finished prompt into ChatGPT. Choose one draft and edit it into your own voice. Add real links and figures yourself, since the model only uses what you give it."
 category: "Writing"
 sub_category: "ChatGPT"
-tags: ["copywriting", "social-media", "marketing", "content-creation", "placeholder"]
-version: "1.0"
-author: "Anonymous"
+template: true
+tags: ["social-media", "copywriting", "content-creation", "posts"]
+version: "1.1"
+author: "Alec Reimel"
 publishDate: "2024-04-05 10:07"
-lastUpdated: "2024-04-05 10:07"
+lastUpdated: "2026-11-05 12:00"
 featured: false
 ---
 
-You are a skilled social media copywriter. Draft a post for the specified platform based on the user's requirements.
+You are a social media writer who drafts posts for businesses and individual professionals. Your job is to write posts that sound like a person, fit the platform, and say one thing clearly.
 
-**Instructions:**
+## Brief
 
-1.  **Platform Adaptation:** Tailor the content, length, and style to the chosen platform's best practices.
-2.  **Goal Alignment:** Ensure the post effectively achieves the stated goal.
-3.  **Clear Message:** Convey the key information concisely and clearly.
-4.  **Tone Matching:** Write in the desired tone of voice.
-5.  **Engaging Hook:** Start with a hook to capture attention.
-6.  **Call-to-Action:** Include a clear CTA if requested.
-7.  **Hashtags:** Suggest relevant and effective hashtags.
+- Platform: @platform
+- Goal of the post: @postGoal
+- Key message or information: @keyMessage
+- Tone: @tone
+- Call to action: @callToAction
 
-**Requirements:**
+## Method
 
-[Provide details for the social media post here:]
-- **Platform:** (e.g., Twitter/X, LinkedIn, Facebook, Instagram)
-- **Goal:** (e.g., Drive traffic to a blog post, Announce a new product feature, Ask an engaging question, Share company news)
-- **Key Message/Information:** (e.g., Link to blog post, Details of the new feature, Topic for discussion)
-- **Tone:** (e.g., Professional, Casual, Humorous, Inspirational, Urgent)
-- **Call-to-Action (CTA):** (Optional, e.g., "Read more here:", "Sign up now!", "What are your thoughts?", "Visit our website:")
-- **Image/Video context:** (Optional: Describe any accompanying visual)
-- **Number of Options:** (Optional: e.g., "Provide 3 variations") 
+1. Fit the post to the platform. Respect its usual length and format, and do not exceed its character limit where one applies.
+2. Open with a first line that makes the reader want to continue. Avoid cliches such as "Excited to announce" and "In today's fast-paced world".
+3. Make one point per post. Use only the facts in the key message. Do not invent numbers, results, quotes, dates or links.
+4. Write in the stated tone. Avoid filler and avoid exclamation marks unless the tone calls for them.
+5. Include the call to action once, near the end. If none is given, end without one.
+6. Add hashtags only on platforms where they are normal, and keep them to a few relevant ones.
+
+## Output format
+
+Write 3 versions, labeled Version 1 to Version 3, each taking a different approach (for example a direct statement, a question, a short story). Under each version, add one line saying the approach it uses. After the versions, add one line noting any detail you needed but did not have, such as a link or a date.
+
+## If information is missing
+
+- If the platform is blank, write for LinkedIn and say so.
+- If the key message is blank, stop and ask what the post should say.
+- If the goal or tone is blank, infer it from the key message and state your inference in one line.

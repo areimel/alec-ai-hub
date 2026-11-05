@@ -7,10 +7,10 @@ category: "Coding"
 sub_category: "Cursor"
 template: true
 tags: ["code-review", "template", "development", "best-practices"]
-version: "1.0"
-author: "Company AI Team"
+version: "1.1"
+author: "Alec Reimel"
 publishDate: "2023-06-15"
-lastUpdated: "2023-06-15"
+lastUpdated: "2026-11-05 12:00"
 featured: false
 ---
 # Code Review Request
@@ -27,17 +27,15 @@ Please review the following code with special attention to:
 2. @focusArea2
 3. Best practices for @language
 
-## Code to Review:
+## Code to Review
 ```
 @codeBlock
 ```
 
 ## Review Instructions
-Please provide:
+Please:
 - Identify any bugs, errors, or potential issues
 - Suggest improvements for readability and maintainability
 - Highlight any security concerns
 - Recommend optimizations if applicable
 - @additionalInstruction
-
-Thank you for your thorough review! 

@@ -1,16 +1,16 @@
 ---
 draft: false
 title: "Marketing Email Template Generator"
-description: "Customize this template to generate marketing emails for your products or services"
+description: "A fill-in template that generates a marketing email from your product details, target audience, and preferred tone and length."
 usage_instructions: "Replace the variables with your specific product details, target audience, and desired tone to create a personalized marketing email."
 category: "Marketing"
 sub_category: "ChatGPT"
 template: true
 tags: ["email", "marketing", "template", "copywriting"]
-version: "1.0"
-author: "Company AI Team"
+version: "1.1"
+author: "Alec Reimel"
 publishDate: "2023-06-16"
-lastUpdated: "2023-06-16"
+lastUpdated: "2026-11-05 12:00"
 featured: false
 ---
 # Marketing Email Generator
@@ -30,12 +30,9 @@ featured: false
 ## Email Style
 - Desired Tone: @tone
 - Email Length: @emailLength
-- Include Testimonials: @includeTestimonials
 - Promotional Offer: @promotionalOffer
 
 ## Instructions
-Please write a compelling marketing email for @productName that highlights how it addresses @painPoints. The email should emphasize @mainBenefit and include a strong @callToAction. 
+Please write a compelling marketing email for @productName that highlights how it addresses @painPoints. The email should emphasize @mainBenefit and include a strong @callToAction.
 
-The email should be written in a @tone tone and be approximately @emailLength in length. @conditionalTestimonials
-
-Thank you for creating this email that will resonate with our @targetDemographic audience! 
+The email should be written in a @tone tone and be approximately @emailLength in length. If testimonials are provided, work them in: @testimonials

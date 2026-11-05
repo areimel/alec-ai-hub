@@ -2,15 +2,15 @@
 import ActionButton from "@components/ui/ActionButton.astro";
 import FormField from "./FormField.astro";
 
-const categories = ["Coding", "Writing", "Creative", "Analysis", "Marketing", "Other"];
-const platforms = ["ChatGPT", "Claude", "Cursor", "MidJourney", "Other"];
+const categories = ["Coding", "Writing", "Analysis", "Creative", "Business", "Marketing", "Other"];
+const platforms = ["Cursor", "ChatGPT", "Claude", "Gemini", "MidJourney", "Other"];
 ---
 
 <!-- Submissions go to Alec's inbox through web3forms. Without JS the form posts to `action` directly. -->
 <form action="https://api.web3forms.com/submit" method="POST" id="promptSubmissionForm" class="hub-form">
   <input type="hidden" name="access_key" value="75f8b211-81aa-45c2-9c7b-c11f447d30a0" />
   <input type="hidden" name="subject" value="New AI Prompt Submission" />
-  <input type="hidden" name="from_name" value="Company AI Prompts - Submission Form" />
+  <input type="hidden" name="from_name" value="AI Hub Submission Form" />
   <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" />
 
   <FormField id="prompt-submitter-name" name="submitter_name" label="Your name" autocomplete="name" required error="Enter your name." />
