@@ -1,7 +1,7 @@
 ---
 draft: false
 title: "Decision Memo Template"
-description: "Turn a pending decision and its options into a one-page memo with a clear recommendation, trade-offs and next steps."
+description: "Turn a pending decision and its options into a one-page memo for your board or leadership team, with a clear recommendation, trade-offs and next steps."
 usage_instructions: "Fill in the fields below, then copy the full prompt into Claude. List every option you are actually considering."
 category: "Business"
 sub_category: "Claude"

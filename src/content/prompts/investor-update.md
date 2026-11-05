@@ -1,7 +1,7 @@
 ---
 draft: false
 title: "Investor Update Template"
-description: "Write a clear, honest investor update covering progress, metrics, challenges and the specific help you need from investors."
+description: "Write a clear, honest update for investors and board members covering progress, metrics, challenges and the specific help you need from them."
 usage_instructions: "Fill in the fields below, then copy the full prompt into Claude. Use real figures only and leave a field blank if you do not have the number."
 category: "Business"
 sub_category: "Claude"
