@@ -16,13 +16,14 @@ export const SYNC = {
   drop: 104,
   plateLand: 104,
   statLands: [117, 130, 143],      // stat strip lands/counts finish on beats
-  search: { text: "marketing", n0: 64 },     // bar 5 downbeat, one letter per 16th; ends f237
-  lock: 247,                       // target lock on Marketing Email Template Generator
+  search: { text: "board", n0: 64 },     // bar 5 downbeat, one letter per 16th; ends f237
+  lock: 247,                       // target lock on Board Update Template
   fields: [                        // sample inputs; 16th index n0
-    { field: "productName", text: "Halcyon", n0: 81 },
-    { field: "painPoints", text: "slow reports", n0: 88 },
-    { field: "callToAction", text: "Demo", n0: 100 },
+    { field: "companyName", text: "Halcyon", n0: 81 },
+    { field: "biggestRisk", text: "supply delay", n0: 88 },
+    { field: "decisionNeeded", text: "Hire", n0: 100 },
   ],
+  agents: ["Meeting Prep Researcher", "Competitor Scout", "Code Reviewer", "Bug Investigator", "Security Auditor"],
   copyPress: 338,                  // Copy prompt flips to Copied, n=104
   cards: [364, 377, 390, 403, 416],// one agent card per beat
   declassified: 468,               // bar 10: stamp + impact, kick out

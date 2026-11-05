@@ -1,11 +1,11 @@
-// s4 Fill and copy (f260-364): two synced iframes of the real /prompts/marketing-email-template/ page.
+// s4 Fill and copy (f260-364): two synced iframes of the real /prompts/board-update/ page.
 // Left = real form fields, right = real #promptContent. Typing goes through setInput so the real script fires.
 import { SYNC, SCENES, typedCount, s16Frame } from "/__comp/timeline.js";
 import { loadPage, setInput, setCopied, createCaption } from "/engine/lib.js";
 import { createHudFrame, slam } from "/engine/fx.js";
 
 const SC = SCENES.find((s) => s.id === "s4");
-const URL_ = "/prompts/marketing-email-template/";
+const URL_ = "/prompts/board-update/";
 const SCALE = 1.5, CW = 560, CH = 446, STRIP = 56;   // pane = 840 x 660 px
 const PX = 96, PX2 = 984, PY = 110;                  // pane origins
 let S;
@@ -21,7 +21,7 @@ body::after{content:"";position:fixed;left:0;right:0;top:0;height:${STRIP}px;bac
 const LEFT = `
 body::before{content:"INPUT / TEMPLATE FIELDS";display:block;position:fixed;left:16px;top:0;height:${STRIP}px;z-index:100;
   font:500 16px ui-monospace,"Liberation Mono",monospace;line-height:${STRIP}px;letter-spacing:.16em;color:#ff4d00}
-.form-group:has(#var-productName){order:-3}.form-group:has(#var-painPoints){order:-2}.form-group:has(#var-callToAction){order:-1}
+.form-group:has(#var-companyName){order:-3}.form-group:has(#var-biggestRisk){order:-2}.form-group:has(#var-decisionNeeded){order:-1}
 #templateForm{gap:14px 16px!important}
 .dossier__input{height:54px!important;font-size:21px!important;padding:0 14px!important;border-radius:0!important;background:#1c1b17!important;color:#efebe0!important;border:2px solid #3f3b31!important}
 .dossier__label{font-size:15px!important;color:#aaa596!important}
@@ -55,8 +55,8 @@ const inject = (doc, css) => { const s = doc.createElement("style"); s.textConte
 
 export async function mount(root) {
   const pl = pane(root, PX), pr = pane(root, PX2);
-  const L = await loadPage(pl, URL_, { width: CW, height: CH, scale: SCALE, until: "#var-productName" });
-  const R = await loadPage(pr, URL_, { width: CW, height: CH, scale: SCALE, until: "#var-productName" });
+  const L = await loadPage(pl, URL_, { width: CW, height: CH, scale: SCALE, until: "#var-companyName" });
+  const R = await loadPage(pr, URL_, { width: CW, height: CH, scale: SCALE, until: "#var-companyName" });
   inject(L.doc, BASE + LEFT); inject(R.doc, BASE + RIGHT);
   await L.doc.fonts.ready; await R.doc.fonts.ready;
   frameBorder(root, PX); frameBorder(root, PX2);
@@ -66,7 +66,7 @@ export async function mount(root) {
   if (!R.win.CSS || !R.win.CSS.highlights) throw new Error("s4: CSS highlight API unavailable");
   const original = pre.textContent;
 
-  const hud = createHudFrame(root, { tl: "AI HUB / PROMPT RESEARCH BUREAU", tr: "MARKETING / CHATGPT", bl: "", br: "" });
+  const hud = createHudFrame(root, { tl: "AI HUB / PROMPT RESEARCH BUREAU", tr: "BUSINESS / CLAUDE", bl: "", br: "" });
   const cap = createCaption(root, "MISSION 01", "Fill it in. The prompt updates as you type.");
   Object.assign(cap.style, { paddingTop: "40px", paddingBottom: "52px" });
   Object.assign(cap.querySelector(".cap__line").style, { fontSize: "84px", whiteSpace: "nowrap", letterSpacing: "-0.035em" });
@@ -84,16 +84,13 @@ function measure() {
   const { L, R, pre, original } = S;
   const tn = pre.firstChild;
   const rangeOf = (a, b) => { const r = R.doc.createRange(); r.setStart(tn, a); r.setEnd(tn, b); return r.getBoundingClientRect(); };
-  const iI = original.indexOf("## Instructions"), iEnd = original.indexOf("\n\nThe email should be written");
-  const iCond = original.indexOf("@conditionalTestimonials");
-  if (iI < 0 || iEnd < 0 || iCond < 0) throw new Error("s4: prompt structure changed");
-  const para = rangeOf(iI, iEnd), cond = rangeOf(iCond, iCond + 10);
+  const iI = original.indexOf("## Instructions"), iEnd = original.length;
+  if (iI < 0) throw new Error("s4: prompt structure changed");
+  const para = rangeOf(iI, iEnd);
   // Snap so a full text line sits just under the header strip (no half-cut line).
   const lh = parseFloat(R.win.getComputedStyle(pre).lineHeight), g0 = rangeOf(0, 1).top;
   const want = para.bottom + 14 - CH;
   const scroll = Math.round(g0 + Math.ceil((want + STRIP + 6 - g0) / lh) * lh - STRIP - 6);
-  // Filling the fields shortens the paragraph, so leave one line of slack under the viewport.
-  if (cond.top - lh < scroll + CH) throw new Error("s4: @conditionalTestimonials would be in frame");
   S.scroll = scroll;
   const g = L.doc.querySelector("#templateForm .form-group");
   S.lscroll = Math.round(g.getBoundingClientRect().top - STRIP - 8);
@@ -136,14 +133,9 @@ export function seek(f) {
   // Right: decryption highlights, built from the real text node.
   const { out, text } = spans(original, values);
   if (pre.textContent !== text) throw new Error("s4: prompt text does not match the real render");
-  // The real script writes one big text node. Split the unfilled-token tail (which sits below the crop) into its own
-  // node so no node that touches the frame contains @conditionalTestimonials. The text on screen is unchanged.
   pre.normalize();
-  const cut = text.indexOf("@conditionalTestimonials");
   const tn = pre.firstChild, H = R.win.Highlight, reg = R.win.CSS.highlights;
-  if (cut > 0) tn.splitText(cut);
-  const limit = cut > 0 ? cut : Infinity;
-  const mk = (flt) => { const h = new H(); for (const s of out.filter((x) => x.b <= limit && flt(x))) { const r = R.doc.createRange(); r.setStart(tn, s.a); r.setEnd(tn, s.b); h.add(r); } return h; };
+  const mk = (flt) => { const h = new H(); for (const s of out.filter(flt)) { const r = R.doc.createRange(); r.setStart(tn, s.a); r.setEnd(tn, s.b); h.add(r); } return h; };
   const freshNames = SYNC.fields.filter((x) => x.fresh).map((x) => x.field);
   reg.set("blank", mk((s) => !s.resolved));
   reg.set("resolved", mk((s) => s.resolved && !freshNames.includes(s.name)));

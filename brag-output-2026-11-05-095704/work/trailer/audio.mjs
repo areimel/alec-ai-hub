@@ -26,7 +26,7 @@ e.riser(f(SYNC.fewCommand) + 5200, f(SYNC.drop), 1.3, 300, 6000);
 e.impact(f(SYNC.drop), 0.75);
 e.acid(3, 5, { variant: 'hard' });
 e.groove(3, 5, { openHat: 1, hat16: 0.34, kickVel: 1.05 });
-SYNC.numerals.forEach((fr, i) => { e.stampHit(f(fr), 1.1 + 0.1 * i); e.stabHit(f(fr), ['Am', 'Bb', 'AmHi'][i], 0.9); });
+SYNC.labels.forEach((fr, i) => { e.stampHit(f(fr), 1.1 + 0.1 * i); e.stabHit(f(fr), ['Am', 'Bb', 'AmHi'][i], 0.9); });
 // bars 5-7 full groove, ticks on the typing, squelch in bar 6, hit + flash on COPY
 e.acid(5, 8, { variant: 'hard' });
 e.groove(5, 8, { openHat: 1, hat16: 0.36, kickFill: true });

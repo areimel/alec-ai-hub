@@ -17,15 +17,16 @@ export const SYNC = {
   impactOpen: 0,
   fewCommand: 52,
   drop: 104,
-  numerals: [130, 143, 156],       // 18 / 5 / 4 land
-  search: { text: "marketing", n0: 64 },
+  labels: [130, 143, 156],         // PROMPTS / CUSTOM AGENTS / SKILLS & PLUGINS land
+  search: { text: "board", n0: 64 },
   lock: 247,
   fields: [
-    { field: "productName", text: "Halcyon", n0: 81 },
-    { field: "painPoints", text: "slow ops", n0: 88 },
+    { field: "companyName", text: "Halcyon", n0: 81 },
+    { field: "biggestRisk", text: "Q3 churn", n0: 88 },
   ],
   copyPress: 325,                  // bar 7 beat 2: flips to Copied, white flash
   names: [364, 377, 390, 403, 416],// one agent per beat, stacking
+  agents: ["Meeting Prep Researcher", "Competitor Scout", "Code Reviewer", "Bug Investigator", "Security Auditor"],
   free: 468,                       // everything cuts; bar 10
   noAccount: 481,                  // bar 10 beat 2
   finalDrop: 520,

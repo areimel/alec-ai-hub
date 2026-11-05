@@ -3,15 +3,23 @@ import { loadPage, setInput } from "/engine/lib.js";
 import { typedCount } from "/__comp/timeline.js";
 import { createTargetLock } from "/engine/fx.js";
 const sc = scene("t5");
-const SCALE = 1.35, TOP = 236, VH = Math.round((H - TOP) / SCALE);
+const SCALE = 1.72, TOP = 236, VH = Math.round((H - TOP) / SCALE);
 let page, title, lock, rootEl, holderEl;
 
 const CSS = `
-#sidebarContent > div:not(:first-child){display:none!important}
-#resetFilters{display:none!important}
-.prompt-card__preview{display:none!important}
-.prompt-card[data-title^="WeBasic"]{display:none!important}
-body{margin-top:-392px!important}
+header, .page-header, .skip-link, footer, #mobileMenuToggle{display:none!important}
+.directory-filters__group + .directory-filters__group, #resetFilters, #emptyState, #resultCount{display:none!important}
+main{padding:0!important;margin:0!important}
+body{background:#141310!important}
+.directory{display:block!important;padding-top:10px!important}
+.directory__rail{width:auto!important;max-width:none!important;margin:0 0 20px!important}
+.directory-filters__body{display:block!important}
+.directory-filters__group > label{display:none!important}
+#searchInput{height:60px!important;font-size:32px!important;padding:0 20px!important;border:3px solid #ff4d00!important;border-radius:0!important;background:#1c1b17!important;color:#efebe0!important}
+#promptsGrid{display:grid!important;grid-template-columns:repeat(3,1fr)!important;border-top:1px solid #3f3b31;border-left:1px solid #3f3b31}
+.prompt-card__preview,.prompt-card__facts{display:none!important}
+.prompt-card__title{font-size:26px!important}
+.prompt-card__desc{font-size:15px!important}
 `;
 
 export async function mount(root) {
@@ -29,7 +37,7 @@ function ensureLock() {
   if (lock) return;
   const root = rootEl;
   setInput(page.doc, "#searchInput", SYNC.search.text);
-  const card = page.doc.querySelector('.prompt-card[data-title="Marketing Email Template Generator"]');
+  const card = page.doc.querySelector('.prompt-card[data-title="Board Update Template"]');
   const r = card.getBoundingClientRect();
   const to = { x: Math.round(r.left * SCALE), y: Math.round(r.top * SCALE + TOP), w: Math.round(r.width * SCALE), h: Math.round(r.height * SCALE) };
   setInput(page.doc, "#searchInput", "");

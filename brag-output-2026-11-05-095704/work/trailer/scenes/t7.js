@@ -18,7 +18,7 @@ export async function mount(root) {
   title.el.style.top = "34px";
   const fw = VW * SCALE, fh = VH * SCALE;
   const holder = div(root, { left: Math.round((W - fw) / 2) + "px", top: "560px", width: fw + "px", height: fh + "px", overflow: "hidden" });
-  page = await loadPage(holder, "/prompts/marketing-email-template/", { width: VW, height: VH, scale: SCALE, until: "#copyPrompt" });
+  page = await loadPage(holder, "/prompts/board-update/", { width: VW, height: VH, scale: SCALE, until: "#copyPrompt" });
   const st = page.doc.createElement("style"); st.textContent = CSS; page.doc.head.appendChild(st);
   btn = page.doc.querySelector("#copyPrompt");
   cursor = createCursor(root);

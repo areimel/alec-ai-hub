@@ -10,26 +10,35 @@ html,body{background:#141310!important;overflow:hidden!important}
 .home-hero,.home-hero>div,.home-hero__grid{padding:0!important;margin:0!important;display:block!important;max-width:none!important;min-height:0!important;border:0!important}
 .home-hero__plate{position:fixed!important;left:${S.plateCx - 400.5}px;top:${S.plateCy - 440.5}px;width:801px;height:881px;margin:0!important;transform-origin:50% 50%}
 .home-hero__copy{position:fixed!important;left:100px;top:150px;width:700px;margin:0!important;padding:0!important;transform-origin:0 0;transform:scale(1.2)}
-.stat-strip{position:fixed!important;left:100px;top:490px;width:800px;margin:0!important;border-top:2px solid #3f3b31;border-bottom:2px solid #3f3b31}
-.stat-strip dd{font-size:96px!important;line-height:1!important}
 `;
-let ctx, hud, sweep, plate, copy, strip, dds = [], finals = [], cap, bar;
+let ctx, hud, sweep, plate, copy, strip, cells = [], cap;
 
 export async function mount(root) {
   root.style.background = "#141310";
-  ctx = await loadPage(root, "/", { until: ".stat-strip" });
+  ctx = await loadPage(root, "/", { until: ".home-hero__plate" });
   const d = ctx.doc;
   const st = d.createElement("style"); st.textContent = CSS; d.head.appendChild(st);
   plate = d.querySelector(".home-hero__plate");
   copy = d.querySelector(".home-hero__copy");
-  strip = d.querySelector(".stat-strip");
-  dds = [...strip.querySelectorAll("dd")];
-  finals = dds.map((e) => e.textContent.trim());
   const svg = plate.querySelector("svg");
   sweep = createRadarSweep(svg, { wedge: 'path[d^="M245 277L144"]', needle: 'path[d^="M245 277L379"]', start: SYNC.plateLand, period: 104 });
 
   hud = createHudFrame(root, { labelTL: "AI HUB / PROMPT RESEARCH BUREAU", labelTR: "FIG. 01 / RADAR TELEMETRY", labelBL: "ACCESS / UNRESTRICTED", labelBR: "SCAN 360 / ACTIVE" });
   hud.el.style.zIndex = 5;
+  // composition-layer strip (no numbers): three labelled cells, each slams in on a stat beat
+  strip = document.createElement("div");
+  Object.assign(strip.style, { position: "absolute", left: "100px", top: "490px", width: "800px", height: "150px", display: "flex", borderTop: "2px solid #3f3b31", borderBottom: "2px solid #3f3b31", zIndex: 4 });
+  cells = ["PROMPTS", "CUSTOM AGENTS", "SKILLS & PLUGINS"].map((t, i) => {
+    const c = document.createElement("div");
+    Object.assign(c.style, { flex: "1 1 0", minWidth: 0, boxSizing: "border-box", padding: "0 18px", display: "flex", flexDirection: "column", justifyContent: "center", gap: "14px", borderLeft: i ? "2px solid #3f3b31" : "0" });
+    const bar = document.createElement("div");
+    Object.assign(bar.style, { height: "8px", width: "56px", background: "#ff4d00" });
+    const lab = document.createElement("div");
+    lab.textContent = t;
+    Object.assign(lab.style, { font: "700 30px/1.1 ui-monospace,'Liberation Mono',monospace", letterSpacing: ".06em", color: "#efebe0", whiteSpace: "normal", overflowWrap: "normal" });
+    c.append(bar, lab); strip.appendChild(c); return c;
+  });
+  root.appendChild(strip);
   cap = document.createElement("div");
   cap.textContent = "AI prompts, custom agents and skills.";
   Object.assign(cap.style, { position: "absolute", left: "100px", top: "760px", width: "820px", fontFamily: '"DM Sans",sans-serif', fontWeight: 700, fontSize: "68px", lineHeight: "1.04", letterSpacing: "-0.035em", color: "#efebe0", borderTop: "6px solid #ff4d00", paddingTop: "26px" });
@@ -47,13 +56,9 @@ export function seek(f) {
   const hk = clamp((f - (SYNC.plateLand + 5)) / 8);
   copy.style.clipPath = `inset(-10px ${(100 - Math.round(hk * 6) / 6 * 100).toFixed(1)}% -10px 0)`;
   copy.style.opacity = f < SYNC.plateLand + 5 ? 0 : 1;
-  // stat strip counts to its real values
+  // stat strip: each cell lands on its beat
   strip.style.opacity = t < 0 ? 0 : 1;
-  dds.forEach((dd, i) => {
-    const n = Number(finals[i]), land = SYNC.statLands[i];
-    const p = clamp((f - SYNC.plateLand) / (land - SYNC.plateLand));
-    dd.textContent = f >= land ? finals[i] : String(Math.round(n * easeOut(p)));
-  });
+  cells.forEach((c, i) => { c.style.visibility = f >= SYNC.statLands[i] ? "visible" : "hidden"; });
   // caption from f110
   const ck = clamp((f - 110) / 6);
   cap.style.clipPath = `inset(-20px ${(100 - Math.round(ck * 6) / 6 * 100).toFixed(1)}% -20px 0)`;

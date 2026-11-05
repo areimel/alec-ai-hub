@@ -12,18 +12,15 @@ body *{visibility:hidden!important}
 html,body{background:#1c1b17!important;margin:0!important}
 #promptContent{position:fixed!important;left:0!important;top:28px!important;width:${VW}px!important;height:${VH - 28}px!important;margin:0!important;padding:0 30px!important;box-sizing:border-box!important;overflow:hidden!important;max-height:none!important;border:0!important;background:#1c1b17!important;z-index:99999!important;font-size:13px!important;line-height:19px!important;white-space:pre-wrap!important}
 #promptContent .hl{background:#ff4d00;color:#141310}
-#promptContent .gone{visibility:hidden!important}
 `;
 // First-occurrence value lines to highlight and keep in view, per field.
-const LINES = { productName: "- Product/Service Name: ", painPoints: "- Customer Pain Points: " };
+const LINES = { companyName: "- Company: ", biggestRisk: "- Biggest Risk: " };
 
 // Normalise the pre (pure) and mark: the unfillable token is hidden, filled/pending values highlighted.
 function decorate(values) {
   const text = pre.textContent;
   pre.textContent = text;
   const marks = [];
-  const tok = text.indexOf("@conditionalTestimonials");
-  if (tok >= 0) marks.push({ a: tok, b: tok + "@conditionalTestimonials".length, cls: "gone" });
   for (const [name, prefix] of Object.entries(LINES)) {
     const a = text.indexOf(prefix);
     if (a < 0) continue;
@@ -45,7 +42,7 @@ export async function mount(root) {
   await fonts();
   root.style.background = C.charcoal;
   const holder = div(root, { left: 0, top: 0, width: W + "px", height: BAND + "px", overflow: "hidden", background: C.panel });
-  page = await loadPage(holder, "/prompts/marketing-email-template/", { width: VW, height: VH, scale: SCALE, until: "#var-productName" });
+  page = await loadPage(holder, "/prompts/board-update/", { width: VW, height: VH, scale: SCALE, until: "#var-companyName" });
   const st = page.doc.createElement("style"); st.textContent = CSS; page.doc.head.appendChild(st);
   pre = page.doc.querySelector("#promptContent");
   div(root, { left: 0, top: BAND + "px", width: W + "px", height: "6px", background: C.orange });

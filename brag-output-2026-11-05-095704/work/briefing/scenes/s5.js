@@ -34,20 +34,28 @@ export async function mount(root) {
   const { doc } = pg;
   const st = doc.createElement("style"); st.textContent = CSS; doc.head.appendChild(st);
   await doc.fonts.ready;
-  const cards = [...doc.querySelectorAll(".prompt-card")];
-  if (cards.length !== 5) throw new Error("s5: expected 5 agent cards, found " + cards.length);
-  if (SYNC.cards.length !== cards.length) throw new Error("s5: SYNC.cards does not match card count");
+  // Pick the cards named in SYNC.agents, in that order; CSS uses nth-child so the rest leave the DOM and the picks are re-appended.
+  const all = [...doc.querySelectorAll(".prompt-card")];
+  if (SYNC.agents.length !== SYNC.cards.length) throw new Error("s5: SYNC.agents and SYNC.cards differ in length");
+  const cards = SYNC.agents.map((name) => {
+    const c = all.find((x) => (x.dataset.title || x.querySelector(".prompt-card__title")?.textContent || "").trim() === name);
+    if (!c) throw new Error("s5: agent card not found: " + name);
+    return c;
+  });
+  const grid = cards[0].parentElement;
+  all.forEach((c) => c.remove());
+  cards.forEach((c) => grid.appendChild(c));
   // Facts for the assertions, straight from the DOM.
   const access = cards.map((c) => c.querySelector(".prompt-card__facts dd")?.textContent.trim());
   if (access.some((a) => !a)) throw new Error("s5: a card has no Access value");
-  const hud = createHudFrame(root, { tl: "AI HUB / CUSTOM AGENTS", tr: "OPERATIVES 00 / 05", bl: "", br: "" });
-  const cap = createCaption(root, "", "Then deploy the specialists. Five custom agents for Claude Code.");
+  const hud = createHudFrame(root, { tl: "AI HUB / CUSTOM AGENTS", tr: "OPERATIVES / ACTIVE", bl: "", br: "" });
+  const cap = createCaption(root, "", "Then deploy the specialists. Custom agents for Claude Code.");
   Object.assign(cap.style, { paddingTop: "50px", paddingBottom: "48px" });
   cap.querySelector(".cap__line").style.fontSize = "76px";
   // Same verbatim sentence pair, broken at the sentence boundary.
   const line = cap.querySelector(".cap__line");
   line.textContent = "";
-  for (const t of ["Then deploy the specialists.", "Five custom agents for Claude Code."]) { const d = document.createElement("div"); d.textContent = t; line.appendChild(d); }
+  for (const t of ["Then deploy the specialists.", "Custom agents for Claude Code."]) { const d = document.createElement("div"); d.textContent = t; line.appendChild(d); }
   S = { cards, hud, cap, n: cards.length, slots: null };
 }
 
@@ -67,12 +75,10 @@ function makeSlots(root) {
 export function seek(f) {
   if (!S.slots) makeSlots(S.cap.parentElement);
   const { cards, hud, cap, n, slots } = S;
-  let landed = 0;
   cards.forEach((c, i) => {
     const t = SYNC.cards[i], k = f - t;
     slots[i].style.display = k < 0 ? "block" : "none";
     if (k < 0) { c.style.visibility = "hidden"; return; }
-    landed++;
     c.style.visibility = "visible";
     const s = k < 4 ? 1.3 - 0.3 * rampF(f, t, t + 4) : 1;
     c.style.transform = `scale(${s})`;
@@ -82,7 +88,6 @@ export function seek(f) {
     c.style.setProperty("border-color", hot ? "#ff4d00" : "#3f3b31", "important");
     c.style.opacity = k < 2 ? "0.6" : "1";
   });
-  hud.setLabels({ tr: `OPERATIVES ${String(landed).padStart(2, "0")} / ${String(n).padStart(2, "0")}` });
   hud.seek(f);
   slam(cap.querySelector(".cap__line"), f, SC.start, { from: 1.05, frames: 4 });
 }

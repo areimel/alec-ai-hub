@@ -8,10 +8,11 @@ export async function mount(root) {
   root.style.background = C.charcoal;
   // Real agent titles and Access labels from the built /custom-agents page.
   const doc = await fetchDoc("/custom-agents/");
-  const agents = [...doc.querySelectorAll(".prompt-card")].map((c) => ({
-    title: c.querySelector(".prompt-card__title").textContent.trim().toUpperCase(),
+  const all = [...doc.querySelectorAll(".prompt-card")].map((c) => ({
+    name: c.dataset.title, title: c.querySelector(".prompt-card__title").textContent.trim().toUpperCase(),
     access: [...c.querySelectorAll(".prompt-card__facts > div")].find((d) => d.querySelector("dt").textContent.trim() === "Access").querySelector("dd").textContent.trim().toUpperCase(),
   }));
+  const agents = SYNC.agents.map((n) => { const a = all.find((x) => x.name === n); if (!a) throw new Error("agent missing: " + n); return a; });
   const kick = div(root, { left: "96px", top: "90px", font: `500 44px/1 ${MONO}`, letterSpacing: "0.12em", color: C.orange, whiteSpace: "nowrap" }, "CUSTOM AGENTS FOR CLAUDE CODE");
   const NAMEW = 1920 - 96 - 96 - 470;
   const size = Math.min(130, (NAMEW / Math.max(...agents.map((a) => widthAt100(a.title, -0.045)))) * 100);

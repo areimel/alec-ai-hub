@@ -2,14 +2,18 @@
 // Form placeholder attributes are not text nodes, so they never match.
 const NEEDLES = ['placeholder', 'Anonymous', 'Company AI Team', '2023-06-16', 'WeBasic', '@conditionalTestimonials', 'Kojima', 'localhost'];
 
+// Totals must never appear: the site is early, so the videos don't sell on counts.
+const COUNT_PATTERNS = [/PROMPTS\u2014\d/i, /AGENTS\u2014\d/i, /SKILLS\u2014\d/i, /\b\d+\s+PUBLISHED/i, /Showing\s+\d+\s+of\s+\d+/i, /\b\d+\s+(prompts?|agents?|entries|skills?)\b/i, /\b\d+\s*\/\s*\d+\b(?!\s*%)/];
+
 // Runs inside a frame. offset = frame origin in main-viewport coordinates; main = main viewport size.
-function scanFrame({ needles, offset, main }) {
+function scanFrame({ needles, patterns, offset, main }) {
+  const regexes = patterns.map((p) => new RegExp(p.source, p.flags));
   const hits = [];
   const hidden = (el) => { for (let e = el; e; e = e.parentElement) { const s = getComputedStyle(e); if (s.display === 'none' || s.visibility === 'hidden') return true; } return false; };
   const walker = document.createTreeWalker(document.body || document.documentElement, NodeFilter.SHOW_TEXT);
   for (let node = walker.nextNode(); node; node = walker.nextNode()) {
     const el = node.parentElement;
-    const needle = needles.find((n) => node.nodeValue.toLowerCase().includes(n.toLowerCase()));
+    const needle = needles.find((n) => node.nodeValue.toLowerCase().includes(n.toLowerCase())) ?? regexes.find((r) => r.test(node.nodeValue))?.source;
     if (!needle || !el || el.closest('script,style,noscript,template') || hidden(el)) continue;
     const range = document.createRange();
     range.selectNodeContents(node);
@@ -42,7 +46,7 @@ export async function checkExcluded(page) {
       f = f.parentFrame();
     }
     if (!visible) continue;
-    const hits = await frame.evaluate(scanFrame, { needles: NEEDLES, offset, main }).catch(() => []);
+    const hits = await frame.evaluate(scanFrame, { needles: NEEDLES, patterns: COUNT_PATTERNS.map((r) => ({ source: r.source, flags: r.flags })), offset, main }).catch(() => []);
     for (const h of hits) out.push({ url: frame.url(), ...h });
   }
   return out;
