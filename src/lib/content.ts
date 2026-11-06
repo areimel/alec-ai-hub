@@ -12,13 +12,3 @@ export async function getPublished<C extends PublishedCollection>(collection: C)
     (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
   );
 }
-
-/** Published entry counts per collection. */
-export async function getCounts() {
-  const [prompts, agents, skills] = await Promise.all([
-    getPublished("prompts"),
-    getPublished("agents"),
-    getPublished("skills"),
-  ]);
-  return { prompts: prompts.length, agents: agents.length, skills: skills.length };
-}

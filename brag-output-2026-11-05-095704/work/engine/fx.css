@@ -1,0 +1,60 @@
+/* FX layer styles. Static only: no animation, transition, shadow, radius or gradient except the vignette. */
+:root {
+  --fx-charcoal: #141310; --fx-ivory: #efebe0; --fx-orange: #ff4d00; --fx-rule: #3f3b31; --fx-muted: #aaa596;
+  --fx-mono: ui-monospace, "Liberation Mono", monospace;
+  --fx-display: "DM Sans", "Liberation Sans", sans-serif;
+}
+.fx-abs { position: absolute; left: 0; top: 0; }
+.fx-fill { position: absolute; inset: 0; pointer-events: none; }
+
+/* overlay */
+.fx-overlay { position: absolute; inset: 0; z-index: 9000; pointer-events: none; overflow: hidden; }
+.fx-overlay > div { position: absolute; inset: 0; }
+.fx-vig { background: radial-gradient(ellipse 75% 75% at 50% 50%, rgba(20,19,16,0) 70%, rgba(20,19,16,.26) 100%); }
+.fx-scan { background-image: repeating-linear-gradient(to bottom, rgba(0,0,0,.5) 0, rgba(0,0,0,.5) 1px, rgba(0,0,0,0) 1px, rgba(0,0,0,0) 3px); opacity: .09; }
+.fx-grain { background-repeat: repeat; opacity: .085; }
+.fx-glitch > i { position: absolute; display: block; }
+.fx-glitch .fx-diff { mix-blend-mode: difference; background: var(--fx-ivory); }
+
+/* hud */
+.fx-hud { position: absolute; inset: 0; pointer-events: none; font: 500 18px/1 var(--fx-mono); letter-spacing: .24em; text-transform: uppercase; color: var(--fx-muted); white-space: nowrap; }
+.fx-hud .br { position: absolute; width: 44px; height: 44px; }
+.fx-hud .br.tl { left: 48px; top: 48px; border-left: 2px solid var(--fx-ivory); border-top: 2px solid var(--fx-ivory); }
+.fx-hud .br.tr { right: 48px; top: 48px; border-right: 2px solid var(--fx-ivory); border-top: 2px solid var(--fx-ivory); }
+.fx-hud .br.bl { left: 48px; bottom: 48px; border-left: 2px solid var(--fx-ivory); border-bottom: 2px solid var(--fx-ivory); }
+.fx-hud .br.brr { right: 48px; bottom: 48px; border-right: 2px solid var(--fx-ivory); border-bottom: 2px solid var(--fx-ivory); }
+.fx-hud .cx { position: absolute; width: 29px; height: 29px; margin: -14px 0 0 -14px; }
+.fx-hud .cx::before, .fx-hud .cx::after { content: ""; position: absolute; background: var(--fx-muted); }
+.fx-hud .cx::before { left: 14px; top: 0; width: 1px; height: 29px; }
+.fx-hud .cx::after { left: 0; top: 14px; width: 29px; height: 1px; }
+.fx-hud .cx i { position: absolute; left: 9px; top: 9px; width: 9px; height: 9px; border: 1px solid var(--fx-muted); background: var(--fx-charcoal); }
+.fx-hud .lb { position: absolute; }
+.fx-hud .lb.tl { left: 112px; top: 48px; margin-top: -7px; }
+.fx-hud .lb.tr { right: 112px; top: 48px; margin-top: -7px; text-align: right; }
+.fx-hud .lb.bl { left: 112px; bottom: 48px; margin-bottom: -7px; }
+.fx-hud .lb.rb { right: 112px; bottom: 48px; margin-bottom: -7px; text-align: right; }
+.fx-hud .tc { position: absolute; left: 0; right: 0; bottom: 78px; text-align: center; color: var(--fx-muted); }
+
+/* redaction */
+.fx-red { position: absolute; }
+.fx-red > b { position: absolute; inset: 0; display: block; }
+.fx-rtext { position: relative; color: var(--fx-ivory); font: 700 64px/1.1 var(--fx-display); }
+.fx-rw { position: relative; display: inline-block; }
+.fx-rw > b { position: absolute; display: block; left: -.05em; right: -.05em; top: .1em; bottom: -.04em; }
+
+/* stamp */
+.fx-stamp { position: absolute; left: 0; top: 0; }
+.fx-stamp > .o { border: 6px solid currentColor; padding: 8px; }
+.fx-stamp > .o > .i { border: 2px solid currentColor; padding: .16em .5em .12em; font: 700 1em/1 var(--fx-display); letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; text-align: center; }
+.fx-stamp .tex { -webkit-mask-repeat: repeat; mask-repeat: repeat; -webkit-mask-size: 512px 256px; mask-size: 512px 256px; }
+
+/* target lock */
+.fx-lock { position: absolute; inset: 0; pointer-events: none; }
+.fx-lock .c { position: absolute; width: 30px; height: 30px; border: 0 solid var(--fx-orange); }
+.fx-lock .h { position: absolute; background: var(--fx-orange); }
+.fx-lock .lbl { position: absolute; font: 600 16px/1 var(--fx-mono); letter-spacing: .24em; text-transform: uppercase; color: var(--fx-charcoal); background: var(--fx-orange); padding: 6px 10px 5px; white-space: nowrap; }
+
+/* typer */
+.fx-typer { font: 500 34px/1.3 var(--fx-mono); color: var(--fx-ivory); white-space: pre-wrap; }
+.fx-typer .rest { visibility: hidden; }
+.fx-typer .caret { display: inline-block; width: .55em; height: 1em; margin-left: .06em; vertical-align: -.12em; background: var(--fx-orange); }

@@ -5,7 +5,7 @@ description: "A read-only subagent that answers questions about how a codebase w
 usage_instructions: "Save this as .claude/agents/codebase-explorer.md in a project, or ~/.claude/agents/codebase-explorer.md to use it in every project. Ask for it when you are new to a repo or need to trace how a feature works without filling your main conversation with file contents."
 category: "Research"
 sub_category: "Read-only"
-tags: ["exploration", "onboarding", "architecture", "search"]
+tags: ["exploration", "orientation", "architecture", "search"]
 version: "1.0"
 author: "Alec Reimel"
 publishDate: "2026-11-03 12:00"

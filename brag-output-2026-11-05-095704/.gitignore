@@ -1,0 +1,7 @@
+# Regenerable intermediates stay local; scripts and deliverables are committed.
+work/site/
+work/*/stills/
+work/*/stems/
+work/*/frames/
+work/*/video-noaudio*.mp4
+work/*/audio.wav

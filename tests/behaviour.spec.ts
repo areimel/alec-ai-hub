@@ -1,4 +1,4 @@
-import { blockThirdParty, expect, open, test } from "./helpers";
+import { blockThirdParty, countPublishedEntries, expect, open, test } from "./helpers";
 
 const cards = (page: import("@playwright/test").Page) => page.locator(".prompt-card:visible");
 
@@ -228,15 +228,13 @@ test.describe("theme, navigation, FAQ", () => {
 });
 
 test.describe("real data", () => {
-  test("homepage prompt count equals the cards in the directory", async ({ page }) => {
+  test("prompt directory shows one card per published prompt; home shows no counts", async ({ page }) => {
     await open(page, "/");
-    const homeCount = Number(
-      await page.locator(".stat-strip div", { hasText: "Prompts" }).first().locator("dd").textContent(),
-    );
+    await expect(page.locator(".stat-strip")).toHaveCount(0);
+    await expect(page.locator("main")).not.toHaveText(/\d+ (prompts|agents|entries|published)/i);
+
     await open(page, "/prompts");
-    const cardCount = await page.locator(".prompt-card").count();
-    expect(cardCount).toBe(18);
-    expect(homeCount).toBe(cardCount);
+    await expect(page.locator(".prompt-card")).toHaveCount(countPublishedEntries("prompts"));
   });
 });
 
@@ -255,7 +253,8 @@ test.describe("without JavaScript", () => {
     await expect(page.locator("header nav a[href='/prompts']").first()).toBeVisible();
 
     await page.goto("/prompts");
-    await expect(page.locator(".prompt-card")).toHaveCount(18);
+    const prompts = countPublishedEntries("prompts");
+    await expect(page.locator(".prompt-card")).toHaveCount(prompts);
     await expect(page.locator(".prompt-card").first().locator("pre")).toBeAttached();
     await expect(page.locator("#searchInput")).toBeVisible(); // desktop width
 
@@ -267,7 +266,7 @@ test.describe("without JavaScript", () => {
   test("mobile directory filters reachability without JS (informational)", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto("/prompts");
-    await expect(page.locator(".prompt-card")).toHaveCount(18);
+    await expect(page.locator(".prompt-card")).toHaveCount(countPublishedEntries("prompts"));
     const reachable = await page.locator("#searchInput").isVisible();
     test.info().annotations.push({ type: "no-js mobile filters visible", description: String(reachable) });
     console.log(`NO-JS 390px filters visible: ${reachable}`);
@@ -386,11 +385,11 @@ test.describe("agents and skills", () => {
     expect(text).toBe(expected);
   });
 
-  test("directories show 5 agents and 4 skills; the Plugin filter shows 1", async ({ page }) => {
+  test("directories show every published agent and skill; the Plugin filter shows 1", async ({ page }) => {
     await open(page, "/custom-agents");
-    await expect(page.locator(".prompt-card")).toHaveCount(5);
+    await expect(page.locator(".prompt-card")).toHaveCount(countPublishedEntries("agents"));
     await open(page, "/skills-plugins");
-    await expect(page.locator(".prompt-card")).toHaveCount(4);
+    await expect(page.locator(".prompt-card")).toHaveCount(countPublishedEntries("skills"));
     await page.locator('.subcategory-filter[data-subcategory="Plugin"]').click();
     await expect(cards(page)).toHaveCount(1);
   });

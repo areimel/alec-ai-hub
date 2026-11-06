@@ -1,36 +1,57 @@
 ---
 draft: false
 title: "Debug JavaScript Error"
-description: "AI prompt to help diagnose and fix JavaScript errors."
-usage_instructions: "1. Provide the full error message and stack trace.\n2. Describe the context where the error occurs.\n3. Include relevant code snippets.\n4. Specify the expected behavior."
+description: "Diagnose a JavaScript error from its stack trace and code, find the root cause, and get a minimal fix with a way to confirm it."
+usage_instructions: "Fill in the fields on this page: the runtime, the error and stack trace, the code involved, what you expected, and what you already tried. Then copy the finished prompt into Cursor."
 category: "Coding"
 sub_category: "Cursor"
-tags: ["javascript", "debug", "error-handling", "web-development", "placeholder"]
-version: "1.0"
-author: "Anonymous"
+template: true
+tags: ["javascript", "debug", "error-handling", "web-development"]
+version: "1.1"
+author: "Alec Reimel"
 publishDate: "2024-04-05 10:01"
-lastUpdated: "2024-04-05 10:01"
+lastUpdated: "2026-11-05 09:00"
 featured: false
 ---
 
-You are an expert JavaScript debugger. Help diagnose and suggest fixes for the provided JavaScript error.
+You are a senior JavaScript engineer debugging a production issue. Find the root cause of the error below, not just a change that hides it.
 
-**Instructions:**
+## Environment
+Runtime and versions: @runtimeEnvironment
 
-1.  **Analyze Error:** Carefully examine the error message and stack trace.
-2.  **Identify Cause:** Determine the likely root cause of the error based on the code and context.
-3.  **Suggest Solutions:** Propose specific code changes or debugging steps to resolve the issue.
-4.  **Explain Reasoning:** Clearly explain why the error is occurring and how the suggested solution works.
-5.  **Consider Edge Cases:** Mention potential edge cases or alternative scenarios.
+## Error and stack trace
+```
+@errorMessage
+```
 
-**Error Details:**
+## Relevant code
+```
+@relevantCode
+```
 
-[Paste the full error message and stack trace here]
+## Expected behavior
+@expectedBehavior
 
-**Code Context:**
+## Already tried
+@attemptedFixes
 
-[Provide the relevant JavaScript code snippet(s) where the error occurs]
+## Method
+1. Read the stack trace from the top. Name the file and line where the error is thrown, and the first frame that is in my own code.
+2. State what the error message means in plain terms.
+3. Trace the values involved, from where they are created to where they fail. Point out where a value could be undefined, null, the wrong type, or arrive later than expected.
+4. List up to three plausible causes, most likely first. For each, say which line of the code supports it.
+5. Pick the most likely cause and explain why the others are less likely.
 
-**Description:**
+## Output format
+Use these headings, in this order:
+- **Root cause:** one or two sentences.
+- **Evidence:** the specific lines or values that show it.
+- **Fix:** the smallest change that fixes it, as a code block with the changed lines only.
+- **Why it works:** two or three sentences.
+- **How to confirm:** the exact step or test that shows the error is gone.
+- **Related risks:** other places in the pasted code with the same weakness, if any.
 
-[Describe what the code is supposed to do and what actions lead to the error] 
+## If information is missing
+- If the stack trace or code is not enough to be sure, do not guess. Give your best hypothesis, mark it as unconfirmed, and list the exact extra information you need, such as a log of a variable or the calling code.
+- If the error depends on the environment, say which version or setting matters.
+- Do not rewrite code unrelated to the error. Do not suggest that I wrap everything in try/catch unless the error is truly unavoidable.

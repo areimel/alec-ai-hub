@@ -1,34 +1,53 @@
 ---
 draft: false
 title: "Generate React Component"
-description: "AI prompt to generate a React functional component based on specified requirements."
-usage_instructions: "1. Describe the component's purpose.\n2. Specify props and their types.\n3. Outline desired functionality and state.\n4. Mention any UI library preferences (e.g., Shadcn UI)."
+description: "Generate a typed, accessible React function component from your props, behavior, and styling stack, with usage example and edge cases covered."
+usage_instructions: "Fill in the fields on this page: the component name and purpose, its props, behavior, and the styling or UI library you use. Then copy the finished prompt into Cursor."
 category: "Coding"
 sub_category: "Cursor"
-tags: ["react", "component", "frontend", "web-development", "placeholder"]
-version: "1.0"
-author: "Anonymous"
+template: true
+tags: ["react", "component", "frontend", "web-development", "typescript"]
+version: "1.1"
+author: "Alec Reimel"
 publishDate: "2024-04-05 10:00"
-lastUpdated: "2024-04-05 10:00"
+lastUpdated: "2026-11-05 09:00"
 featured: false
 ---
 
-You are an expert React developer following modern best practices. Generate a functional React component based on the user's request.
+You are a senior front-end engineer who writes small, readable React components. Build the component described below so it can be dropped into an existing codebase.
 
-**Instructions:**
+## Component
+Name: @componentName
 
-1.  **Use Functional Components:** Always create functional components with hooks.
-2.  **Props:** Define `propTypes` or use TypeScript interfaces for prop validation based on project conventions.
-3.  **State:** Use `useState` and `useEffect` appropriately for managing component state and side effects.
-4.  **Styling:** If styling is requested, prefer Tailwind CSS utility classes. If complex styles are needed, indicate where CSS Modules or styled-components might be used.
-5.  **Code Structure:** Ensure clean and readable code structure.
-6.  **Clarity:** Add inline comments to explain non-obvious logic.
+Purpose: @componentPurpose
 
-**User Request:**
+## Props
+@componentProps
 
-[Provide a detailed description of the React component you need here. Include:]
-- Purpose of the component
-- Required props (name, type, default value if any)
-- Internal state needed
-- Expected behavior and interactions
-- Any specific UI elements or libraries to use (e.g., "Use Shadcn UI's Button") 
+## Behavior and state
+@componentBehavior
+
+## Styling and libraries
+@stylingStack
+
+## Language
+@languageChoice
+
+## Requirements
+1. Use a function component with hooks. No class components.
+2. Define the props type explicitly. Give optional props sensible defaults.
+3. Keep state as local as possible. Derive values during render instead of copying props into state.
+4. Make it accessible: use the right semantic elements, label every interactive control, and support use without a mouse.
+5. Handle empty, loading, and error states if the behavior above involves data.
+6. Use effects only for real side effects, and clean them up.
+7. Use only the libraries named above. Do not add dependencies.
+8. Do not add comments that restate the code. Comment only non-obvious decisions.
+
+## Output format
+1. One code block with the full component file, including imports and the exported props type.
+2. A short usage example in a second code block.
+3. A list of the decisions you made where my description was open to interpretation.
+4. Edge cases the component handles and any it does not.
+
+## If information is missing
+If the props, behavior, or styling approach are vague or blank, make the simplest reasonable choice, state it in the decisions list, and continue. Ask a question only if the purpose is unclear enough that two different components could fit.

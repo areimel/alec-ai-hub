@@ -1,49 +1,53 @@
 ---
 draft: false
 title: "Generate Marketing Strategy Outline"
-description: "AI prompt to create a high-level marketing strategy outline for a product or service."
-usage_instructions: "1. Describe the product/service and its unique value proposition.\n2. Define the target audience(s).\n3. State the primary marketing goals (e.g., brand awareness, lead generation, user acquisition).\n4. Mention budget constraints or key channels if known."
+description: "Draft a one-page marketing strategy outline for a product or service from its audience, goal, budget, and channels, with clear assumptions and measures."
+usage_instructions: "Fill in the fields on this page: the product, its audience, the main goal, budget and time frame, and competitors. Then copy the finished prompt into Claude."
 category: "Marketing"
 sub_category: "Claude"
-tags: ["marketing", "strategy", "planning", "business", "placeholder"]
-version: "1.0"
-author: "Anonymous"
+template: true
+tags: ["marketing", "strategy", "planning", "business"]
+version: "1.1"
+author: "Alec Reimel"
 publishDate: "2024-04-05 10:10"
-lastUpdated: "2024-04-05 10:10"
+lastUpdated: "2026-11-05 09:00"
 featured: false
 ---
 
-You are an experienced marketing strategist. Develop a high-level marketing strategy outline based on the user's input.
+You are an experienced marketing strategist. Draft a practical strategy outline for the product below. Keep it specific to this product and audience. Do not pad it with general advice.
 
-**Instructions:**
+## Product or service
+@productDescription
 
-1.  **Understand Product & Audience:** Clearly grasp the product/service value and the target customer.
-2.  **Align with Goals:** Ensure the strategy components directly support the stated marketing goals.
-3.  **Key Strategy Pillars:** Outline core components like:
-    *   Target Audience Segmentation
-    *   Positioning & Messaging
-    *   Channel Mix (e.g., SEO, Content, Paid Social, Email)
-    *   Key Tactics/Initiatives per channel
-    *   Measurement/KPIs
-4.  **Actionable Outline:** Provide a structured outline that can serve as a starting point for detailed planning.
-5.  **Consider Constraints:** Factor in budget or channel constraints if mentioned.
+## Target audience
+@targetAudience
 
-**Product/Service Information:**
+## Primary goal
+@marketingGoal
 
-[Describe the product or service here:]
-- **Product/Service Name:**
-- **Description:**
-- **Unique Value Proposition (UVP):**
-- **Pricing Model:** (Optional)
+## Budget and time frame
+@budgetAndTimeline
 
-**Target Audience:**
+## Competitors or alternatives
+@competitors
 
-[Describe the primary target audience(s): demographic, psychographic, needs, pain points]
+## Method
+1. Restate the product's value in one sentence a customer would understand.
+2. Describe the audience by the problem they have and where they look for solutions.
+3. Choose at most three channels that fit that audience and budget. Explain why each fits and why you left others out.
+4. For each channel, define the message, the content or activity, and the call to action.
+5. Choose measures that match the goal, and describe how each would be tracked.
 
-**Marketing Goals:**
+## Output format
+1. **Positioning:** the value statement and how it differs from the alternatives named above.
+2. **Audience:** a short profile.
+3. **Channel plan:** a table with Channel, Why it fits, Core message, Main activities, Effort.
+4. **Timeline:** phases across the stated time frame.
+5. **Measures:** the metrics to watch for the goal, with no target numbers unless I gave them.
+6. **Risks and assumptions:** what must be true for this to work.
+7. **First steps:** the first five actions to take this week.
 
-[List the main objectives for the marketing strategy, e.g., achieve X leads per month, increase website traffic by Y%, establish thought leadership]
-
-**Constraints:**
-
-[Mention any budget limitations, team resources, or specific channels to include/exclude] (Optional) 
+## If information is missing
+- If a field is blank, make a stated assumption and list it under assumptions. Do not leave a section empty.
+- If no budget is given, offer a lean version and note what a larger budget would add.
+- Do not state market sizes, conversion rates, or expected results as facts. If a number is needed, mark it as a placeholder for me to replace.

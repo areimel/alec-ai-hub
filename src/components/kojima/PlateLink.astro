@@ -6,12 +6,10 @@ interface Props extends Omit<InstrumentGraphicProps, "className" | "title" | "de
   href: string;
   title: string;
   description?: string;
-  /** Short real-data label, e.g. "18 prompts". */
-  meta?: string;
   class?: string;
 }
 
-const { href, title, description, meta, class: className, ...plate } = Astro.props;
+const { href, title, description, class: className, ...plate } = Astro.props;
 ---
 
 <a href={href} class:list={["plate-link", className]}>
@@ -20,7 +18,6 @@ const { href, title, description, meta, class: className, ...plate } = Astro.pro
   </span>
   <span class="plate-link__caption">
     <span class="plate-link__title">{title}</span>
-    {meta && <span class="technical-label plate-link__meta">{meta}</span>}
     {description && <span class="plate-link__desc">{description}</span>}
   </span>
 </a>
