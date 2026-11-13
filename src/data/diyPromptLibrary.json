@@ -4,8 +4,14 @@
     "headline": "One prompt library",
     "headlineMuted": "for your whole team.",
     "intro": "Stop passing good prompts around in chat threads. AI Hub gives your team one searchable place for prompts, custom agents and skills. Take the code free and set it up yourself, or have me set it up and fill it for you.",
-    "primary": { "text": "Request a quote", "href": "#contact" },
-    "secondary": { "text": "Get the code free", "href": "#paths" }
+    "primary": {
+      "text": "Request a quote",
+      "href": "#contact"
+    },
+    "secondary": {
+      "text": "Get the code free",
+      "href": "#paths"
+    }
   },
   "statsLabels": {
     "prompts": "Prompts",
@@ -14,7 +20,10 @@
     "license": "License"
   },
   "problem": {
-    "header": { "label": "Why a shared library", "title": "From scattered to shared." },
+    "header": {
+      "label": "Why a shared library",
+      "title": "From scattered to shared."
+    },
     "rows": [
       {
         "before": "The best prompts live in one person's notes or a chat thread nobody can search.",
@@ -31,7 +40,10 @@
     ]
   },
   "preview": {
-    "header": { "label": "The product", "title": "What your team will see." },
+    "header": {
+      "label": "The product",
+      "title": "What your team will see."
+    },
     "shots": [
       {
         "key": "directory",
@@ -64,8 +76,14 @@
         "Runs on GitHub Pages, Netlify, Vercel or your own server",
         "Setup steps in the README"
       ],
-      "primary": { "text": "Fork on GitHub", "href": "https://github.com/areimel/alec-ai-hub" },
-      "secondary": { "text": "Download ZIP", "href": "https://github.com/areimel/alec-ai-hub/archive/main.zip" }
+      "primary": {
+        "text": "Fork on GitHub",
+        "href": "https://github.com/areimel/alec-ai-hub"
+      },
+      "secondary": {
+        "text": "Download ZIP",
+        "href": "https://github.com/areimel/alec-ai-hub/archive/main.zip"
+      }
     },
     "service": {
       "label": "Done for you",
@@ -78,37 +96,46 @@
         "Training for your team",
         "Your own copy of the code to keep"
       ],
-      "primary": { "text": "Request a quote", "href": "#contact" },
+      "primary": {
+        "text": "Request a quote",
+        "href": "#contact"
+      },
       "note": "Every team is different, so I quote per project."
     }
   },
   "timeline": {
-    "header": { "label": "How setup works", "title": "Four steps, start to finish." },
+    "header": {
+      "label": "How setup works",
+      "title": "Four steps, start to finish."
+    },
     "steps": [
       {
         "title": "Intro call",
         "description": "We talk through how your team uses AI today, who the library is for and what you want in it. I then send a quote.",
-        "diy": "On your own: list the tasks your team repeats most and who will use the library."
+        "diy": "List the tasks your team repeats most and who will use the library."
       },
       {
         "title": "Brand and deploy",
         "description": "I set up the site with your name, logo and colors, and publish it on your domain.",
-        "diy": "On your own: edit src/data/branding.json, then build the site and publish it to a static host."
+        "diy": "Edit src/data/branding.json, then build the site and publish it to a static host."
       },
       {
         "title": "Load your prompts",
         "description": "I write custom prompts, agents and skills for your workflows, and add any you already have.",
-        "diy": "On your own: add a file for each entry in src/content, one folder per type."
+        "diy": "Add a file for each entry in src/content, one folder per type."
       },
       {
         "title": "Train the team",
         "description": "I show your people how to find, fill in and copy prompts, and how to add new ones.",
-        "diy": "On your own: share the README with whoever will add entries, and have them try one."
+        "diy": "Share the README with whoever will add entries, and have them try one."
       }
     ]
   },
   "features": {
-    "header": { "label": "What's included", "title": "Built for shared use." },
+    "header": {
+      "label": "What's included",
+      "title": "Built for shared use."
+    },
     "items": [
       {
         "title": "Find a prompt in seconds",
@@ -117,14 +144,6 @@
       {
         "title": "Start from the same wording",
         "description": "Template prompts have blanks. Your team types in their details and the prompt text updates as they go."
-      },
-      {
-        "title": "Prompts, agents and skills in one place",
-        "description": "Custom agents and skills for Claude Code get the same directory and detail pages as prompts."
-      },
-      {
-        "title": "Edit with a text editor",
-        "description": "Every entry is a plain file in src/content. Adding or changing one does not need a database or an account."
       },
       {
         "title": "Looks like your company",
@@ -143,10 +162,16 @@
       "I deploy your library, set it up with your branding on your domain, write the prompts, agents and skills your team needs, and train your people to use it. You get the code, so it is yours.",
       "I don't offer ongoing maintenance. Once the project is handed over, your team or your own developer looks after it. Because every team's needs are different, the price comes from a custom quote after we talk."
     ],
-    "button": { "text": "Request a quote", "href": "#contact" }
+    "button": {
+      "text": "Request a quote",
+      "href": "#contact"
+    }
   },
   "faq": {
-    "header": { "label": "FAQ", "title": "Questions" },
+    "header": {
+      "label": "FAQ",
+      "title": "Questions"
+    },
     "items": [
       {
         "id": "faq-1",
@@ -213,7 +238,13 @@
     "headline": "Give your team",
     "headlineMuted": "one place for prompts.",
     "description": "Tell me what you need and I will send a custom quote. Or take the code free and start today.",
-    "primary": { "text": "Request a quote", "href": "#contact" },
-    "secondary": { "text": "Get the code free", "href": "#paths" }
+    "primary": {
+      "text": "Request a quote",
+      "href": "#contact"
+    },
+    "secondary": {
+      "text": "Get the code free",
+      "href": "#paths"
+    }
   }
 }

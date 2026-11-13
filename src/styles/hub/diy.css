@@ -113,10 +113,10 @@
   margin-top: 1.25rem;
   padding-block: 0.75rem;
   border-block: 1px solid var(--border);
-  font-size: 1.5rem;
+  font-size: clamp(2.5rem, 5.5vw, 4.5rem);
   font-weight: 600;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
+  letter-spacing: -0.05em;
+  line-height: 1;
 }
 .diy-card__desc {
   max-width: 52ch;
@@ -168,8 +168,8 @@
   background: var(--primary);
   color: var(--diy-ink);
 }
-.diy-card--service .technical-label,
-.diy-card--service .diy-card__desc {
+.diy-card--service .diy-card__desc,
+html[data-theme="kojima"] .diy-card--service .technical-label {
   color: var(--diy-ink);
 }
 .diy-card--service .diy-card__title {
@@ -178,10 +178,7 @@
 .diy-card--service .diy-card__price {
   padding-block: 1rem;
   border-block-color: var(--diy-ink);
-  font-size: clamp(2.5rem, 5.5vw, 4.5rem);
   font-weight: 700;
-  letter-spacing: -0.05em;
-  line-height: 1;
 }
 .diy-card--service .diy-card__items li {
   border-top-color: var(--diy-ink);
