@@ -1,6 +1,17 @@
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 import { blockThirdParty, countPublishedEntries, expect, open, test } from "./helpers";
 
+const diyContent = JSON.parse(
+  readFileSync(fileURLToPath(new URL("../src/data/diyPromptLibrary.json", import.meta.url)), "utf8"),
+) as {
+  hero: { primary: { text: string }; secondary: { text: string } };
+  statsLabels: { prompts: string; license: string };
+  contact: { subject: string };
+};
+
 const cards = (page: import("@playwright/test").Page) => page.locator(".prompt-card:visible");
+const DEFAULT_PAGE_SIZE = 24;
 
 test.describe("directory filters", () => {
   test.beforeEach(async ({ page }) => {
@@ -8,13 +19,21 @@ test.describe("directory filters", () => {
   });
 
   test("search narrows cards, updates the count, shows the empty state and resets", async ({ page }) => {
-    const total = await page.locator(".prompt-card").count();
-    await expect(page.locator("#resultCount")).toHaveText(`Showing ${total} of ${total} prompts`);
+    const total = countPublishedEntries("prompts");
+    const firstPage = Math.min(total, DEFAULT_PAGE_SIZE);
+    await expect(page.locator("#resultCount")).toHaveText(
+      total > DEFAULT_PAGE_SIZE ? `Showing 1–${firstPage} of ${total} prompts` : `Showing ${total} of ${total} prompts`,
+    );
     await page.locator("#searchInput").fill("react");
     const shown = await cards(page).count();
     expect(shown).toBeGreaterThan(0);
     expect(shown).toBeLessThan(total);
-    await expect(page.locator("#resultCount")).toHaveText(`Showing ${shown} of ${total} prompts`);
+    // Few enough matches for one page: "Showing N of M"; otherwise a range.
+    await expect(page.locator("#resultCount")).toHaveText(
+      shown < total && (await page.locator("#pagination").isHidden())
+        ? `Showing ${shown} of ${total} prompts`
+        : new RegExp(`^Showing 1–${shown} of ${total} prompts$`),
+    );
 
     await page.locator("#searchInput").fill("zzzz-no-such-prompt");
     await expect(cards(page)).toHaveCount(0);
@@ -22,15 +41,17 @@ test.describe("directory filters", () => {
     await expect(page.locator("#resultCount")).toHaveText(`Showing 0 of ${total} prompts`);
 
     await page.locator("#resetFilters").click();
-    await expect(cards(page)).toHaveCount(total);
+    await expect(cards(page)).toHaveCount(firstPage);
     await expect(page.locator("#emptyState")).toBeHidden();
     await expect(page.locator("#searchInput")).toHaveValue("");
   });
 
   test("category, tool and tag filters work, combine and reset", async ({ page }) => {
-    const total = await page.locator(".prompt-card").count();
-    const visibleCount = (attr: string, value: string) =>
-      page.locator(`.prompt-card[${attr}="${value}"]`).count();
+    const total = countPublishedEntries("prompts");
+    const firstPage = Math.min(total, DEFAULT_PAGE_SIZE);
+    // Filters can match more cards than fit on one page.
+    const visibleCount = async (attr: string, value: string) =>
+      Math.min(await page.locator(`.prompt-card[${attr}="${value}"]`).count(), DEFAULT_PAGE_SIZE);
 
     // Category.
     const category = page.locator(".category-filter:not([data-category=all])").first();
@@ -39,7 +60,7 @@ test.describe("directory filters", () => {
     await expect(category).toHaveAttribute("aria-pressed", "true");
     await expect(page.locator('.category-filter[data-category="all"]')).toHaveAttribute("aria-pressed", "false");
     await expect(cards(page)).toHaveCount(await visibleCount("data-category", categoryName));
-    expect(await cards(page).count()).toBeLessThan(total);
+    expect(await page.locator(`.prompt-card[data-category="${categoryName}"]`).count()).toBeLessThan(total);
 
     // Tool (subcategory), combined with the category.
     const tools = await page.locator(".prompt-card[data-category]").evaluateAll(
@@ -53,7 +74,7 @@ test.describe("directory filters", () => {
     const both = await page
       .locator(`.prompt-card[data-category="${categoryName}"][data-subcategory="${toolName}"]`)
       .count();
-    await expect(cards(page)).toHaveCount(both);
+    await expect(cards(page)).toHaveCount(Math.min(both, DEFAULT_PAGE_SIZE));
 
     // Tag, combined with category + tool.
     const tagName = await page.locator(".prompt-card:visible").first().evaluate((el) => JSON.parse((el as HTMLElement).dataset.tags!)[0] as string);
@@ -68,7 +89,7 @@ test.describe("directory filters", () => {
         }).length,
       [categoryName, toolName, tagName],
     );
-    await expect(cards(page)).toHaveCount(expected);
+    await expect(cards(page)).toHaveCount(Math.min(expected, DEFAULT_PAGE_SIZE));
     await tag.click();
     await expect(tag).toHaveAttribute("aria-pressed", "false");
 
@@ -78,7 +99,7 @@ test.describe("directory filters", () => {
 
     // Reset restores everything.
     await page.locator("#resetFilters").click();
-    await expect(cards(page)).toHaveCount(total);
+    await expect(cards(page)).toHaveCount(firstPage);
     await expect(page.locator('.category-filter[data-category="all"]')).toHaveAttribute("aria-pressed", "true");
     await expect(page.locator('.subcategory-filter[data-subcategory="all"]')).toHaveAttribute("aria-pressed", "true");
     await expect(page.locator('.tag-filter[aria-pressed="true"]')).toHaveCount(0);
@@ -227,6 +248,93 @@ test.describe("theme, navigation, FAQ", () => {
   });
 });
 
+test.describe("directory view controls", () => {
+  const total = countPublishedEntries("prompts");
+  const published = (page: import("@playwright/test").Page) =>
+    cards(page).evaluateAll((els) => els.map((e) => (e as HTMLElement).dataset.published ?? ""));
+
+  test.beforeEach(async ({ page }) => {
+    await open(page, "/prompts");
+    await expect(page.locator("#directoryToolbar")).toBeVisible();
+  });
+
+  test("density sets the first-row column count and survives reload", async ({ page }) => {
+    const firstRowColumns = () =>
+      cards(page).evaluateAll((els) => {
+        const rects = els.map((e) => e.getBoundingClientRect());
+        const top = rects[0].top;
+        return new Set(rects.filter((r) => Math.abs(r.top - top) < 2).map((r) => Math.round(r.left))).size;
+      });
+    test.skip(total < 4, "needs at least four cards");
+    const expected = { compact: 4, normal: 3, wide: 2 } as const;
+    await expect(page.locator('input[name="density"]:checked')).toHaveValue("normal");
+    await expect(page.locator("#promptsGrid")).toHaveAttribute("data-density", "normal");
+    expect(await firstRowColumns()).toBe(3);
+    for (const density of ["compact", "wide", "normal"] as const) {
+      await page.locator(`input[name="density"][value="${density}"]`).check({ force: true });
+      await expect(page.locator("#promptsGrid")).toHaveAttribute("data-density", density);
+      expect(await firstRowColumns()).toBe(expected[density]);
+    }
+    await page.locator('input[name="density"][value="wide"]').check({ force: true });
+    await expect(page).toHaveURL(/view=wide/);
+    await page.reload();
+    await expect(page.locator('input[name="density"][value="wide"]')).toBeChecked();
+    await expect(page.locator("#promptsGrid")).toHaveAttribute("data-density", "wide");
+  });
+
+  test("sort orders visible cards by date and puts featured first", async ({ page }) => {
+    test.skip(total < 2, "needs at least two cards");
+    await page.locator("#sortSelect").selectOption("oldest");
+    await expect(page).toHaveURL(/sort=oldest/);
+    const asc = await published(page);
+    expect(asc.length).toBeGreaterThan(1);
+    expect(asc).toEqual([...asc].sort((a, b) => new Date(a).getTime() - new Date(b).getTime()));
+
+    await page.locator("#sortSelect").selectOption("newest");
+    const desc = await published(page);
+    expect(desc).toEqual([...desc].sort((a, b) => new Date(b).getTime() - new Date(a).getTime()));
+
+    await page.locator("#sortSelect").selectOption("featured");
+    const flags = await cards(page).evaluateAll((els) => els.map((e) => (e as HTMLElement).dataset.featured === "true"));
+    expect(flags).toEqual([...flags].sort((a, b) => Number(b) - Number(a)));
+  });
+
+  test("page size and Next paginate, and filters reset to page 1", async ({ page }) => {
+    test.skip(total <= 12, "needs more than 12 cards");
+    await page.locator("#pageSizeSelect").selectOption("12");
+    await expect(cards(page)).toHaveCount(12);
+    await expect(page.locator("#resultCount")).toHaveText(new RegExp(`^Showing 1–12 of ${total} prompts$`));
+    await expect(page).toHaveURL(/per=12/);
+
+    await page.getByRole("button", { name: "Next page" }).click();
+    await expect(page.locator("#resultCount")).toHaveText(/^Showing 13–/);
+    await expect(page).toHaveURL(/page=2/);
+    await expect(page.locator('button.pagination__btn[data-page="2"]')).toHaveAttribute("aria-current", "page");
+
+    // Changing a filter returns to page 1.
+    await page.locator(".category-filter:not([data-category=all])").first().click();
+    await expect(page).not.toHaveURL(/page=/);
+
+    // Reset, then per=all hides pagination.
+    await page.locator("#resetFilters").click();
+    await page.locator("#pageSizeSelect").selectOption("all");
+    await expect(page.locator("#pagination")).toBeHidden();
+    await expect(cards(page)).toHaveCount(total);
+    await expect(page).toHaveURL(/per=all/);
+  });
+
+  test("deep link restores sort, page size and page", async ({ page }) => {
+    test.skip(total <= 12, "needs more than 12 cards");
+    await open(page, "/prompts?sort=oldest&per=12&page=2");
+    await expect(page.locator("#sortSelect")).toHaveValue("oldest");
+    await expect(page.locator("#pageSizeSelect")).toHaveValue("12");
+    await expect(page.locator("#resultCount")).toHaveText(/^Showing 13–/);
+    await expect(page.locator('button.pagination__btn[data-page="2"]')).toHaveAttribute("aria-current", "page");
+    const dates = await published(page);
+    expect(dates).toEqual([...dates].sort((a, b) => new Date(a).getTime() - new Date(b).getTime()));
+  });
+});
+
 test.describe("real data", () => {
   test("prompt directory shows one card per published prompt; home shows no counts", async ({ page }) => {
     await open(page, "/");
@@ -234,7 +342,10 @@ test.describe("real data", () => {
     await expect(page.locator("main")).not.toHaveText(/\d+ (prompts|agents|entries|published)/i);
 
     await open(page, "/prompts");
-    await expect(page.locator(".prompt-card")).toHaveCount(countPublishedEntries("prompts"));
+    // The JS pipeline pages the list, so only the first page is visible (all cards stay in the DOM).
+    const total = countPublishedEntries("prompts");
+    await expect(page.locator(".prompt-card:visible")).toHaveCount(Math.min(total, DEFAULT_PAGE_SIZE));
+    await expect(page.locator("#resultCount")).toHaveText(new RegExp(`of ${total} prompts$`));
   });
 });
 
@@ -257,6 +368,8 @@ test.describe("without JavaScript", () => {
     await expect(page.locator(".prompt-card")).toHaveCount(prompts);
     await expect(page.locator(".prompt-card").first().locator("pre")).toBeAttached();
     await expect(page.locator("#searchInput")).toBeVisible(); // desktop width
+    await expect(page.locator("#directoryToolbar")).toBeHidden();
+    await expect(page.locator(".prompt-card:visible")).toHaveCount(prompts);
 
     await page.goto("/custom-agents/code-reviewer");
     await expect(page.locator("h1")).toBeVisible();
@@ -400,5 +513,69 @@ test.describe("agents and skills", () => {
     await expect(secondary).toHaveAttribute("href", "/custom-agents");
     await secondary.click();
     await expect(page).toHaveURL(/\/custom-agents$/);
+  });
+});
+
+test.describe("DIY prompt library page", () => {
+  const REPO_URL = "https://github.com/areimel/alec-ai-hub";
+  const ZIP_URL = `${REPO_URL}/archive/main.zip`;
+
+  test.beforeEach(async ({ page }) => {
+    await open(page, "/diy-prompt-library");
+  });
+
+  test("hero primary CTA scrolls the quote form into view", async ({ page }) => {
+    const primary = page.locator(".home-hero__actions a").nth(0);
+    await expect(primary).toHaveText(diyContent.hero.primary.text);
+    await expect(primary).toHaveAttribute("href", "#contact");
+    await primary.click();
+    await expect(page.locator("#contact #form")).toBeInViewport();
+  });
+
+  test("hero secondary CTA links to the paths section", async ({ page }) => {
+    const secondary = page.locator(".home-hero__actions a").nth(1);
+    await expect(secondary).toHaveText(diyContent.hero.secondary.text);
+    await expect(secondary).toHaveAttribute("href", "#paths");
+    await expect(page.locator("#paths")).toHaveCount(1);
+  });
+
+  test("the DIY card links to the repository and the ZIP download", async ({ page }) => {
+    const card = page.locator(".diy-card--diy");
+    await expect(card.locator(`a[href="${REPO_URL}"]`)).toHaveCount(1);
+    await expect(card.locator(`a[href="${ZIP_URL}"]`)).toHaveCount(1);
+  });
+
+  test("stat strip shows a numeric prompt count and MIT as the license", async ({ page }) => {
+    const statValue = (label: string) =>
+      page
+        .locator(".stat-strip > div", { has: page.locator("dt", { hasText: label }) })
+        .locator("dd");
+    await expect(statValue(diyContent.statsLabels.prompts)).toHaveText(/^\d+$/);
+    await expect(statValue(diyContent.statsLabels.license)).toHaveText("MIT");
+  });
+
+  test("quote form has the setup subject and interest select; the homepage form has neither", async ({ page }) => {
+    await expect(page.locator('#contact #form input[type="hidden"][name="subject"]')).toHaveValue(
+      diyContent.contact.subject,
+    );
+    await expect(page.locator("select#contact-interest")).toHaveCount(1);
+
+    await open(page, "/");
+    await expect(page.locator('#form input[name="subject"]')).toHaveCount(0);
+    await expect(page.locator("select#contact-interest")).toHaveCount(0);
+  });
+
+  test("both preview images have non-empty alt text", async ({ page }) => {
+    const alts = await page
+      .locator(".diy-preview img")
+      .evaluateAll((els) => els.map((e) => (e as HTMLImageElement).alt.trim()));
+    expect(alts).toHaveLength(2);
+    expect(alts.filter((alt) => alt === "")).toEqual([]);
+  });
+
+  test("no horizontal scroll at 375px", async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 812 });
+    const scrollWidth = await page.evaluate(() => document.documentElement.scrollWidth);
+    expect(scrollWidth).toBeLessThanOrEqual(375);
   });
 });

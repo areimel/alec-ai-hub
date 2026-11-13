@@ -13,6 +13,7 @@ interface Props {
       tags: string[];
       sub_category: string;
       version: string;
+      publishDate?: Date;
     };
     body: string;
     slug: string;
@@ -35,6 +36,8 @@ const { viewLabel: viewText, copyLabel: copyText, subCategoryLabel } = config;
   data-tags={JSON.stringify(data.tags)}
   data-title={data.title}
   data-description={data.description}
+  data-published={data.publishDate ? new Date(data.publishDate).toISOString() : ""}
+  data-featured={data.featured ? "true" : "false"}
 >
   <div class="prompt-card__meta technical-label">
     <span>{data.category}</span>

@@ -4,23 +4,62 @@ import LandingHero from "@components/LandingComponents/LandingHero.astro";
 import LandingFeatures from "@components/LandingComponents/LandingFeatures.astro";
 import LandingPanel from "@components/LandingComponents/LandingPanel.astro";
 import LandingContact from "@components/LandingComponents/LandingContact.astro";
+import DiyProblem from "@components/DiyComponents/DiyProblem.astro";
+import DiyPreview from "@components/DiyComponents/DiyPreview.astro";
+import type { Props as PreviewProps } from "@components/DiyComponents/DiyPreview.astro";
+import DiyPaths from "@components/DiyComponents/DiyPaths.astro";
+import DiyTimeline from "@components/DiyComponents/DiyTimeline.astro";
+import DiyCtaBand from "@components/DiyComponents/DiyCtaBand.astro";
+import { getPublished } from "@/lib/content";
 import diyContent from "@data/diyPromptLibrary.json";
+
+const [prompts, agents, skills] = await Promise.all([
+  getPublished("prompts"),
+  getPublished("agents"),
+  getPublished("skills"),
+]);
+
+const { statsLabels } = diyContent;
+const stats = [
+  { label: statsLabels.prompts, value: prompts.length },
+  { label: statsLabels.agents, value: agents.length },
+  { label: statsLabels.skills, value: skills.length },
+  { label: statsLabels.license, value: "MIT" },
+];
 ---
 
-<Layout title="Get your own prompt library">
+<Layout
+  title="Get a prompt library for your team"
+  description="Give your team one shared library for AI prompts, agents and skills. Set it up yourself for free, or have Alec set it up for you."
+>
   <LandingHero
     content={diyContent.hero}
-    stats={diyContent.stats}
+    stats={stats}
     plate={{
       variant: "grid",
       palette: "orange",
       seed: 41,
       code: "MIT—OPEN",
-      plate: "OPEN SOURCE",
-      footerLines: ["MIT LICENSE", "ALEC REIMEL"],
+      plate: "YOUR LIBRARY",
+      footerLines: ["SETUP + PROMPTS + TRAINING", "ALEC REIMEL"],
     }}
   />
+  <DiyProblem content={diyContent.problem} />
+  <DiyPreview content={diyContent.preview as PreviewProps["content"]} />
+  <DiyPaths content={diyContent.paths} />
+  <DiyTimeline content={diyContent.timeline} />
   <LandingFeatures content={diyContent.features} />
-  <LandingPanel content={diyContent.about} />
+  <LandingPanel
+    content={diyContent.service}
+    plate={{
+      variant: "wave",
+      palette: "paper",
+      seed: 12,
+      code: "SERVICE",
+      plate: "DONE FOR YOU",
+      footerLines: ["CUSTOM QUOTE", "ALEC REIMEL"],
+    }}
+  />
   <LandingContact faq={diyContent.faq} contact={diyContent.contact} />
+  <DiyCtaBand content={diyContent.ctaBand} />
 </Layout>

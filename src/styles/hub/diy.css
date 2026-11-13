@@ -1,0 +1,206 @@
+/* DIY landing page sections; imported from hub.css. Tokens only, radius 0, no shadows. */
+
+/* Problem: ruled before/after rows */
+.diy-problem__heads {
+  display: none;
+}
+.diy-problem__list {
+  list-style: none;
+  padding: 0;
+  border-top: 1px solid var(--border);
+}
+.diy-problem__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.75rem;
+  padding-block: 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+.diy-problem__before,
+.diy-problem__after {
+  max-width: 52ch;
+  line-height: 1.6;
+}
+.diy-problem__before {
+  color: var(--muted-foreground);
+  font-size: 1rem;
+}
+.diy-problem__after {
+  color: var(--foreground);
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+.diy-problem__tag {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+.diy-problem__marker {
+  display: none;
+}
+@media (min-width: 800px) {
+  .diy-problem__heads,
+  .diy-problem__row {
+    grid-template-columns: minmax(0, 1fr) 3rem minmax(0, 1fr);
+    gap: 0 1rem;
+  }
+  .diy-problem__heads {
+    display: grid;
+    padding-bottom: 0.75rem;
+  }
+  .diy-problem__row {
+    align-items: start;
+    padding-block: 1.75rem;
+  }
+  /* Column heads show the labels visually; keep them for screen readers. */
+  .diy-problem__tag {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .diy-problem__marker {
+    display: block;
+    align-self: stretch;
+    justify-self: center;
+    position: relative;
+    width: 1px;
+    background: var(--border);
+  }
+  .diy-problem__marker::before {
+    content: "";
+    position: absolute;
+    top: 0.5rem;
+    left: -0.25rem;
+    width: 0.5rem;
+    height: 0.5rem;
+    background: var(--kojima-orange);
+  }
+}
+
+/* Paths: quiet DIY sheet beside the solid orange service card */
+.diy-paths__intro {
+  max-width: 60ch;
+  margin: -0.75rem 0 1.75rem;
+  color: var(--muted-foreground);
+  line-height: 1.7;
+}
+.diy-paths__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+}
+@media (min-width: 900px) {
+  .diy-paths__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    align-items: stretch;
+  }
+}
+.diy-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: clamp(1.5rem, 3.5vw, 2.5rem);
+}
+.diy-card--diy {
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--card-foreground);
+}
+.diy-card__title {
+  margin-top: 1rem;
+  font-size: clamp(1.5rem, 2.6vw, 2.25rem);
+  line-height: 1.1;
+}
+.diy-card__price {
+  width: 100%;
+  margin-top: 1.25rem;
+  padding-block: 0.75rem;
+  border-block: 1px solid var(--border);
+  font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+  font-weight: 600;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+.diy-card__desc {
+  max-width: 52ch;
+  margin-top: 1rem;
+  color: var(--muted-foreground);
+  line-height: 1.7;
+}
+.diy-card__items {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+  width: 100%;
+  max-width: 52ch;
+}
+.diy-card__items li {
+  position: relative;
+  padding: 0.5rem 0 0.5rem 1.5rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+.diy-card__items li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.95rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  background: var(--kojima-orange);
+}
+.diy-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: auto;
+}
+.diy-card__note {
+  max-width: 52ch;
+  margin-top: 1.25rem;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+/* Service card: fixed ink on orange in both themes (contrast about 5.5:1) */
+.diy-card--service {
+  --diy-ink: var(--primary-foreground);
+  --diy-paper: #efebe0; /* fixed ivory so the inverted button reads in both themes */
+  border: 1px solid var(--primary);
+  background: var(--primary);
+  color: var(--diy-ink);
+}
+.diy-card--service .diy-card__desc,
+html[data-theme="kojima"] .diy-card--service .technical-label {
+  color: var(--diy-ink);
+}
+.diy-card--service .diy-card__title {
+  font-size: clamp(1.75rem, 3.2vw, 2.75rem);
+}
+.diy-card--service .diy-card__price {
+  padding-block: 1rem;
+  border-block-color: var(--diy-ink);
+  font-weight: 700;
+}
+.diy-card--service .diy-card__items li {
+  border-top-color: var(--diy-ink);
+}
+.diy-card--service .diy-card__items li::before {
+  background: var(--diy-ink);
+}
+html[data-theme="kojima"] .diy-card--service [data-slot="button"] {
+  border: 1px solid var(--diy-ink);
+  background: var(--diy-ink);
+  color: var(--diy-paper);
+}
+html[data-theme="kojima"] .diy-card--service [data-slot="button"]:is(:hover, :focus-visible) {
+  background: var(--diy-paper);
+  color: var(--diy-ink);
+}
+html[data-theme="kojima"] .diy-card--service :focus-visible {
+  outline-color: var(--diy-ink);
+}

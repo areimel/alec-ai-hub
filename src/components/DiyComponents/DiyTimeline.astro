@@ -1,0 +1,34 @@
+---
+import SectionHead from "@components/SectionHead.astro";
+import Container from "@components/container.astro";
+
+export interface Props {
+  content: {
+    header: { label: string; title: string };
+    steps: { title: string; description: string; diy: string }[];
+  };
+  diyLabel?: string;
+}
+
+const { content, diyLabel = "Doing it yourself:" } = Astro.props;
+---
+
+<section class="home-section diy-timeline">
+  <Container>
+    <SectionHead {...content.header} />
+    <ol class="diy-timeline__list">
+      {
+        content.steps.map((step, i) => (
+          <li class="diy-timeline__step">
+            <span class="technical-label diy-timeline__num">Step {String(i + 1).padStart(2, "0")}</span>
+            <h3>{step.title}</h3>
+            <p class="diy-timeline__desc">{step.description}</p>
+            <p class="diy-timeline__diy">
+              <span class="diy-timeline__diy-label">{diyLabel}</span> {step.diy}
+            </p>
+          </li>
+        ))
+      }
+    </ol>
+  </Container>
+</section>

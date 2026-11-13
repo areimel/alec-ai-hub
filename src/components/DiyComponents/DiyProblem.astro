@@ -1,0 +1,43 @@
+---
+import SectionHead from "@components/SectionHead.astro";
+import Container from "@components/container.astro";
+
+export interface Props {
+  content: {
+    header: { label: string; title: string };
+    rows: { before: string; after: string }[];
+  };
+  beforeLabel?: string;
+  afterLabel?: string;
+}
+
+const { content, beforeLabel = "Without a shared library", afterLabel = "With AI Hub" } = Astro.props;
+---
+
+<section class="home-section diy-problem">
+  <Container>
+    <SectionHead {...content.header} />
+    <div class="diy-problem__heads" aria-hidden="true">
+      <span class="technical-label">{beforeLabel}</span>
+      <span></span>
+      <span class="technical-label">{afterLabel}</span>
+    </div>
+    <ul class="diy-problem__list">
+      {
+        content.rows.map((row) => (
+          <li class="diy-problem__row">
+            <p class="diy-problem__before">
+              <span class="technical-label diy-problem__tag">{beforeLabel}</span>
+              {row.before}
+            </p>
+            <span class="diy-problem__marker" aria-hidden="true"></span>
+            <p class="diy-problem__after">
+              <span class="technical-label diy-problem__tag">{afterLabel}</span>
+              {row.after}
+            </p>
+          </li>
+        ))
+      }
+    </ul>
+  </Container>
+</section>

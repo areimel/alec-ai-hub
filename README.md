@@ -66,6 +66,7 @@ Visit `http://localhost:4321` to view your site.
 │   │   ├── blocks/           # Navbar and footer
 │   │   ├── FormComponents/   # Forms and the shared form field
 │   │   ├── kojima/           # Instrument plates, plate links, slug barcode
+│   │   ├── DiyComponents/    # DIY page sections: problem rows, two paths, timeline, previews, CTA band
 │   │   ├── LandingComponents/ # Homepage and DIY page sections
 │   │   ├── PromptComponents/ # Directory and detail pages for prompts, agents and skills
 │   │   └── ui/               # Shared UI parts

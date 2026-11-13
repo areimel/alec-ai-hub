@@ -3,6 +3,9 @@
 @import "./hub/directory.css";
 @import "./hub/dossier.css";
 @import "./hub/forms.css";
+@import "./hub/diy.css";
+@import "./hub/diy-flow.css";
+@import "./hub/diy-preview.css";
 
 /* Shell */
 .skip-link {

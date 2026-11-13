@@ -1,0 +1,77 @@
+/* Product preview plates for the DIY landing (DiyPreview.astro).
+   Stacked on mobile; on desktop the directory shot is wide and the detail
+   shot sits lower-right, overlapping its corner. Tokens only, no radius,
+   no shadows, no motion. */
+
+.diy-preview {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  min-width: 0;
+}
+
+.diy-preview__figure {
+  margin: 0;
+  min-width: 0;
+  position: relative;
+}
+
+.diy-preview__frame {
+  border: 1px solid var(--border);
+  background: var(--card);
+  min-width: 0;
+}
+
+.diy-preview__bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 2.5rem;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--background);
+}
+
+.diy-preview__code {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.diy-preview__image {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border: 0;
+}
+
+.diy-preview__caption {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted-foreground);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  max-width: 60ch;
+}
+
+@media (min-width: 1100px) {
+  .diy-preview {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-items: start;
+    margin-bottom: 2.5rem;
+  }
+
+  .diy-preview__figure--directory {
+    grid-column: 1 / span 9;
+    grid-row: 1;
+  }
+
+  .diy-preview__figure--detail {
+    grid-column: 8 / span 5;
+    grid-row: 1;
+    align-self: end;
+    margin-bottom: -2.5rem;
+    z-index: 1;
+  }
+}

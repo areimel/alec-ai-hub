@@ -6,13 +6,14 @@ interface Props {
   label: string;
   title: string;
   intro?: string;
+  width?: "default" | "full";
 }
 
-const { label, title, intro } = Astro.props;
+const { label, title, intro, width } = Astro.props;
 ---
 
 <header class="page-header">
-  <Container>
+  <Container width={width}>
     <div class="page-header__top">
       <p class="kicker">{label}</p>
       <span class="registration-mark" aria-hidden="true"></span>
