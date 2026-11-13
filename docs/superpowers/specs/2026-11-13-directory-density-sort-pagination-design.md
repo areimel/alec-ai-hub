@@ -52,7 +52,7 @@ The three directory pages (`/prompts`, `/skills-plugins`, `/custom-agents`) sit 
 
   | Density | 1 column | 2 columns | 3 columns | 4 columns |
   |---|---|---|---|---|
-  | Compact | below 560px | from 560px | from 860px | from 1120px |
+  | Compact | below 520px | from 520px | from 780px | from 1040px |
   | Normal | below 640px | from 640px | from 980px | — |
   | Wide | below 720px | from 720px | — | — |
 

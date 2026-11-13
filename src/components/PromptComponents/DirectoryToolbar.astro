@@ -1,0 +1,40 @@
+---
+// Sort, page size and card-density controls. Hidden until the directory script runs.
+const densities = [
+  { value: "compact", label: "Compact", bars: 4 },
+  { value: "normal", label: "Normal", bars: 3, checked: true },
+  { value: "wide", label: "Wide", bars: 2 },
+];
+---
+
+<div id="directoryToolbar" class="directory-toolbar" hidden>
+  <div class="directory-toolbar__field">
+    <label for="sortSelect" class="technical-label">Sort</label>
+    <select id="sortSelect" class="directory-select technical-label">
+      <option value="newest">Newest</option>
+      <option value="oldest">Oldest</option>
+      <option value="featured">Featured first</option>
+    </select>
+  </div>
+  <div class="directory-toolbar__field">
+    <label for="pageSizeSelect" class="technical-label">Per page</label>
+    <select id="pageSizeSelect" class="directory-select technical-label">
+      <option value="12">12</option>
+      <option value="24" selected>24</option>
+      <option value="48">48</option>
+      <option value="all">All</option>
+    </select>
+  </div>
+  <fieldset id="densityControl" class="density-control">
+    <legend class="sr-only">Card size</legend>
+    {densities.map((d) => (
+      <label class="density-control__option">
+        <input type="radio" name="density" value={d.value} checked={d.checked} />
+        <span class="density-control__face technical-label">
+          <span class="density-control__glyph" style={`--bars:${d.bars}`} aria-hidden="true"></span>
+          {d.label}
+        </span>
+      </label>
+    ))}
+  </fieldset>
+</div>

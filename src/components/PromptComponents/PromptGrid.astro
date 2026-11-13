@@ -1,5 +1,7 @@
 ---
 import PromptCard from "./PromptCard.astro";
+import DirectoryToolbar from "./DirectoryToolbar.astro";
+import DirectoryPagination from "./DirectoryPagination.astro";
 import { directoryCollections, type DirectoryCollection } from "@lib/collections";
 
 interface Props {
@@ -12,15 +14,19 @@ const { noun } = directoryCollections[collectionType];
 ---
 
 <div>
-  <p id="resultCount" class="technical-label directory-count" aria-live="polite" data-noun={noun}>
-    Showing {publishedItems.length} of {publishedItems.length} {noun}
-  </p>
+  <div class="directory-head">
+    <p id="resultCount" class="technical-label directory-count" aria-live="polite" data-noun={noun}>
+      Showing {publishedItems.length} of {publishedItems.length} {noun}
+    </p>
+    <DirectoryToolbar />
+  </div>
   <p id="emptyState" class="directory-empty" hidden>
     No {noun} match these filters. Reset filters to see all.
   </p>
-  <div id="promptsGrid" class="directory-grid">
+  <div id="promptsGrid" class="directory-grid" data-density="normal">
     {publishedItems.map((itemEntry) => (
       <PromptCard itemEntry={itemEntry} collectionType={collectionType} />
     ))}
   </div>
+  <DirectoryPagination />
 </div>
