@@ -1,14 +1,29 @@
 ---
 import ActionButton from "@components/ui/ActionButton.astro";
 import FormField from "./FormField.astro";
+
+interface Props {
+  /** Email subject for web3forms, sent as a hidden `subject` field. */
+  subject?: string;
+  /** Optional, not required: a select placed before the message. The first option is the empty prompt. */
+  interest?: { label: string; options: string[] };
+}
+
+const { subject, interest } = Astro.props;
 ---
 
 <!-- Submissions go to Alec's inbox through web3forms. Without JS the form posts to `action` directly. -->
 <form action="https://api.web3forms.com/submit" method="POST" id="form" class="hub-form">
   <input type="hidden" name="access_key" value="75f8b211-81aa-45c2-9c7b-c11f447d30a0" />
+  {subject && <input type="hidden" name="subject" value={subject} />}
   <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" />
   <FormField id="contact-name" name="name" label="Full name" autocomplete="name" required error="Enter your full name." />
   <FormField id="contact-email" name="email" label="Email address" type="email" autocomplete="email" required error="Enter an email address in the form name@example.com." />
+  {
+    interest && (
+      <FormField id="contact-interest" name="interest" label={interest.label} control="select" options={interest.options} />
+    )
+  }
   <FormField id="contact-message" name="message" label="Message" control="textarea" rows={6} required error="Write a message before sending." />
   <ActionButton type="submit" size="lg">Send message</ActionButton>
   <p id="result" class="form-result" role="status" aria-live="polite"></p>

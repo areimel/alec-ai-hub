@@ -11,6 +11,9 @@ export interface Props {
   };
   contact: {
     header: { label: string; title: string; description: string };
+    /** Passed to ContactForm; omitted on the homepage. */
+    subject?: string;
+    interest?: { label: string; options: string[] };
   };
 }
 
@@ -27,7 +30,7 @@ const { faq, contact } = Astro.props;
       <div id="contact" class="technical-panel faq-contact__form scroll-mt-24">
         <SectionHead label={contact.header.label} title={contact.header.title} />
         <p class="faq-contact__intro">{contact.header.description}</p>
-        <ContactForm />
+        <ContactForm subject={contact.subject} interest={contact.interest} />
       </div>
     </div>
   </Container>
