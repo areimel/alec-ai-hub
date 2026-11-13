@@ -1,6 +1,7 @@
 import { blockThirdParty, countPublishedEntries, expect, open, test } from "./helpers";
 
 const cards = (page: import("@playwright/test").Page) => page.locator(".prompt-card:visible");
+const DEFAULT_PAGE_SIZE = 24;
 
 test.describe("directory filters", () => {
   test.beforeEach(async ({ page }) => {
@@ -8,13 +9,21 @@ test.describe("directory filters", () => {
   });
 
   test("search narrows cards, updates the count, shows the empty state and resets", async ({ page }) => {
-    const total = await page.locator(".prompt-card").count();
-    await expect(page.locator("#resultCount")).toHaveText(`Showing ${total} of ${total} prompts`);
+    const total = countPublishedEntries("prompts");
+    const firstPage = Math.min(total, DEFAULT_PAGE_SIZE);
+    await expect(page.locator("#resultCount")).toHaveText(
+      total > DEFAULT_PAGE_SIZE ? `Showing 1–${firstPage} of ${total} prompts` : `Showing ${total} of ${total} prompts`,
+    );
     await page.locator("#searchInput").fill("react");
     const shown = await cards(page).count();
     expect(shown).toBeGreaterThan(0);
     expect(shown).toBeLessThan(total);
-    await expect(page.locator("#resultCount")).toHaveText(`Showing ${shown} of ${total} prompts`);
+    // Few enough matches for one page: "Showing N of M"; otherwise a range.
+    await expect(page.locator("#resultCount")).toHaveText(
+      shown < total && (await page.locator("#pagination").isHidden())
+        ? `Showing ${shown} of ${total} prompts`
+        : new RegExp(`^Showing 1–${shown} of ${total} prompts$`),
+    );
 
     await page.locator("#searchInput").fill("zzzz-no-such-prompt");
     await expect(cards(page)).toHaveCount(0);
@@ -22,15 +31,17 @@ test.describe("directory filters", () => {
     await expect(page.locator("#resultCount")).toHaveText(`Showing 0 of ${total} prompts`);
 
     await page.locator("#resetFilters").click();
-    await expect(cards(page)).toHaveCount(total);
+    await expect(cards(page)).toHaveCount(firstPage);
     await expect(page.locator("#emptyState")).toBeHidden();
     await expect(page.locator("#searchInput")).toHaveValue("");
   });
 
   test("category, tool and tag filters work, combine and reset", async ({ page }) => {
-    const total = await page.locator(".prompt-card").count();
-    const visibleCount = (attr: string, value: string) =>
-      page.locator(`.prompt-card[${attr}="${value}"]`).count();
+    const total = countPublishedEntries("prompts");
+    const firstPage = Math.min(total, DEFAULT_PAGE_SIZE);
+    // Filters can match more cards than fit on one page.
+    const visibleCount = async (attr: string, value: string) =>
+      Math.min(await page.locator(`.prompt-card[${attr}="${value}"]`).count(), DEFAULT_PAGE_SIZE);
 
     // Category.
     const category = page.locator(".category-filter:not([data-category=all])").first();
@@ -39,7 +50,7 @@ test.describe("directory filters", () => {
     await expect(category).toHaveAttribute("aria-pressed", "true");
     await expect(page.locator('.category-filter[data-category="all"]')).toHaveAttribute("aria-pressed", "false");
     await expect(cards(page)).toHaveCount(await visibleCount("data-category", categoryName));
-    expect(await cards(page).count()).toBeLessThan(total);
+    expect(await page.locator(`.prompt-card[data-category="${categoryName}"]`).count()).toBeLessThan(total);
 
     // Tool (subcategory), combined with the category.
     const tools = await page.locator(".prompt-card[data-category]").evaluateAll(
@@ -53,7 +64,7 @@ test.describe("directory filters", () => {
     const both = await page
       .locator(`.prompt-card[data-category="${categoryName}"][data-subcategory="${toolName}"]`)
       .count();
-    await expect(cards(page)).toHaveCount(both);
+    await expect(cards(page)).toHaveCount(Math.min(both, DEFAULT_PAGE_SIZE));
 
     // Tag, combined with category + tool.
     const tagName = await page.locator(".prompt-card:visible").first().evaluate((el) => JSON.parse((el as HTMLElement).dataset.tags!)[0] as string);
@@ -68,7 +79,7 @@ test.describe("directory filters", () => {
         }).length,
       [categoryName, toolName, tagName],
     );
-    await expect(cards(page)).toHaveCount(expected);
+    await expect(cards(page)).toHaveCount(Math.min(expected, DEFAULT_PAGE_SIZE));
     await tag.click();
     await expect(tag).toHaveAttribute("aria-pressed", "false");
 
@@ -78,7 +89,7 @@ test.describe("directory filters", () => {
 
     // Reset restores everything.
     await page.locator("#resetFilters").click();
-    await expect(cards(page)).toHaveCount(total);
+    await expect(cards(page)).toHaveCount(firstPage);
     await expect(page.locator('.category-filter[data-category="all"]')).toHaveAttribute("aria-pressed", "true");
     await expect(page.locator('.subcategory-filter[data-subcategory="all"]')).toHaveAttribute("aria-pressed", "true");
     await expect(page.locator('.tag-filter[aria-pressed="true"]')).toHaveCount(0);
@@ -227,6 +238,93 @@ test.describe("theme, navigation, FAQ", () => {
   });
 });
 
+test.describe("directory view controls", () => {
+  const total = countPublishedEntries("prompts");
+  const published = (page: import("@playwright/test").Page) =>
+    cards(page).evaluateAll((els) => els.map((e) => (e as HTMLElement).dataset.published ?? ""));
+
+  test.beforeEach(async ({ page }) => {
+    await open(page, "/prompts");
+    await expect(page.locator("#directoryToolbar")).toBeVisible();
+  });
+
+  test("density sets the first-row column count and survives reload", async ({ page }) => {
+    const firstRowColumns = () =>
+      cards(page).evaluateAll((els) => {
+        const rects = els.map((e) => e.getBoundingClientRect());
+        const top = rects[0].top;
+        return new Set(rects.filter((r) => Math.abs(r.top - top) < 2).map((r) => Math.round(r.left))).size;
+      });
+    test.skip(total < 4, "needs at least four cards");
+    const expected = { compact: 4, normal: 3, wide: 2 } as const;
+    await expect(page.locator('input[name="density"]:checked')).toHaveValue("normal");
+    await expect(page.locator("#promptsGrid")).toHaveAttribute("data-density", "normal");
+    expect(await firstRowColumns()).toBe(3);
+    for (const density of ["compact", "wide", "normal"] as const) {
+      await page.locator(`input[name="density"][value="${density}"]`).check({ force: true });
+      await expect(page.locator("#promptsGrid")).toHaveAttribute("data-density", density);
+      expect(await firstRowColumns()).toBe(expected[density]);
+    }
+    await page.locator('input[name="density"][value="wide"]').check({ force: true });
+    await expect(page).toHaveURL(/view=wide/);
+    await page.reload();
+    await expect(page.locator('input[name="density"][value="wide"]')).toBeChecked();
+    await expect(page.locator("#promptsGrid")).toHaveAttribute("data-density", "wide");
+  });
+
+  test("sort orders visible cards by date and puts featured first", async ({ page }) => {
+    test.skip(total < 2, "needs at least two cards");
+    await page.locator("#sortSelect").selectOption("oldest");
+    await expect(page).toHaveURL(/sort=oldest/);
+    const asc = await published(page);
+    expect(asc.length).toBeGreaterThan(1);
+    expect(asc).toEqual([...asc].sort((a, b) => new Date(a).getTime() - new Date(b).getTime()));
+
+    await page.locator("#sortSelect").selectOption("newest");
+    const desc = await published(page);
+    expect(desc).toEqual([...desc].sort((a, b) => new Date(b).getTime() - new Date(a).getTime()));
+
+    await page.locator("#sortSelect").selectOption("featured");
+    const flags = await cards(page).evaluateAll((els) => els.map((e) => (e as HTMLElement).dataset.featured === "true"));
+    expect(flags).toEqual([...flags].sort((a, b) => Number(b) - Number(a)));
+  });
+
+  test("page size and Next paginate, and filters reset to page 1", async ({ page }) => {
+    test.skip(total <= 12, "needs more than 12 cards");
+    await page.locator("#pageSizeSelect").selectOption("12");
+    await expect(cards(page)).toHaveCount(12);
+    await expect(page.locator("#resultCount")).toHaveText(new RegExp(`^Showing 1–12 of ${total} prompts$`));
+    await expect(page).toHaveURL(/per=12/);
+
+    await page.getByRole("button", { name: "Next page" }).click();
+    await expect(page.locator("#resultCount")).toHaveText(/^Showing 13–/);
+    await expect(page).toHaveURL(/page=2/);
+    await expect(page.locator('button.pagination__btn[data-page="2"]')).toHaveAttribute("aria-current", "page");
+
+    // Changing a filter returns to page 1.
+    await page.locator(".category-filter:not([data-category=all])").first().click();
+    await expect(page).not.toHaveURL(/page=/);
+
+    // Reset, then per=all hides pagination.
+    await page.locator("#resetFilters").click();
+    await page.locator("#pageSizeSelect").selectOption("all");
+    await expect(page.locator("#pagination")).toBeHidden();
+    await expect(cards(page)).toHaveCount(total);
+    await expect(page).toHaveURL(/per=all/);
+  });
+
+  test("deep link restores sort, page size and page", async ({ page }) => {
+    test.skip(total <= 12, "needs more than 12 cards");
+    await open(page, "/prompts?sort=oldest&per=12&page=2");
+    await expect(page.locator("#sortSelect")).toHaveValue("oldest");
+    await expect(page.locator("#pageSizeSelect")).toHaveValue("12");
+    await expect(page.locator("#resultCount")).toHaveText(/^Showing 13–/);
+    await expect(page.locator('button.pagination__btn[data-page="2"]')).toHaveAttribute("aria-current", "page");
+    const dates = await published(page);
+    expect(dates).toEqual([...dates].sort((a, b) => new Date(a).getTime() - new Date(b).getTime()));
+  });
+});
+
 test.describe("real data", () => {
   test("prompt directory shows one card per published prompt; home shows no counts", async ({ page }) => {
     await open(page, "/");
@@ -234,7 +332,10 @@ test.describe("real data", () => {
     await expect(page.locator("main")).not.toHaveText(/\d+ (prompts|agents|entries|published)/i);
 
     await open(page, "/prompts");
-    await expect(page.locator(".prompt-card")).toHaveCount(countPublishedEntries("prompts"));
+    // The JS pipeline pages the list, so only the first page is visible (all cards stay in the DOM).
+    const total = countPublishedEntries("prompts");
+    await expect(page.locator(".prompt-card:visible")).toHaveCount(Math.min(total, DEFAULT_PAGE_SIZE));
+    await expect(page.locator("#resultCount")).toHaveText(new RegExp(`of ${total} prompts$`));
   });
 });
 
@@ -257,6 +358,8 @@ test.describe("without JavaScript", () => {
     await expect(page.locator(".prompt-card")).toHaveCount(prompts);
     await expect(page.locator(".prompt-card").first().locator("pre")).toBeAttached();
     await expect(page.locator("#searchInput")).toBeVisible(); // desktop width
+    await expect(page.locator("#directoryToolbar")).toBeHidden();
+    await expect(page.locator(".prompt-card:visible")).toHaveCount(prompts);
 
     await page.goto("/custom-agents/code-reviewer");
     await expect(page.locator("h1")).toBeVisible();
