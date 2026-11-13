@@ -1,0 +1,45 @@
+---
+import Container from "@components/container.astro";
+import ActionButton from "@components/ui/ActionButton.astro";
+import { InstrumentGraphic } from "@/components/kojima/instrument-graphic";
+
+export interface Props {
+  content: {
+    label: string;
+    headline: string;
+    headlineMuted: string;
+    description: string;
+    primary: { text: string; href: string };
+    secondary: { text: string; href: string };
+  };
+}
+
+const { content } = Astro.props;
+---
+
+<section class="home-section diy-cta">
+  <Container>
+    <div class="diy-cta__band">
+      <div class="diy-cta__copy">
+        <div class="diy-cta__top">
+          <p class="kicker">{content.label}</p>
+          <span class="registration-mark" aria-hidden="true"></span>
+        </div>
+        <h2 class="diy-cta__title">
+          {content.headline}
+          <span class="diy-cta__muted">{content.headlineMuted}</span>
+        </h2>
+        <p class="diy-cta__desc">{content.description}</p>
+        <div class="diy-cta__actions">
+          <ActionButton href={content.primary.href} size="lg">{content.primary.text}</ActionButton>
+          <ActionButton href={content.secondary.href} variant="outline" size="lg">
+            {content.secondary.text}
+          </ActionButton>
+        </div>
+      </div>
+      <div class="diy-cta__plate" aria-hidden="true">
+        <InstrumentGraphic variant="grid" palette="dark" seed={7} decorative />
+      </div>
+    </div>
+  </Container>
+</section>
