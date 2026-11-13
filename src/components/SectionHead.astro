@@ -2,10 +2,12 @@
 interface Props {
   label: string;
   title: string;
+  /** Optional id on the heading, e.g. for aria-labelledby. */
+  id?: string;
 }
 
-const { label, title } = Astro.props;
+const { label, title, id } = Astro.props;
 ---
 
 <p class="kicker">{label}</p>
-<h2 class="home-section__title">{title}</h2>
+<h2 id={id} class="home-section__title">{title}</h2>

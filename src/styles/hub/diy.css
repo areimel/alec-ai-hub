@@ -51,8 +51,14 @@
     align-items: start;
     padding-block: 1.75rem;
   }
+  /* Column heads show the labels visually; keep them for screen readers. */
   .diy-problem__tag {
-    display: none;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
   .diy-problem__marker {
     display: block;
@@ -162,8 +168,8 @@
 
 /* Service card: fixed ink on orange in both themes (contrast about 5.5:1) */
 .diy-card--service {
-  --diy-ink: #141310;
-  --diy-paper: #efebe0;
+  --diy-ink: var(--primary-foreground);
+  --diy-paper: #efebe0; /* fixed ivory so the inverted button reads in both themes */
   border: 1px solid var(--primary);
   background: var(--primary);
   color: var(--diy-ink);

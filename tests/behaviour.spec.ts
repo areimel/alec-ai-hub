@@ -1,4 +1,14 @@
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 import { blockThirdParty, countPublishedEntries, expect, open, test } from "./helpers";
+
+const diyContent = JSON.parse(
+  readFileSync(fileURLToPath(new URL("../src/data/diyPromptLibrary.json", import.meta.url)), "utf8"),
+) as {
+  hero: { primary: { text: string }; secondary: { text: string } };
+  statsLabels: { prompts: string; license: string };
+  contact: { subject: string };
+};
 
 const cards = (page: import("@playwright/test").Page) => page.locator(".prompt-card:visible");
 const DEFAULT_PAGE_SIZE = 24;
@@ -503,5 +513,69 @@ test.describe("agents and skills", () => {
     await expect(secondary).toHaveAttribute("href", "/custom-agents");
     await secondary.click();
     await expect(page).toHaveURL(/\/custom-agents$/);
+  });
+});
+
+test.describe("DIY prompt library page", () => {
+  const REPO_URL = "https://github.com/areimel/alec-ai-hub";
+  const ZIP_URL = `${REPO_URL}/archive/main.zip`;
+
+  test.beforeEach(async ({ page }) => {
+    await open(page, "/diy-prompt-library");
+  });
+
+  test("hero primary CTA scrolls the quote form into view", async ({ page }) => {
+    const primary = page.locator(".home-hero__actions a").nth(0);
+    await expect(primary).toHaveText(diyContent.hero.primary.text);
+    await expect(primary).toHaveAttribute("href", "#contact");
+    await primary.click();
+    await expect(page.locator("#contact #form")).toBeInViewport();
+  });
+
+  test("hero secondary CTA links to the paths section", async ({ page }) => {
+    const secondary = page.locator(".home-hero__actions a").nth(1);
+    await expect(secondary).toHaveText(diyContent.hero.secondary.text);
+    await expect(secondary).toHaveAttribute("href", "#paths");
+    await expect(page.locator("#paths")).toHaveCount(1);
+  });
+
+  test("the DIY card links to the repository and the ZIP download", async ({ page }) => {
+    const card = page.locator(".diy-card--diy");
+    await expect(card.locator(`a[href="${REPO_URL}"]`)).toHaveCount(1);
+    await expect(card.locator(`a[href="${ZIP_URL}"]`)).toHaveCount(1);
+  });
+
+  test("stat strip shows a numeric prompt count and MIT as the license", async ({ page }) => {
+    const statValue = (label: string) =>
+      page
+        .locator(".stat-strip > div", { has: page.locator("dt", { hasText: label }) })
+        .locator("dd");
+    await expect(statValue(diyContent.statsLabels.prompts)).toHaveText(/^\d+$/);
+    await expect(statValue(diyContent.statsLabels.license)).toHaveText("MIT");
+  });
+
+  test("quote form has the setup subject and interest select; the homepage form has neither", async ({ page }) => {
+    await expect(page.locator('#contact #form input[type="hidden"][name="subject"]')).toHaveValue(
+      diyContent.contact.subject,
+    );
+    await expect(page.locator("select#contact-interest")).toHaveCount(1);
+
+    await open(page, "/");
+    await expect(page.locator('#form input[name="subject"]')).toHaveCount(0);
+    await expect(page.locator("select#contact-interest")).toHaveCount(0);
+  });
+
+  test("both preview images have non-empty alt text", async ({ page }) => {
+    const alts = await page
+      .locator(".diy-preview img")
+      .evaluateAll((els) => els.map((e) => (e as HTMLImageElement).alt.trim()));
+    expect(alts).toHaveLength(2);
+    expect(alts.filter((alt) => alt === "")).toEqual([]);
+  });
+
+  test("no horizontal scroll at 375px", async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 812 });
+    const scrollWidth = await page.evaluate(() => document.documentElement.scrollWidth);
+    expect(scrollWidth).toBeLessThanOrEqual(375);
   });
 });

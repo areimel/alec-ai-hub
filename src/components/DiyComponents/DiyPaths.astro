@@ -1,4 +1,5 @@
 ---
+import SectionHead from "@components/SectionHead.astro";
 import Container from "@components/container.astro";
 import ActionButton from "@components/ui/ActionButton.astro";
 
@@ -25,8 +26,7 @@ const { header, diy, service } = content;
 
 <section id="paths" class="home-section diy-paths scroll-mt-24" aria-labelledby="paths-title">
   <Container>
-    <p class="kicker">{header.label}</p>
-    <h2 id="paths-title" class="home-section__title">{header.title}</h2>
+    <SectionHead label={header.label} title={header.title} id="paths-title" />
     {header.description && <p class="diy-paths__intro">{header.description}</p>}
     <div class="diy-paths__grid">
       <article class="diy-card diy-card--diy">
