@@ -219,6 +219,12 @@ pagination?.addEventListener("click", (event) => {
   render();
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   document.querySelector(".directory__main")?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  // render() rebuilt the buttons, so the clicked one is gone; move focus to the
+  // top of the results (which now reads the new range) instead of dropping to <body>.
+  if (resultCount) {
+    resultCount.tabIndex = -1;
+    resultCount.focus({ preventScroll: true });
+  }
 });
 
 // Copy buttons on cards.
