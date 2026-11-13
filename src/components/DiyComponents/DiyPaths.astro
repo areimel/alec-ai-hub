@@ -1,0 +1,62 @@
+---
+import Container from "@components/container.astro";
+import ActionButton from "@components/ui/ActionButton.astro";
+
+type Link = { text: string; href: string };
+interface Card {
+  label: string;
+  title: string;
+  price: string;
+  description: string;
+  items: string[];
+}
+
+export interface Props {
+  content: {
+    header: { label: string; title: string; description?: string };
+    diy: Card & { primary: Link; secondary: Link };
+    service: Card & { primary: Link; note?: string };
+  };
+}
+
+const { content } = Astro.props;
+const { header, diy, service } = content;
+---
+
+<section id="paths" class="home-section diy-paths scroll-mt-24" aria-labelledby="paths-title">
+  <Container>
+    <p class="kicker">{header.label}</p>
+    <h2 id="paths-title" class="home-section__title">{header.title}</h2>
+    {header.description && <p class="diy-paths__intro">{header.description}</p>}
+    <div class="diy-paths__grid">
+      <article class="diy-card diy-card--diy">
+        <p class="technical-label">{diy.label}</p>
+        <h3 class="diy-card__title">{diy.title}</h3>
+        <p class="diy-card__price">{diy.price}</p>
+        <p class="diy-card__desc">{diy.description}</p>
+        <ul class="diy-card__items">
+          {diy.items.map((item) => <li>{item}</li>)}
+        </ul>
+        <div class="diy-card__actions">
+          <ActionButton href={diy.primary.href} size="lg">{diy.primary.text}</ActionButton>
+          <ActionButton href={diy.secondary.href} variant="outline" size="lg">
+            {diy.secondary.text}
+          </ActionButton>
+        </div>
+      </article>
+      <article class="diy-card diy-card--service">
+        <p class="technical-label">{service.label}</p>
+        <h3 class="diy-card__title">{service.title}</h3>
+        <p class="diy-card__price">{service.price}</p>
+        <p class="diy-card__desc">{service.description}</p>
+        <ul class="diy-card__items">
+          {service.items.map((item) => <li>{item}</li>)}
+        </ul>
+        <div class="diy-card__actions">
+          <ActionButton href={service.primary.href} size="lg">{service.primary.text}</ActionButton>
+        </div>
+        {service.note && <p class="diy-card__note">{service.note}</p>}
+      </article>
+    </div>
+  </Container>
+</section>
