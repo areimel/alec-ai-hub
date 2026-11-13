@@ -1,99 +1,219 @@
 {
   "hero": {
-    "kicker": "Open source / MIT license",
-    "headline": "Get your own",
-    "headlineMuted": "prompt library.",
-    "intro": "This whole site is open source. Download it, change it, and fill it with your own prompts. It works for one person or a team.",
-    "primary": { "text": "View on GitHub", "href": "https://github.com/areimel/alec-ai-hub" },
-    "secondary": { "text": "See the live site", "href": "/prompts" }
+    "kicker": "For teams / MIT license",
+    "headline": "One prompt library",
+    "headlineMuted": "for your whole team.",
+    "intro": "Stop passing good prompts around in chat threads. AI Hub gives your team one searchable place for prompts, custom agents and skills. Take the code free and set it up yourself, or have me set it up and fill it for you.",
+    "primary": { "text": "Request a quote", "href": "#contact" },
+    "secondary": { "text": "Get the code free", "href": "#paths" }
   },
-  "stats": [
-    { "label": "License", "value": "MIT" },
-    { "label": "Cost", "value": "Free" },
-    { "label": "Hosting", "value": "Static site" }
-  ],
-  "features": {
-    "header": { "label": "What you get", "title": "The full source." },
-    "items": [
+  "statsLabels": {
+    "prompts": "Prompts",
+    "agents": "Custom agents",
+    "skills": "Skills",
+    "license": "License"
+  },
+  "problem": {
+    "header": { "label": "Why a shared library", "title": "From scattered to shared." },
+    "rows": [
       {
-        "title": "Complete source code",
-        "description": "All of the code, including the interface and the way prompts are stored. Built with Astro, React and Tailwind CSS."
+        "before": "The best prompts live in one person's notes or a chat thread nobody can search.",
+        "after": "Every prompt sits in one directory your team can search and filter by category and AI tool."
       },
       {
-        "title": "Content in files",
-        "description": "Prompts, custom agents and skills are plain files in src/content, one folder for each type. Add a file to add an entry."
+        "before": "Each person rewrites the same prompt, and gets different results.",
+        "after": "Templates have blanks to fill in, so everyone starts from the same wording and adds their own details."
       },
       {
-        "title": "Light and dark mode",
-        "description": "Both themes are included, and the layout works on phones and desktops."
-      },
-      {
-        "title": "Any static host",
-        "description": "The site builds to static files, so it runs on GitHub Pages, Netlify, Vercel or your own server."
-      },
-      {
-        "title": "Change anything",
-        "description": "The name, wordmark and navigation are set in src/data/branding.json. Page copy is in src/data, and plate wording is set where each plate is used."
+        "before": "Nobody knows which version is the current one.",
+        "after": "Each prompt has one page, kept as a file in your own repository, so there is one place to edit and one version to copy."
       }
     ]
   },
-  "about": {
-    "label": "Open source",
-    "headline": "What open source means",
-    "paragraphs": [
-      "Open source software is code that anyone can read, use and change. Think of a recipe that is shared freely: you can follow it exactly or swap ingredients.",
-      "The project uses the MIT license, which lets you use it for personal or commercial work as long as you keep the license notice. The theme code in src/components/kojima adds a Commons Clause: you can use it in your own site, but not resell the template as is."
-    ],
-    "button": {
-      "text": "Download project",
-      "href": "https://github.com/areimel/alec-ai-hub/archive/main.zip"
+  "preview": {
+    "header": { "label": "The product", "title": "What your team will see." },
+    "shots": [
+      {
+        "key": "directory",
+        "caption": "Search and filter the whole library.",
+        "code": "DIRECTORY",
+        "alt": "The AI Hub prompt directory: a search box and filters on the left, and a grid of prompt cards with categories and AI tool tags."
+      },
+      {
+        "key": "detail",
+        "caption": "One page per prompt, with a copy button.",
+        "code": "DOSSIER",
+        "alt": "An AI Hub prompt page showing the prompt title, its description and tags, fill-in fields, and the prompt text with a copy button."
+      }
+    ]
+  },
+  "paths": {
+    "header": {
+      "label": "Two paths",
+      "title": "Pick how you want to start.",
+      "description": "The code is the same either way. The difference is who does the setup."
+    },
+    "diy": {
+      "label": "Do it yourself",
+      "title": "Take the code",
+      "price": "Free",
+      "description": "Fork the repository or download a ZIP, then set it up with your own team. Best if you have a developer or are comfortable with the command line.",
+      "items": [
+        "The full source code, under the MIT license",
+        "Prompts, agents and skills stored as plain files",
+        "Runs on GitHub Pages, Netlify, Vercel or your own server",
+        "Setup steps in the README"
+      ],
+      "primary": { "text": "Fork on GitHub", "href": "https://github.com/areimel/alec-ai-hub" },
+      "secondary": { "text": "Download ZIP", "href": "https://github.com/areimel/alec-ai-hub/archive/main.zip" }
+    },
+    "service": {
+      "label": "Done for you",
+      "title": "Have me set it up",
+      "price": "Custom quote",
+      "description": "I deploy the library for your team, write prompts for your work and show your people how to use it. Best if you want it running without taking on the setup.",
+      "items": [
+        "Deployed and hosted on your domain, with your branding",
+        "Custom prompts, agents and skills written for your workflows",
+        "Training for your team",
+        "Your own copy of the code to keep"
+      ],
+      "primary": { "text": "Request a quote", "href": "#contact" },
+      "note": "Every team is different, so I quote per project."
     }
+  },
+  "timeline": {
+    "header": { "label": "How setup works", "title": "Four steps, start to finish." },
+    "steps": [
+      {
+        "title": "Intro call",
+        "description": "We talk through how your team uses AI today, who the library is for and what you want in it. I then send a quote.",
+        "diy": "On your own: list the tasks your team repeats most and who will use the library."
+      },
+      {
+        "title": "Brand and deploy",
+        "description": "I set up the site with your name, logo and colors, and publish it on your domain.",
+        "diy": "On your own: edit src/data/branding.json, then build the site and publish it to a static host."
+      },
+      {
+        "title": "Load your prompts",
+        "description": "I write custom prompts, agents and skills for your workflows, and add any you already have.",
+        "diy": "On your own: add a file for each entry in src/content, one folder per type."
+      },
+      {
+        "title": "Train the team",
+        "description": "I show your people how to find, fill in and copy prompts, and how to add new ones.",
+        "diy": "On your own: share the README with whoever will add entries, and have them try one."
+      }
+    ]
+  },
+  "features": {
+    "header": { "label": "What's included", "title": "Built for shared use." },
+    "items": [
+      {
+        "title": "Find a prompt in seconds",
+        "description": "Search by keyword, or filter by category and AI tool, so people spend less time hunting."
+      },
+      {
+        "title": "Start from the same wording",
+        "description": "Template prompts have blanks. Your team types in their details and the prompt text updates as they go."
+      },
+      {
+        "title": "Prompts, agents and skills in one place",
+        "description": "Custom agents and skills for Claude Code get the same directory and detail pages as prompts."
+      },
+      {
+        "title": "Edit with a text editor",
+        "description": "Every entry is a plain file in src/content. Adding or changing one does not need a database or an account."
+      },
+      {
+        "title": "Looks like your company",
+        "description": "Name, wordmark and navigation are set in src/data/branding.json. Light and dark themes are included, and it works on phones."
+      },
+      {
+        "title": "Cheap to host",
+        "description": "The site builds to static files, so free static hosting such as GitHub Pages can run it."
+      }
+    ]
+  },
+  "service": {
+    "label": "The done-for-you service",
+    "headline": "What I do, and what I don't.",
+    "paragraphs": [
+      "I deploy your library, set it up with your branding on your domain, write the prompts, agents and skills your team needs, and train your people to use it. You get the code, so it is yours.",
+      "I don't offer ongoing maintenance. Once the project is handed over, your team or your own developer looks after it. Because every team's needs are different, the price comes from a custom quote after we talk."
+    ],
+    "button": { "text": "Request a quote", "href": "#contact" }
   },
   "faq": {
     "header": { "label": "FAQ", "title": "Questions" },
     "items": [
       {
         "id": "faq-1",
-        "question": "Do I need to be a developer?",
-        "answer": "Some comfort with the command line helps. The README covers installing and building the site. Larger changes are easier with a developer."
+        "question": "How much does it cost?",
+        "answer": "The code is free. If you want me to set it up, I quote per project, because the work depends on your branding, how many prompts you need and how much training you want. Send a request and I will reply with a quote."
       },
       {
         "id": "faq-2",
-        "question": "How much does it cost to run?",
-        "answer": "It can be free. The site is static, so it runs on free static hosting such as GitHub Pages. The forms use Web3Forms, which has a free tier."
+        "question": "Where is it hosted?",
+        "answer": "Anywhere that serves static files. That includes GitHub Pages, Netlify, Vercel and your own server. If you hire me, I deploy it to the host you choose, on your domain."
       },
       {
         "id": "faq-3",
-        "question": "Can I remove the branding?",
-        "answer": "Yes. The name and links are in src/data/branding.json. Keep the license notices when you change the rest."
+        "question": "What happens to our data?",
+        "answer": "The site is static, so there is no database and no user accounts. Your prompts are files in your own repository. The only thing that leaves the site is the contact or submission form, which sends through Web3Forms, and you can remove those forms if you don't want them."
       },
       {
         "id": "faq-4",
-        "question": "Is open source the same as free?",
-        "answer": "Not quite. Open source means you can see and change the code. Free means no cost. This project is both."
+        "question": "Do we need a developer?",
+        "answer": "For the free version, it helps to have one, or someone comfortable with the command line. With the done-for-you service you don't need one to get started. Adding a prompt afterwards means creating a text file, and the README explains how."
       },
       {
         "id": "faq-5",
-        "question": "Can I use it for a business?",
-        "answer": "Yes. Commercial use is allowed if you keep the license notices. You can't resell the template itself as is, because the theme code has a Commons Clause."
+        "question": "Can we use it commercially?",
+        "answer": "Yes. The project uses the MIT license, which allows business use if you keep the license notice. The theme code in src/components/kojima adds a Commons Clause: you can use it in your own site, but you can't resell the template as is."
       },
       {
         "id": "faq-6",
-        "question": "Is there support?",
-        "answer": "No ongoing support. This is a personal project. You can report bugs or ask for features on GitHub, and I will look when I can."
+        "question": "How long does setup take?",
+        "answer": "It depends on scope. A branded site with a few prompts is a smaller job than one with many custom agents and training for several teams. I will give you a timeline when I send the quote."
       },
       {
         "id": "faq-7",
-        "question": "Can I contribute changes?",
-        "answer": "Yes. If you fix a bug or add a feature, you are welcome to send it back on GitHub."
+        "question": "Can we take it over ourselves later?",
+        "answer": "Yes, and that is the plan. You get the code in your own repository, and it is the same free, open source project. Your team can keep adding entries or change the site without me."
+      },
+      {
+        "id": "faq-8",
+        "question": "Is there support?",
+        "answer": "I don't offer ongoing maintenance or support contracts. During your project I am available to you. For the free version, you can report bugs or ask for features on GitHub, and I will look when I can."
       }
     ]
   },
   "contact": {
     "header": {
       "label": "Contact",
-      "title": "Need help getting started?",
-      "description": "Read the README on GitHub first. For anything else, send me a message."
+      "title": "Request a quote.",
+      "description": "Tell me about your team and what you want to use the library for. I will reply with questions or a quote."
+    },
+    "subject": "AI Hub setup inquiry",
+    "interest": {
+      "label": "What do you need?",
+      "options": [
+        "Done-for-you setup",
+        "Custom prompts for my team",
+        "Team training",
+        "Help with the free version",
+        "Something else"
+      ]
     }
+  },
+  "ctaBand": {
+    "label": "Next step",
+    "headline": "Give your team",
+    "headlineMuted": "one place for prompts.",
+    "description": "Tell me what you need and I will send a custom quote. Or take the code free and start today.",
+    "primary": { "text": "Request a quote", "href": "#contact" },
+    "secondary": { "text": "Get the code free", "href": "#paths" }
   }
 }
